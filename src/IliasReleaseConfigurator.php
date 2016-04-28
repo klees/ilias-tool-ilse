@@ -29,7 +29,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		chdir($this->absolute_path);
 		require_once($this->absolute_path."/Services/Context/classes/class.ilContext.php");
 		require_once($this->absolute_path."/Services/Init/classes/class.ilInitialisation.php");
-		require_once($this->absolute_path."/Services/AccessControl/classes/class.ilObjRoleTemplate.php");
+		require_once($this->absolute_path."/Services/AccessControl/classes/class.ilObjRole.php");
 		require_once($this->absolute_path."/Modules/OrgUnit/classes/class.ilObjOrgUnit.php");
 		require_once($this->absolute_path."/Modules/Category/classes/class.ilObjCategory.php");
 
@@ -42,20 +42,17 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	 * @inheritdoc
 	 */
 	public function createRoles($install_roles) {
-		$newObj = new ilObjRoleTemplate();
-		$newObj->setType("rolt");
-		$newObj->setTitle("Pool Trainingsersteller");
-		$newObj->setDescription("Rolle für die Ersteller von dezentralen Trainings");
-		$newObj->create();
-		$newObj->createReference();
-		$newObj->putInTree(ROLE_FOLDER_ID);
-		$newObj->setPermissions(ROLE_FOLDER_ID);
+		global $rbacadmin;
 
-		$this->gDB->manipulate("INSERT INTO rbac_fa (rol_id, parent, assign, protected)"
-			 ." VALUES ( ".$this->gDB->quote($newObj->getId(), "integer")
-			 ."        , ".$this->gDB->quote(ROLE_FOLDER_ID, "integer")
-			 ."        , 'n', 'y')"
-			 );
+		foreach ($install_roles->roles() as $role => $value) {
+			$newObj = new \ilObjRole();
+			$newObj->setTitle($value->name());
+			$newObj->setDescription($value->description());
+			$newObj->create();
+
+			$rbacadmin->assignRoleToFolder($newObj->getId(), ROLE_FOLDER_ID,'y');
+			$rbacadmin->setProtected(ROLE_FOLDER_ID, $newObj->getId(),'n');
+		}
 	}
 
 	/**

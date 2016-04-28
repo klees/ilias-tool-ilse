@@ -20,4 +20,7 @@ echo "\t\tDone...\n";
 echo "\nCreate OrgUnits.";
 $ilias_configurator->createOrgUnits($general_config->orgunit());
 echo "\t\tDone...\n";
+echo "\nCreate global Roles.";
+$ilias_configurator->createRoles($general_config->role());
+echo "\t\tDone...\n";
 echo "\n\nIlias successfull configured.";
