@@ -118,7 +118,7 @@ abstract class Base {
 			}
 		}
 		else {
-			assert('is_subclass_of($type, "\\CaT\\InstILIAS\\Config\\Base")');
+			assert('$this->isSublass($type, "\\CaT\\InstILIAS\\Config\\Base")');
 			$ok = $value instanceof $type;
 		}
 
@@ -166,5 +166,11 @@ abstract class Base {
 	 */
 	final protected function checkContentPregmatch($value, $preg) {
 		return (bool)preg_match($preg, strtolower($value));
+	}
+
+	protected function isSublass($type, $class) {
+		$reflection = new \ReflectionClass($type);
+
+		return $reflection->isSubclassOf($class);
 	}
 }
