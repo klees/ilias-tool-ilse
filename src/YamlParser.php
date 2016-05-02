@@ -19,7 +19,7 @@ class YamlParser implements \CaT\InstILIAS\interfaces\Parser {
 			$type_val = $type[0];
 			$optional = $type[1];
 
-			if($this->isSublass($type_val, "\\CaT\\InstILIAS\\Config\\Base")) {
+			if(is_subclass_of($type_val, "\\CaT\\InstILIAS\\Config\\Base")) {
 				$vals[] = $this->createConfig($this->yamlValue($yaml,$key,$optional), $type_val);
 			}
 			else if ($type_val == "string") {
@@ -32,7 +32,7 @@ class YamlParser implements \CaT\InstILIAS\interfaces\Parser {
 				assert('count($type_val) === 1');
 				$content = $type_val[0];
 				
-				if($this->isSublass($content, "\\CaT\\InstILIAS\\Config\\Base")) {
+				if(is_subclass_of($content, "\\CaT\\InstILIAS\\Config\\Base")) {
 					$sub_vals = array();
 					foreach ($this->yamlValue($yaml,$key,$optional,array()) as $key => $value) {
 						$sub_vals[] = $this->createConfig($value, $content);
@@ -59,11 +59,5 @@ class YamlParser implements \CaT\InstILIAS\interfaces\Parser {
 		}
 
 		return $yaml[$key];
-	}
-
-	protected function isSublass($type, $class) {
-		$reflection = new \ReflectionClass($type);
-
-		return $reflection->isSubclassOf($class);
 	}
 }
