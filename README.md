@@ -18,15 +18,15 @@ $ composer intall
 ### Configuration
 Create a copy of the default_config.yaml.
 ```
-$ cp src/config/default_config.yaml src/config/config.yaml
+$ cp src/default_config.yaml src/config.yaml
 ```
 Open the config.yaml and fill in all Values
 ```
-$ vi src/config/config.yaml
+$ vi src/config.yaml
 ```
 
 ### Execution
 To install your ILIAS execute the install script.
 ```
-$ php src/bin/install.php CONFIG_PATH
+$ php src/bin/install.php src/config.yaml
 ```
