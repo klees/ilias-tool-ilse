@@ -55,14 +55,14 @@ class ClientConfigTest extends PHPUnit_Framework_TestCase {
 	public function dataDirProvider() {
 		// Second parameter encodes whether the value is a valid config.
 		return array
-			( array("/Users/shecken/Documents/ilias_data/generali/data", true)
+			( array("/data_dir", true)
 			, array(1, false)
 			);
 	}
 
 	public function nameProvider() {
 		return array
-			( array("Generali2", true)
+			( array("ILIAS", true)
 			, array(2, false)
 			);
 	}

@@ -9,13 +9,13 @@ class RolesConfigTest extends PHPUnit_Framework_TestCase {
 		$this->yaml_string = "--- 
 roles:
     0:
-        title: Admin-Ansicht
+        title: Titel1
         description: Der darf alles sehen sonst nicht.
     1:
-        title: DumpUsers
+        title: Titel2
         description: Gruppe für alle
     2:
-        title: WhosNexte
+        title: Titel3
         description: Neue Menschen";
 	}
 

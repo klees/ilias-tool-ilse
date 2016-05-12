@@ -62,7 +62,7 @@ class LogConfigTest extends PHPUnit_Framework_TestCase{
 
 	public function pathProvider() {
 		return array(
-				array("/var/logs/ilias", true)
+				array("/path", true)
 				, array(2, false)
 				, array(true, false)
 				, array(array(), false)

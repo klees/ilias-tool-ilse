@@ -57,7 +57,7 @@ class ToolConfigTest extends PHPUnit_Framework_TestCase{
 
 	public function convertProvider() {
 		return array(
-				array("/opt/ImageMagick", true)
+				array("/ImageMagick", true)
 				, array(5, false)
 				, array(true, false)
 				, array(array(), false)
@@ -68,7 +68,7 @@ class ToolConfigTest extends PHPUnit_Framework_TestCase{
 		return array(
 				array(5, false)
 				, array(true, false)
-				, array("/usr/bin/zip", true)
+				, array("/zip", true)
 				, array(array(), false)
 			);
 	}
@@ -76,7 +76,7 @@ class ToolConfigTest extends PHPUnit_Framework_TestCase{
 	public function unzipProvider() {
 		return array(
 				array(5, false)
-				, array("/usr/bin/unzip", true)
+				, array("/nzip", true)
 				, array(true, false)
 				, array(array(), false)
 			);
@@ -87,7 +87,7 @@ class ToolConfigTest extends PHPUnit_Framework_TestCase{
 				array(5, false)
 				, array(true, false)
 				, array(array(), false)
-				, array("/usr/bin/java", true)
+				, array("/java", true)
 			);
 	}
 }

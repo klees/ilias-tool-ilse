@@ -34,9 +34,9 @@ password_encoder : md5";
 	public function test_createDbConfig() {
 		$json_string = '---
 host: 127.0.0.1
-database: iliastest
-user: root
-password: 4z0sXAPk
+database: ilias
+user: user
+password: passwd
 engine: innodb
 encoding: utf8_general_ci';
 		$obj = $this->parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\DB");
@@ -46,13 +46,13 @@ encoding: utf8_general_ci';
 		$this->assertEquals($obj->host(), "127.0.0.1");
 		$this->assertInternalType("string", $obj->host());
 
-		$this->assertEquals($obj->database(), "iliastest");
+		$this->assertEquals($obj->database(), "ilias");
 		$this->assertInternalType("string", $obj->database());
 
-		$this->assertEquals($obj->user(), "root");
+		$this->assertEquals($obj->user(), "user");
 		$this->assertInternalType("string", $obj->user());
 
-		$this->assertEquals($obj->password(), "4z0sXAPk");
+		$this->assertEquals($obj->password(), "passwd");
 		$this->assertInternalType("string", $obj->password());
 
 		$this->assertEquals($obj->engine(), "innodb");
@@ -64,14 +64,14 @@ encoding: utf8_general_ci';
 
 	public function test_createGitConfig() {
 		$json_string = '---
-git_url: https://github.com/conceptsandtraining/ILIAS.git
+git_url: https://github.com/
 git_branch_name: ilias';
 
 		$obj = $this->parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\GitBranch");
 
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\GitBranch", $obj);
 		
-		$this->assertEquals($obj->gitUrl(), "https://github.com/conceptsandtraining/ILIAS.git");
+		$this->assertEquals($obj->gitUrl(), "https://github.com/");
 		$this->assertInternalType("string", $obj->gitUrl());
 
 		$this->assertEquals($obj->gitBranchName(), "ilias");
@@ -97,17 +97,17 @@ to_install_langs:
 
 	public function test_createServerConfig() {
 		$json_string = '---
-http_path: http://localhost/44generali2
-absolute_path: /Library/WebServer/Documents/44generali2
+http_path: http://localhost/
+absolute_path: /path
 timezone: Europe/Berlin';
 		$obj = $this->parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\Server");
 
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Server", $obj);
 		
-		$this->assertEquals($obj->httpPath(), "http://localhost/44generali2");
+		$this->assertEquals($obj->httpPath(), "http://localhost/");
 		$this->assertInternalType("string", $obj->httpPath());
 
-		$this->assertEquals($obj->absolutePath(), "/Library/WebServer/Documents/44generali2");
+		$this->assertEquals($obj->absolutePath(), "/path");
 		$this->assertInternalType("string", $obj->absolutePath());
 
 		$this->assertEquals($obj->timezone(), "Europe/Berlin");
@@ -127,54 +127,54 @@ passwd: KarlHeinz';
 
 	public function test_createToolsConfig() {
 		$json_string = '---
-convert: /opt/ImageMagick
-zip: /usr/bin/zip
-unzip: /usr/bin/unzip
-java: /usr/bin/java';
+convert: /ImageMagick
+zip: /zip
+unzip: /unzip
+java: /java';
 		$obj = $this->parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\Tools");
 
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Tools", $obj);
 
-		$this->assertEquals($obj->convert(), "/opt/ImageMagick");
+		$this->assertEquals($obj->convert(), "/ImageMagick");
 		$this->assertInternalType("string", $obj->convert());
 
-		$this->assertEquals($obj->zip(), "/usr/bin/zip");
+		$this->assertEquals($obj->zip(), "/zip");
 		$this->assertInternalType("string", $obj->zip());
 
-		$this->assertEquals($obj->unzip(), "/usr/bin/unzip");
+		$this->assertEquals($obj->unzip(), "/unzip");
 		$this->assertInternalType("string", $obj->unzip());
 
-		$this->assertEquals($obj->java(), "/usr/bin/java");
+		$this->assertEquals($obj->java(), "/java");
 		$this->assertInternalType("string", $obj->java());
 	}
 
 	public function readConfigWithValuesProvider() {
 		$json_string = '---
-data_dir : /Users/shecken/Documents/ilias_data
-name : Generali31
+data_dir : /data_dir
+name : ILIAS
 password_encoder : bcrypt
 host: 127.0.0.1
-database: iliastest31
-user: root
-password: 4z0sXAPk
+database: ilias
+user: user
+password: passwd
 engine: innodb
 encoding: utf8_general_ci
 default_lang: de
 to_install_langs:
     - en 
     - de
-http_path: http://localhost/iliastest31
-absolute_path: /Library/WebServer/Documents/iliastest31
+http_path: http://localhost
+absolute_path: /path
 timezone: Europe/Berlin
 passwd: KarlHeinz
-convert: /opt/ImageMagick
-zip: /usr/bin/zip
-unzip: /usr/bin/unzip
-java: /usr/bin/java
-path: /Users/shecken/Documents/ilias_data/Generali31
-file_name: ilias31.log
-git_url: https://github.com/conceptsandtraining/ILIAS.git
-git_branch_name: release_5-1';
+convert: /ImageMagick
+zip: //zip
+unzip: /n/unzip
+java: /java
+path: /path
+file_name: ilias.log
+git_url: https://github.com/
+git_branch_name: ilias';
 
 		return array
 			( array($json_string, "\\CaT\\InstILIAS\\Config\\Client")

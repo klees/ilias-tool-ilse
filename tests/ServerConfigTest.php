@@ -54,18 +54,18 @@ class ServerConfigTest extends PHPUnit_Framework_TestCase{
 
 	public function HTTPPathProvider() {
 		return array(
-				array("http://localhost/44generali2", true)
-				, array("htt://localhost/44generali2", false)
+				array("http://localhost/", true)
+				, array("htt://localhost/", false)
 				, array(4, false)
 				, array(false, false)
 				, array(array(), false)
-				, array("https://localhost/44generali2", true)
+				, array("https://localhost/", true)
 			);
 	}
 
 	public function absolutePathProvider() {
 		return array(
-				array("/Library/WebServer/Documents/44generali2", true)
+				array("/path", true)
 				, array(4, false)
 				, array(false, false)
 				, array(array(), false)
