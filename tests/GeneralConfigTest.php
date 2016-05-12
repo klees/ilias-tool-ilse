@@ -8,14 +8,14 @@ class GeneralConfigTest extends PHPUnit_Framework_TestCase {
 		$this->parser = new YamlParser();
 		$this->yaml_string = "---
 client:
-    data_dir : /Users/shecken/Documents/ilias_data
+    data_dir : /data_dir
     name : Ilias5
     password_encoder : bcrypt 
 database:
     host: 127.0.0.1
-    database: iliastest5
-    user: root
-    password: 4z0sXAPk
+    database: ilias
+    user: user
+    password: passwd
     engine: innodb
     encoding: utf8_general_ci 
 language:
@@ -24,19 +24,19 @@ language:
         - en
         - de
 server:
-    http_path: http://localhost/iliastest5
-    absolute_path: /Library/WebServer/Documents/iliastest5
+    http_path: http://localhost/
+    absolute_path: /yourpath
     timezone: Europe/Berlin
 setup:
-    passwd: KarlHeinz
+    passwd: passwd
 tools:
-    convert: /opt/ImageMagick
-    zip: /usr/bin/zip
-    unzip: /usr/bin/unzip
-    java: /usr/bin/java
+    convert: /convert
+    zip: /zip
+    unzip: /unzip
+    java: /java
 log:
-    path: /Users/shecken/Documents/ilias_data/Ilias5
-    file_name: ilias5.log
+    path: /path
+    file_name: ilias.log
 git_branch:
     git_url: https://github.com/ILIAS-eLearning/ILIAS.git
     git_branch_name: release_5-1
@@ -75,14 +75,27 @@ orgunit:
 role:
     roles:
         0:
-            name: Admin-Ansicht
+            title: Titel1
             description: Der darf alles sehen sonst nicht.
         1:
-            name: DumpUsers
+            title: Titel2
             description: Gruppe für alle
         2:
-            name: WhosNexte
-            description: Neue Menschen";
+            title: Titel3
+            description: Neue Menschen
+ldap:
+    name: ldap
+    server: ldap://127.0.0.1:389
+    basedn: cn=user,dc=dcdom,dc=local
+    con_type: 1
+    con_user_dn: cn=ldap,cn=user,dc=dcdom,dc=local
+    con_user_pw: abcd
+    sync_on_login: 1
+    sync_per_cron: 0
+    attr_name_user: sAMAccountName
+    protocol_version: 3
+    user_search_scope: 0
+    register_role_name: User";
 	}
 
 	public function test_not_enough_params() {
@@ -107,5 +120,6 @@ role:
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Categories", $config->category());
         $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgUnits", $config->orgunit());
         $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Roles", $config->role());
+        $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\LDAP", $config->ldap());
 	}
 }

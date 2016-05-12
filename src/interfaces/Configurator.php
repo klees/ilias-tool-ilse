@@ -32,4 +32,11 @@ interface Configurator {
 	 * @param mixed $install_categories
 	 */
 	public function createCategories($install_categories);
+
+	/**
+	 * ldap server is configured
+	 *
+	 * @param mixed $ldap_config
+	 */
+	public function configureLDAPServer($ldap_config);
 }

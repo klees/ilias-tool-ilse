@@ -23,4 +23,7 @@ echo "\t\tDone...\n";
 echo "\nCreate global Roles.";
 $ilias_configurator->createRoles($general_config->role());
 echo "\t\tDone...\n";
+echo "\nConfigure LDAP Server.";
+$ilias_configurator->configureLDAPServer($general_config->ldap());
+echo "\t\tDone...\n";
 echo "\n\nIlias successfull configured.";

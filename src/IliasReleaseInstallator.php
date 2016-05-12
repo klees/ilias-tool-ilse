@@ -20,6 +20,7 @@ class IliasReleaseInstallator implements \CaT\InstILIAS\interfaces\Installator {
 	//tools
 	protected $ilias_setup;
 	protected $ilias_path;
+	protected $general;
 
 	public function __construct($ilias_path, \ilSetup $ilias_setup) {
 		$this->ilias_path = $ilias_path;
@@ -64,8 +65,7 @@ class IliasReleaseInstallator implements \CaT\InstILIAS\interfaces\Installator {
 		$this->ilias_setup->getClient()->setDSN();
 
 		if(!$this->ilias_setup->saveNewClient()) {
-			echo $this->ilias_setup->getError();
-			die();
+			throw new \Exception($this->ilias_setup->getError());
 		}
 
 		$this->setClientIniSetupFinsihed();
@@ -119,7 +119,7 @@ class IliasReleaseInstallator implements \CaT\InstILIAS\interfaces\Installator {
 		$done = $lng->installLanguages($this->general->language()->toInstallLangs(), array());
 		
 		if($done !== true) {
-			die("Error installing languages");
+			throw new \Exception("Error installing languages");
 		}
 
 		$this->setDefaultLanguage();

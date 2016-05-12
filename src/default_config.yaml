@@ -27,5 +27,30 @@ git_branch_name: #BranchName
 category: #default category structure. it is possible to create categories within categories (children)
     categories:#categories on top level
         1: #one category. repeat this for each. if there are no childs enter an empty array
-            title: Zwei #title of the category
-            childs: []# children of the category. array of categories ech with title and children
+            title:  #title of the category
+            childs: []# children of the category. array of categories each with title and children
+orgunit: #default orgunit structure. it is possible to create orgunits within orgunits (children)
+    orgunits:#orgunits on top level
+        1: #one orgunit. repeat this for each. if there are no childs enter an empty array
+            title:  #title of the orgunit
+            childs: []# children of the orgunit. array of categories each with title and children
+role: #group of roles
+    roles:#array of roles
+        1: #one role. repeat this for each.
+            title:  #title of the role
+            description: #description of the role
+ldap:
+    name: #server name
+    server: #server url
+    basedn: #server dn
+    con_type: #con type (0 or 1)
+    con_user_dn: #user dn
+    con_user_pw: #user pw
+    sync_on_login: #sync user accounts on login (0 or 1)
+    sync_per_cron: #sync user accounts per cron (0 or 1)
+    attr_name_user: #attribute name for user accounts (e.g. sAMAccountName)
+    protocol_version: #protocoll version (2 or 3)
+    user_search_scope: #search scope for user (0 or 1)
+    register_role_name: #assigned role for user after first login. mark created role title with "&LDAP_ROLE" if you want to use this. set register_role_name to "*LDAP_ROLE"
+                        # e.g  #title: &LDAP_ROLE TITLE
+                               #register_role_name: *LDAP_ROLE
