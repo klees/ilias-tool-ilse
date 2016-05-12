@@ -10,7 +10,7 @@ namespace CaT\InstILIAS\Config;
  * @method string java()
  */
 class Tools extends Base {
-		/**
+	/**
 	 * @inheritdocs
 	 */
 	public static function fields() {

@@ -92,30 +92,7 @@ abstract class Base {
 			$ok = is_int($value);
 		}
 		else if (is_array($type)) {
-			assert('count($type) === 1');
-			$content = $type[0];
-			if (!is_array($value)) {
-				$ok = false;
-			}
-			else {
-				if(empty($value)){
-					$ok = false;
-				} else {
-					try {
-						// TODO: This is not very nice. I introduced $key to make
-						// it possible for concrete config classes to perform further
-						// checks on input values, but i would call checkValue with a
-						// specific key with array($type) and $type as well.
-						foreach ($value as $v) {
-							$this->checkValue($key, $content, $v, $optional);
-						}
-						$ok = true;
-					}
-					catch (\InvalidArgumentException $e) {
-						$ok = false;
-					}
-				}
-			}
+			$ok = $this->checkArray($key, $type, $value, $optional);
 		}
 		else {
 			assert('is_subclass_of($type, "\\CaT\\InstILIAS\\Config\\Base")');
@@ -130,6 +107,41 @@ abstract class Base {
 			throw new \InvalidArgumentException
 						( "Error in field $key: Expected "
 						. print_r($type, true)." found ".print_r($value, true));
+		}
+	}
+
+	/**
+	 * values in array are from $type
+	 *
+	 * @param array $type
+	 * @param string|int|array $value
+	 *
+	 * @return boolean
+	 */
+	protected function checkArray($key, $type, $value, $optional) {
+		assert('count($type) === 1');
+		$content = $type[0];
+		if (!is_array($value)) {
+			return false;
+		}
+		else {
+			if(empty($value)){
+				return false;
+			} else {
+				try {
+					// TODO: This is not very nice. I introduced $key to make
+					// it possible for concrete config classes to perform further
+					// checks on input values, but i would call checkValue with a
+					// specific key with array($type) and $type as well.
+					foreach ($value as $v) {
+						$this->checkValue($key, $content, $v, $optional);
+					}
+					return true;
+				}
+				catch (\InvalidArgumentException $e) {
+					return false;
+				}
+			}
 		}
 	}
 
