@@ -26,7 +26,7 @@ $ vi src/config.yaml
 ```
 
 ### Required configuration entries
-For new installation of ILIAS you need these onfiguration entries.
+For new installation of ILIAS you need these configuration entries.
 ```
 * client
 * database
