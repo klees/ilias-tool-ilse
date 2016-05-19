@@ -1,45 +1,56 @@
 ---
-data_dir : #Dateipfad zum ablegen der ILIAS Daten außerhalb des Webserverser /Users/user/data
-name : #Name des Clients
-password_encoder : #encoder für Passwörter der Benutzer (md5 || bcrypt)
-host: #host von ILIAS
-database: #Datenbankname
-user: #Datenbankbenutzer
-password: #Benutzerpasswort
-engine: #Datenbankengine (innodb)
-encoding: # encoding der Datenbank (utf8_general_ci)
-default_lang: #Sprache die im Standard verwendet werden soll (de)
-to_install_langs: #array von sprachen die installiert werden sollen 
-    #- en 
-    #- de
-http_path: #http pafad für die ILIAS installation (host/client_id)
-absolute_path: #pfad wo die ILIAS Dateien liegen (/Library/WebServer/Documents/iliastest)
-timezone: #Zeitzone (Europe/Berlin)
-passwd: #Admin Passwort für das Setup
-convert: #Dateipfad zum IMG Converter
-zip: #Dateipfad zu ZIP
-unzip: #Dateipfad zu UNZIP
-java: #Dateipfad zu Java
-path: #Pfad wo ILIAS die Logdatei ablegen soll
-file_name: #Name der Logdatei (ilias.log)
-git_url: #URL des Git Repo
-git_branch_name: #BranchName
-category: #default category structure. it is possible to create categories within categories (children)
-    categories:#categories on top level
-        1: #one category. repeat this for each. if there are no childs enter an empty array
-            title:  #title of the category
-            childs: []# children of the category. array of categories each with title and children
-orgunit: #default orgunit structure. it is possible to create orgunits within orgunits (children)
-    orgunits:#orgunits on top level
-        1: #one orgunit. repeat this for each. if there are no childs enter an empty array
-            title:  #title of the orgunit
-            childs: []# children of the orgunit. array of categories each with title and children
-role: #group of roles
-    roles:#array of roles
-        1: #one role. repeat this for each.
-            title:  #title of the role
-            description: #description of the role
-ldap:
+client: #do not delete or comment
+    data_dir : #Dateipfad zum ablegen der ILIAS Daten außerhalb des Webserverser /Users/user/data
+    name : #Name des Clients
+    password_encoder : #encoder für Passwörter der Benutzer (md5 || bcrypt)
+database: #do not delete or comment
+    host: #host von ILIAS
+    database: #Datenbankname
+    user: #Datenbankbenutzer
+    password: #Benutzerpasswort
+    engine:  #Datenbankengine (innodb)
+    encoding: # encoding der Datenbank (utf8_general_ci)
+language: #do not delete or comment
+    default_lang: #Sprache die im Standard verwendet werden soll (de)
+    to_install_langs: #array von sprachen die installiert werden sollen
+        #- en
+        #- de
+server: #do not delete or comment
+    http_path: #http pafad für die ILIAS installation (host/client_id)
+    absolute_path: #pfad wo die ILIAS Dateien liegen (/Library/WebServer/Documents/iliastest)
+    timezone: #Zeitzone (Europe/Berlin)
+setup: #do not delete or comment
+    passwd: #Admin Passwort für das Setup
+tools: #do not delete or comment
+    convert: #Dateipfad zum IMG Converter
+    zip: #Dateipfad zu ZIP
+    unzip: #Dateipfad zu UNZIP
+    java: #Dateipfad zu Java
+log: #do not delete or comment
+    path: #Pfad wo ILIAS die Logdatei ablegen soll
+    file_name: #Name der Logdatei (ilias.log)
+git_branch: #do not delete or comment
+    git_url: #URL des Git Repo
+    git_branch_name: #BranchName
+category: #do not delete or comment
+    categories: #default category structure. it is possible to create categories within categories (children)
+        categories:#categories on top level
+            1: #one category. repeat this for each. if there are no childs enter an empty array
+                title:  #title of the category
+                childs: []# children of the category. array of categories each with title and children
+orgunit: #do not delete or comment
+    orgunits: #default orgunit structure. it is possible to create orgunits within orgunits (children)
+        orgunits:#orgunits on top level
+            1: #one orgunit. repeat this for each. if there are no childs enter an empty array
+                title:  #title of the orgunit
+                childs: []# children of the orgunit. array of categories each with title and children
+role: #do not delete or comment
+    roles: #group of roles
+        roles:#array of roles
+            1: #one role. repeat this for each.
+                title:  #title of the role
+                description: #description of the role
+ldap: #do not delete or comment
     name: #server name
     server: #server url
     basedn: #server dn
