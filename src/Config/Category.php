@@ -13,7 +13,7 @@ class Category extends Base {
 	 */
 	public static function fields() {
 		return array
-			( "title"	=> array("string", true)
+			( "title"	=> array("string", false)
 			, "childs"	=> array(array("\\CaT\\InstILIAS\\Config\\Category"), true)
 			);
 	}

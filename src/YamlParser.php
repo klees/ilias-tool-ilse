@@ -19,8 +19,14 @@ class YamlParser implements \CaT\InstILIAS\interfaces\Parser {
 			$type_val = $type[0];
 			$optional = $type[1];
 
-			if(is_subclass_of($type_val, "\\CaT\\InstILIAS\\Config\\Base")) {
-				$vals[] = $this->createConfig($this->yamlValue($yaml,$key,$optional), $type_val);
+			if(is_subclass_of($type_val, "\\CaT\\InstILIAS\\Config\\Base") ) {
+				$value = $this->yamlValue($yaml,$key,$optional);
+
+				if(!$optional || ($optional && $value !== null)) {
+					$vals[] = $this->createConfig($value, $type_val);
+				} else {
+					$vals[] = null;
+				}
 			}
 			else if ($type_val == "string") {
 				$vals[] = $this->yamlValue($yaml,$key,$optional, "");

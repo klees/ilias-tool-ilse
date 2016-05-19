@@ -12,7 +12,7 @@ class Roles extends Base {
 	 */
 	public static function fields() {
 		return array
-			( "roles"			=> array(array("\\CaT\\InstILIAS\\Config\\Role"), true)
+			( "roles"			=> array(array("\\CaT\\InstILIAS\\Config\\Role"), false)
 			);
 	}
 }

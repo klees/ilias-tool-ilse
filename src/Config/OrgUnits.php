@@ -12,7 +12,7 @@ class OrgUnits extends Base {
 	 */
 	public static function fields() {
 		return array
-			( "orgunits" => array(array("\\CaT\\InstILIAS\\Config\\OrgUnit"), true)
+			( "orgunits" => array(array("\\CaT\\InstILIAS\\Config\\OrgUnit"), false)
 			);
 	}
 }
