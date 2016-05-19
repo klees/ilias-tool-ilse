@@ -13,8 +13,8 @@ class Role extends Base {
 	 */
 	public static function fields() {
 		return array
-			( "title"			=> array("string", false)
-			, "description" 	=> array("string", false)
+			( "title"			=> array("string", true)
+			, "description" 	=> array("string", true)
 			);
 	}
 }

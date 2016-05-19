@@ -25,19 +25,19 @@ class LDAP extends Base {
 	 */
 	public static function fields() {
 		return array
-			( "name"	=> array("string", false)
-			, "server"	=> array("string", false)
-			, "basedn"	=> array("string", false)
-			, "con_type"	=> array("int", false)
-			, "con_user_dn"	=> array("string", false)
-			, "con_user_pw"	=> array("string", false)
-			, "sync_on_login"	=> array("int", false)
-			, "sync_per_cron"	=> array("int", false)
+			( "name"	=> array("string", true)
+			, "server"	=> array("string", true)
+			, "basedn"	=> array("string", true)
+			, "con_type"	=> array("int", true)
+			, "con_user_dn"	=> array("string", true)
+			, "con_user_pw"	=> array("string", true)
+			, "sync_on_login"	=> array("int", true)
+			, "sync_per_cron"	=> array("int", true)
 			, "user_group"	=> array("string", true)
-			, "attr_name_user"	=> array("string", false)
-			, "protocol_version"	=> array("int", false)
-			, "user_search_scope"	=> array("int", false)
-			, "register_role_name"	=> array("string", false)
+			, "attr_name_user"	=> array("string", true)
+			, "protocol_version"	=> array("int", true)
+			, "user_search_scope"	=> array("int", true)
+			, "register_role_name"	=> array("string", true)
 			);
 	}
 

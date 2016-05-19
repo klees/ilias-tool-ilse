@@ -12,7 +12,7 @@ class Categories extends Base {
 	 */
 	public static function fields() {
 		return array
-			( "categories" => array(array("\\CaT\\InstILIAS\\Config\\Category"), false)
+			( "categories" => array(array("\\CaT\\InstILIAS\\Config\\Category"), true)
 			);
 	}
 }
