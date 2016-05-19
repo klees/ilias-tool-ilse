@@ -20,10 +20,23 @@ Create a copy of the default_config.yaml.
 ```
 $ cp src/default_config.yaml src/config.yaml
 ```
-Open the config.yaml and fill in all Values
+Open the config.yaml and fill in all Values.
 ```
 $ vi src/config.yaml
 ```
+
+### Required configuration entries
+For new installation of ILIAS you need these onfiguration entries.
+```
+* client
+* database
+* language
+* server
+* setup
+* tools
+* log
+* git_branch
+``
 
 ### Execution
 To install your ILIAS execute the install script.
