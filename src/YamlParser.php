@@ -61,7 +61,8 @@ class YamlParser implements \CaT\InstILIAS\interfaces\Parser {
 		if(!array_key_exists($key, $yaml) && $optional) {
 			return $baseValue;
 		} else if(!array_key_exists($key, $yaml) && !$optional) {
-			throw new \LogicException("Key not found: ".$key);
+			echo "Required configuration entry \"".$key."\" was not found. Please check your config.yaml";
+			die(1);
 		}
 
 		return $yaml[$key];
