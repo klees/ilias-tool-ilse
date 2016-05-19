@@ -36,7 +36,7 @@ For new installation of ILIAS you need these onfiguration entries.
 * tools
 * log
 * git_branch
-``
+```
 
 ### Execution
 To install your ILIAS execute the install script.
