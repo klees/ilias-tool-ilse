@@ -12,7 +12,7 @@
 $ cd DESTINATION_FOLDER
 $ git clone https://github.com/shecken/InstILIAS.git
 $ cd InstILIAS
-$ composer intall
+$ composer install
 ```
 
 ### Configuration
