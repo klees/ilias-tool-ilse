@@ -1,4 +1,5 @@
 <?php
+die();
 $config_path = $argv[1];
 
 require __DIR__ . '/../../vendor/autoload.php';
