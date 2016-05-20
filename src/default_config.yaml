@@ -65,3 +65,15 @@ ldap:
     register_role_name: #assigned role for user after first login. mark created role title with "&LDAP_ROLE" if you want to use this. set register_role_name to "*LDAP_ROLE"
                         # e.g  #title: &LDAP_ROLE TITLE
                                #register_role_name: *LDAP_ROLE
+table:
+    tables:
+        0:
+            name: #name of table
+            mode: #mode to executed (create, addColumn, dropColumn, clear, drop)
+            columns: #columns to be effected
+                0:
+                    name: #name of column
+                    type: #type of column (text, integer, float, date, time, timestamp, clob, blob)
+                    db_null: #could column be null or not
+                    length: #length
+                    default: #default value

@@ -1,5 +1,5 @@
 <?php
-die();
+
 $config_path = $argv[1];
 
 require __DIR__ . '/../../vendor/autoload.php';
@@ -10,6 +10,7 @@ error_reporting(E_ALL & ~E_STRICT & ~E_DEPRECATED);
 $json_string = file_get_contents($config_path);
 $parser = new \CaT\InstILIAS\YamlParser();
 $general_config = $parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\General");
+
 $absolute_path = $general_config->server()->absolutePath();
 $client_id = $general_config->client()->name();
 
@@ -37,6 +38,12 @@ if($general_config->role() !== null) {
 if($general_config->ldap() !== null) {
 	echo "\nConfigure LDAP Server.";
 	$ilias_configurator->configureLDAPServer($general_config->ldap());
+	echo "\t\tDone...\n";
+}
+
+if($general_config->table() !== null) {
+	echo "\nConfigure Tables Server.";
+	$ilias_configurator->configureTables($general_config->table());
 	echo "\t\tDone...\n";
 }
 

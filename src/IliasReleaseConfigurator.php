@@ -166,6 +166,89 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	}
 
 	/**
+	 * @inheritdoc
+	 */
+	public function configureTables($tables_config) {
+		foreach ($tables_config->tables() as $key => $value) {
+			$mode = $value->mode();
+			switch($mode) {
+				case "create":
+				case "addColumn":
+				case "dropColumn":
+				case "clear":
+				case "drop":
+					$mode = $mode."Table";
+					$this->$mode($value);
+					break;
+				default:
+					echo "Not known mode ".$mode.".";
+					die(1);
+			}
+		}
+	}
+
+	protected function createTable($table_config) {
+		if(!$this->gDB->tableExists($table_config->name())) {
+			$fields = $this->createFields($table_config->columns());
+			$this->gDB->createTable($table_config->name(), $fields);
+
+			if($table_config->primaryKeys()) {
+				$this->gDB->addPrimaryKey($table_config->name(),$table_config->primaryKeys());
+			}
+		}
+	}
+	protected function addColumnTable($table_config) {
+		$fields = $this->createFields($table_config->columns());
+
+		foreach ($fields as $key => $field) {
+			if(!$this->gDB->tableColumnExists($table_config->name(), $key)) {
+				$this->gDB->addTableColumn($table_config->name(), $key, $field);
+			}
+		}
+	}
+	protected function dropColumnTable($table_config) {}
+	protected function clearTable($table_config) {}
+	protected function dropTable($table_config) {}
+
+	protected function createFields($columns) {
+		$ret = array();
+		foreach ($columns as $column) {
+			$attributes = array();
+			$type = $column->type();
+
+			switch($type) {
+				case "text":
+				case "integer":
+					$attributes["type"] = $type;
+					$attributes["notnull"] = !(bool)$column->dbNull();
+
+					if($column->length()) { $attributes["length"] = $column->length(); }
+					
+					if($column->default()) { $attributes["default"] = $column->default(); }
+					break;
+				case "float":
+				case "date":
+				case "time":
+				case "timestamp":
+				case "clob":
+				case "blob":
+					$attributes["type"] = $type;
+					$attributes["notnull"] = !(bool)$column->dbNull();
+					
+					if($column->default()) { $attributes["default"] = $column->default(); }
+					break;
+				default:
+					die(1);
+			}
+
+			$ret[$column->name()] = $attributes;
+		}
+
+		return $ret;
+	}
+
+
+	/**
 	* get obj id for role name
 	*
 	* @param string $role_name
