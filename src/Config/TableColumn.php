@@ -6,7 +6,7 @@ namespace CaT\InstILIAS\Config;
  *
  * @method string name()
  * @method string type()
- * @method boolean null()
+ * @method boolean dbNull()
  * @method string default()
  */
 class TableColumn extends Base {
@@ -17,7 +17,8 @@ class TableColumn extends Base {
 		return array
 			( "name"		=> array("string", false)
 			, "type"		=> array("string", false)
-			, "null"		=> array("int", false)
+			, "db_null"		=> array("int", false)
+			, "length"		=> array("int", true)
 			, "default"		=> array("string", true)
 			);
 	}
@@ -33,7 +34,7 @@ class TableColumn extends Base {
 		"blob"
 	);
 
-	protected static $valid_null = array(
+	protected static $valid_db_null = array(
 		0,
 		1
 	);
@@ -45,8 +46,8 @@ class TableColumn extends Base {
 		switch($key) {
 			case "type":
 				return $this->checkContentValueInArray($value, self::$valid_types);
-			case "null":
-				return $this->checkContentValueInArray($value, self::$valid_null);
+			case "db_null":
+				return $this->checkContentValueInArray($value, self::$valid_db_null);
 			default:
 				return parent::checkValueContent($key, $value);
 		}
