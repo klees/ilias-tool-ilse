@@ -53,6 +53,10 @@ class IliasReleaseInstallator implements \CaT\InstILIAS\interfaces\Installator {
 	public function writeClientIni() {
 		$ret = $this->getClientIniData();
 
+		if(!is_dir($ret["datadir_path"])) {
+			mkdir($ret["datadir_path"], 0755, true);
+		}
+
 		$this->ilias_setup->ini_client_exists = $this->ilias_setup->newClient($ret["client_id"]);
 		$this->ilias_setup->getClient()->setId($ret["client_id"]);
 		$this->ilias_setup->getClient()->setName($ret["client_id"]);
@@ -230,6 +234,7 @@ class IliasReleaseInstallator implements \CaT\InstILIAS\interfaces\Installator {
 
 	protected function getClientIniData() {
 		$ret = array();
+		$ret["datadir_path"] = $this->general->client()->dataDir();
 		$ret["client_id"] = $this->general->client()->name();
 		$ret["db_host"] = $this->general->database()->host();
 		$ret["db_name"] = $this->general->database()->database();
