@@ -15,7 +15,7 @@ $client_id = $general_config->client()->name();
 $git_url = $general_config->gitBranch()->gitUrl();
 $git_branch_name = $general_config->gitBranch()->gitBranchName();
 $web_dir = "data";
-die();
+
 //define git executer
 $git = new \CaT\InstILIAS\GitExecuter;
 //clone git
