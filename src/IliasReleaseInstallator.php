@@ -8,22 +8,10 @@ namespace CaT\InstILIAS;
 */
 
 class IliasReleaseInstallator implements \CaT\InstILIAS\interfaces\Installator {
-	//configs
-	protected $client;
-	protected $db;
-	protected $language;
-	protected $log;
-	protected $server;
-	protected $setup;
-	protected $tools;
-
-	//tools
 	protected $ilias_setup;
-	protected $ilias_path;
 	protected $general;
 
-	public function __construct($ilias_path, \ilSetup $ilias_setup) {
-		$this->ilias_path = $ilias_path;
+	public function __construct(\ilSetup $ilias_setup) {
 		$this->ilias_setup = $ilias_setup;
 	}
 
