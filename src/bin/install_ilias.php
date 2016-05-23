@@ -16,6 +16,45 @@ $git_url = $general_config->gitBranch()->gitUrl();
 $git_branch_name = $general_config->gitBranch()->gitBranchName();
 $web_dir = "data";
 
+echo "\n";
+$requirement_checker = new \CaT\InstILIAS\IliasRequirementChecker;
+if(!$requirement_checker->dataDirectoryExists($data_path)) {
+	echo "Data directory does not exist.\n";
+	echo "Creating data directory...";
+	mkdir($data_path, 0755, true);
+	echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
+if(!$requirement_checker->dataDirectoryPermissions($data_path)) {
+	echo "Not enough permissions on data directory.\n";
+	echo "Setting permission to required...";
+	chmod($data_path, 0755);
+	echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
+if(!$requirement_checker->logDirectoryExists($general_config->log()->path())) {
+	echo "Log directory does not exist.\n";
+	echo "Creating log directory...";
+	mkdir($general_config->log()->path(), 0755, true);
+	echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
+if(!$requirement_checker->logFileExists($general_config->log()->path(), $general_config->log()->fileName())) {
+	touch($general_config->log()->path()."/".$general_config->log()->fileName());
+	chmod($general_config->log()->path()."/".$general_config->log()->fileName(), 0755);
+}
+
+if(!$requirement_checker->validPHPVersion("5.4")) {
+	echo "Your PHP Version is too old. Please update to 5.4 or higher.\n";
+	die(1);
+}
+
+if(!$requirement_checker->validDatabaseType($general_config->database()->host(), $general_config->database()->user(), $general_config->database()->password())) {
+	echo "It's not possible to connect a MySQL or Oracle database.\n";
+	echo "Please ensure you have one of these and the needed extensions installed.\n";
+	die(1);
+}
+
 //define git executer
 $git = new \CaT\InstILIAS\GitExecuter;
 //clone git

@@ -37,25 +37,11 @@ class IliasReleaseInstallator implements \CaT\InstILIAS\interfaces\Installator {
 		$this->ilias_setup->ini_ilias_exists = true;
 	}
 
-	public function createLogSystem() {
-		if(!is_dir($this->general->log()->path())) {
-			mkdir($this->general->log()->path(), 0755, true);
-		}
-
-		if(!file_exists($this->general->log()->path()."/".$this->general->log()->fileName())) {
-			touch($this->general->log()->path()."/".$this->general->log()->fileName());
-		}
-	}
-
 	/**
 	 * @inheritdoc
 	 */
 	public function writeClientIni() {
 		$ret = $this->getClientIniData();
-
-		if(!is_dir($ret["datadir_path"])) {
-			mkdir($ret["datadir_path"], 0755, true);
-		}
 
 		$this->ilias_setup->ini_client_exists = $this->ilias_setup->newClient($ret["client_id"]);
 		$this->ilias_setup->getClient()->setId($ret["client_id"]);
