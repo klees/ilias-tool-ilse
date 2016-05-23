@@ -7,6 +7,13 @@
 **A Command Line Installation Script for [ILIAS](https://github.com/ILIAS-eLearning/ILIAS)**
 
 ## Usage
+### Software requirements
+```
+* PHP 5.4 or higher (PHP 7 only works with trunk)
+* MySQL 5.0.x or higher or Oracle 10g or higher
+* Zip and Unzip
+* ImageMagick
+```
 ### Installation
 ```
 $ cd DESTINATION_FOLDER
