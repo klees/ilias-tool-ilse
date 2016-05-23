@@ -3,10 +3,9 @@ $config_path = $argv[1];
 
 require __DIR__ . '/../../vendor/autoload.php';
 
-//read general configs
-$json_string = file_get_contents($config_path);
+$yaml_string = file_get_contents($config_path);
 $parser = new \CaT\InstILIAS\YamlParser();
-$general_config = $parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\General");
+$general_config = $parser->read_config($yaml_string, "\\CaT\\InstILIAS\\Config\\General");
 
 $http_path = $general_config->server()->httpPath();
 $absolute_path = $general_config->server()->absolutePath();
@@ -19,24 +18,24 @@ $web_dir = "data";
 echo "\n";
 $requirement_checker = new \CaT\InstILIAS\IliasRequirementChecker;
 if(!$requirement_checker->dataDirectoryExists($data_path)) {
-	echo "Data directory does not exist.\n";
+	echo "Data directory does not exist. ";
 	echo "Creating data directory...";
 	mkdir($data_path, 0755, true);
-	echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+	echo "\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if(!$requirement_checker->dataDirectoryPermissions($data_path)) {
-	echo "Not enough permissions on data directory.\n";
+	echo "Not enough permissions on data directory. ";
 	echo "Setting permission to required...";
 	chmod($data_path, 0755);
-	echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+	echo "\t\t\t\t\t\tDone!\n";
 }
 
 if(!$requirement_checker->logDirectoryExists($general_config->log()->path())) {
-	echo "Log directory does not exist.\n";
+	echo "Log directory does not exist. ";
 	echo "Creating log directory...";
 	mkdir($general_config->log()->path(), 0755, true);
-	echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+	echo "\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if(!$requirement_checker->logFileExists($general_config->log()->path(), $general_config->log()->fileName())) {
@@ -55,14 +54,12 @@ if(!$requirement_checker->validDatabaseType($general_config->database()->host(),
 	die(1);
 }
 
-//define git executer
 $git = new \CaT\InstILIAS\GitExecuter;
-//clone git
 try {
-	echo "Clone repository from: ".$git_url;
-	echo " (This could take a few minutes)";
+	echo "Clone repository from ".$git_url;
+	echo " (This could take a few minutes)...";
 	$git->cloneGitTo($git_url, $absolute_path);
-	echo "\t\tDone...\n";
+	echo "\t\t\tDone!\n";
 } catch(\RuntimeException $e) {
 	echo $e->getMessage();
 	die(1);
@@ -71,11 +68,10 @@ try {
 	die(1);
 }
 
-//switch to branch
 try {
-	echo "Checkout branch: ".$git_url;
+	echo "Checkout branch... ".$git_url;
 	$git->checkoutBranch($git_branch_name, $absolute_path);
-	echo "\t\tDone...\n";
+	echo "\t\t\t\t\t\t\t\tDone!\n";
 } catch(\RuntimeException $e) {
 	echo $e->getMessage();
 	die(1);
@@ -87,69 +83,58 @@ try {
 	die(1);
 }
 
-//change dir to ILIAS Folder
 chdir($absolute_path);
 if(file_exists($absolute_path.'/libs/composer/vendor/autoload.php')) {
 	include_once $absolute_path.'/libs/composer/vendor/autoload.php';
 }
 
+// my_setup_header has a high error risk.
+// It defines a lot of constant or object
+// and requires ILIAS files.
+// Unfortunately it is required to do these steps,
+// or the installation will not run.
 require_once("my_setup_header.php");
 
-//define setup object
 $setup = new \ilSetup(true,"admin");
 
-//define installator
-echo "Initialize installer";
-$iinst = new \CaT\InstILIAS\IliasReleaseInstallator($path, $setup);
-echo "\t\tDone...\n";
 
-//set configs to installator
-echo "\nStart install ILIAS\n";
+echo "Initialize installer...";
+$iinst = new \CaT\InstILIAS\IliasReleaseInstallator($setup);
+echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+
+
+echo "\nStart installing ILIAS\n";
 $iinst->setGeneralConfig($general_config);
 
-//create ilias.ini.php
-echo "Create ILIAS ini";
+echo "Creating ilias.ini...";
 $iinst->writeIliasIni();
-echo "\t\tDone...\n";
+echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
-//create client.ini.php + folder structure
-echo "Create Client ini";
+echo "Creating client.ini...";
 $iinst->writeClientIni();
-echo "\t\tDone...\n";
+echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 $iinst->createLogSystem();
-
 $iinst->connectDatabase();
 
-//install ILIAS Database
-echo "Create Database";
+echo "Creating database...";
 $iinst->installDatabase();
-//conncet to Database
 $db = $iinst->getDatabaseHandle();
 $db_updater = new \ilDBUpdate($db);
 $iinst->applyHotfixes($db_updater);
 $iinst->applyUpdates($db_updater);
-echo "\t\tDone...\n";
+echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
-//install languages
-echo "Install Languages";
+echo "Installing languages";
 $lng->setDbHandler($ilDB);
 $iinst->installLanguages($lng);
-echo "\t\tDone...\n";
+echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
-//set proxy use
+
 $iinst->setProxy();
-
-//set register for nic
 $iinst->registerNoNic();
 
-//save encoding for passwort
 $encoder_factory = new \ilUserPasswordEncoderFactory(array());
 $iinst->setPasswordEncoder($encoder_factory);
 
-//finish ILIAS setup
-if(!$iinst->finishSetup()) {
-    echo "Something went wrong at finish setup";
-    die(1);
-}
-echo "\n\nIlias successfull installed.";
+echo "\nILIAS successfull installed.";
