@@ -5,7 +5,7 @@ namespace CaT\InstILIAS\Config;
  * Configuration for an ILIAS database.
  *
  * @method string title()
- * @method array childs()
+ * @method array children()
  */
 class OrgUnit extends Base {
 	/**
@@ -14,7 +14,7 @@ class OrgUnit extends Base {
 	public static function fields() {
 		return array
 			( "title"	=> array("string", false)
-			, "childs"	=> array(array("\\CaT\\InstILIAS\\Config\\OrgUnit"), true)
+			, "children"	=> array(array("\\CaT\\InstILIAS\\Config\\OrgUnit"), true)
 			);
 	}
 }

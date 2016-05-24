@@ -73,7 +73,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	}
 
 	/**
-	 * single OrgUnit and her childs created
+	 * single OrgUnit and her children created
 	 * recursiv
 	 *
 	 * @param $org_unit
@@ -89,7 +89,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$orgu->putInTree($parent_ref_id);
 		$orgu->initDefaultRoles();
 
-		foreach ($org_unit->childs() as $key => $value) {
+		foreach ($org_unit->children() as $key => $value) {
 			$this->createOrgUnit($value, $orgu->getRefId());
 		}
 	}
@@ -104,7 +104,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	}
 
 	/**
-	 * single Category and her childs created
+	 * single Category and her children created
 	 * recursiv
 	 *
 	 * @param $category
@@ -120,7 +120,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$cat->putInTree($parent_ref_id);
 		$cat->initDefaultRoles();
 
-		foreach ($category->childs() as $key => $value) {
+		foreach ($category->children() as $key => $value) {
 			$this->createCategory($value, $cat->getRefId());
 		}
 	}

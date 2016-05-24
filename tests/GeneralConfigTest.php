@@ -46,32 +46,32 @@ category:
             title: Eins
         1:
             title: Zwei
-            childs:
+            children:
                 10:
                     title: ZweiEins
-                    childs: []
+                    children: []
                 11:
                     title: ZweiZwei
-                    childs: []
+                    children: []
         2:
             title: Drei
-            childs: []
+            children: []
 orgunit:
     orgunits:
         0:
             title: OrgEins
         1:
             title: OrgZwei
-            childs:
+            children:
                 10:
                     title: OrgZweiEins
-                    childs: []
+                    children: []
                 11:
                     title: OrgZweiZwei
-                    childs: []
+                    children: []
         2:
             title: OrgDrei
-            childs: []
+            children: []
 role:
     roles:
         0:

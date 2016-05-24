@@ -12,16 +12,16 @@ categories:
         title: Eins
     1:
         title: Zwei
-        childs:
+        children:
             10:
                 title: ZweiEins
-                childs: []
+                children: []
             11:
                 title: ZweiZwei
-                childs: []
+                children: []
     2:
         title: Drei
-        childs: []";
+        children: []";
 	}
 
 	public function test_not_enough_params() {
