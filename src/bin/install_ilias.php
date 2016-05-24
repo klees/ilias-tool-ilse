@@ -95,16 +95,16 @@ if(file_exists($absolute_path.'/libs/composer/vendor/autoload.php')) {
 }
 
 // my_setup_header has a high error risk.
-// It defines a lot of constant or object
+// It defines a lot of constant or objects
 // and requires ILIAS files.
 // Unfortunately it is required to do these steps,
 // or the installation will not run.
+echo "Initializing ILIAS...";
 require_once("my_setup_header.php");
+echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 $setup = new \ilSetup(true,"admin");
-
-
-echo "Initialize installer...";
+echo "Initializing installer...";
 $iinst = new \CaT\InstILIAS\IliasReleaseInstallator($setup);
 echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
