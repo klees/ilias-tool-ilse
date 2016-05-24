@@ -95,10 +95,9 @@ orgunit:
 #Permission must be set after installation in the administration menu
 role:
     roles:
-        roles:
-            0:
-                title: role1
-                description: This is a nice role for Users.
+        0:
+            title: role1
+            description: This is a nice role for Users.
 
 #It is possible in ILIAS to enable user login with the LDAP credentials
 ldap:
