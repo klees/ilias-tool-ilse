@@ -40,7 +40,7 @@ if(!$requirement_checker->logDirectoryExists($general_config->log()->path())) {
 
 if(!$requirement_checker->logFileExists($general_config->log()->path(), $general_config->log()->fileName())) {
 	touch($general_config->log()->path()."/".$general_config->log()->fileName());
-	chmod($general_config->log()->path()."/".$general_config->log()->fileName(), 0755);
+	chmod($general_config->log()->path()."/".$general_config->log()->fileName(), 0777);
 }
 
 if(!$requirement_checker->validPHPVersion("5.4")) {
@@ -106,7 +106,7 @@ echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 $setup = new \ilSetup(true,"admin");
 echo "Initializing installer...";
 $iinst = new \CaT\InstILIAS\IliasReleaseInstallator($setup);
-echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 
 echo "\nStart installing ILIAS\n";
@@ -120,7 +120,6 @@ echo "Creating client.ini...";
 $iinst->writeClientIni();
 echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
-$iinst->createLogSystem();
 $iinst->connectDatabase();
 
 echo "Creating database...";
@@ -142,5 +141,10 @@ $iinst->registerNoNic();
 
 $encoder_factory = new \ilUserPasswordEncoderFactory(array());
 $iinst->setPasswordEncoder($encoder_factory);
+
+if(!$iinst->finishSetup()) {
+	echo "\nSomething went wrong.";
+	die(1);
+}
 
 echo "\nILIAS successfull installed.";
