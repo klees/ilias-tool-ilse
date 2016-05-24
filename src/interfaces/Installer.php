@@ -10,7 +10,7 @@ namespace CaT\InstILIAS\interfaces;
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  */
-interface Installater {
+interface Installer {
 	/**
 	 * Write the client.ini.
 	 *
