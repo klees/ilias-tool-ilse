@@ -95,18 +95,7 @@ ldap:
     attr_name_user: sAMAccountName
     protocol_version: 3
     user_search_scope: 0
-    register_role_name: User
-table:
-    tables:
-        0:
-            name: test
-            mode: create
-            columns:
-                0:
-                    name: spalte 1
-                    type: text
-                    db_null: 1
-                    length: 150";
+    register_role_name: User";
 	}
 
 	public function test_not_enough_params() {
@@ -132,6 +121,5 @@ table:
         $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgUnits", $config->orgunit());
         $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Roles", $config->role());
         $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\LDAP", $config->ldap());
-        $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Tables", $config->table());
 	}
 }
