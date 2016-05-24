@@ -123,7 +123,7 @@ ldap:
     protocol_version: 3
     #Scope for user searching. Use 0 or 1. If you are unsure use 0.
     user_search_scope: 0
-    #Default role user would be assigned to after the first login. You can user ILIAS standard roles like User, Administrator, Guest or Anonymous.
+    #Default role user would be assigned to after the first login. You can use ILIAS standard roles like User, Administrator, Guest or Anonymous.
     #Alternative you can use one of your own created out of this config. For this case mark the name of the role above with "&LDAP_ROLE". e.g. "title: &LDAP_ROLE role1".
     #After that you only have to mark the register_role_name to use this value with the key "*LDAP_ROLE". e.g. "register_role_name: *LDAP_ROLE".
     #The parser fills in the title of the role automaticly
