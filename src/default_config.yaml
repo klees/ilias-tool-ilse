@@ -1,79 +1,131 @@
 ---
 client:
-    data_dir : #Dateipfad zum ablegen der ILIAS Daten außerhalb des Webserverser /Users/user/data
-    name : #Name des Clients
-    password_encoder : #encoder für Passwörter der Benutzer (md5 || bcrypt)
+    #Directory beside the webserver. ILIAS use it to save data or files. e.g. images before upload to the webserver.
+    data_dir : 
+    #ILIAS is a client based system. Client with this name will be created
+    name : 
+    #It is possible to encode passwords in two ways. Enter the one you want to use. Possible encoder are md5 and bcrypt
+    password_encoder : bcrypt
 database:
-    host: #host von ILIAS
-    database: #Datenbankname
-    user: #Datenbankbenutzer
-    password: #Benutzerpasswort
-    engine:  #Datenbankengine (innodb)
-    encoding: # encoding der Datenbank (utf8_general_ci)
+    #Host of your databe.
+    host: 
+    #Name for the ILIAS database.
+    database: 
+    #User with permissions to create database / tables
+    user: 
+    #Password for above user
+    password: 
+    #ILIAS supports three database engines. InnoDB, MyISAM, .....
+    engine: innodb
+    #Encoding for database
+    encoding: utf8_general_ci
 language:
-    default_lang: #Sprache die im Standard verwendet werden soll (de)
-    to_install_langs: #array von sprachen die installiert werden sollen
-        #- en
-        #- de
+    #Default language ILIAS will use.
+    default_lang: en
+    #Install languages user can decide to use. Default language must be listed too!
+    to_install_langs: 
+        - en
+        - de
 server:
-    http_path: #http pafad für die ILIAS installation (host/client_id)
-    absolute_path: #pfad wo die ILIAS Dateien liegen (/Library/WebServer/Documents/iliastest)
-    timezone: #Zeitzone (Europe/Berlin)
+    #Url ILIAS could be accessed by web browser
+    http_path: 
+    #Directory on the webserver ILIAS should be installed in
+    absolute_path: 
+    #Timezone for PHP
+    timezone: Europe/Berlin
 setup:
-    passwd: #Admin Passwort für das Setup
+    #Master password to enter the setup.
+    passwd: 
 tools:
-    convert: #Dateipfad zum IMG Converter
-    zip: #Dateipfad zu ZIP
-    unzip: #Dateipfad zu UNZIP
-    java: #Dateipfad zu Java
+    #ImageMagick is the requested image converter. It is used to create certificates. Enter the installation path
+    convert: 
+    #Installation path to zip
+    zip:
+    #Installation path to unzip
+    unzip: 
+    #Installation path to java
+    java: 
 log:
-    path: #Pfad wo ILIAS die Logdatei ablegen soll
-    file_name: #Name der Logdatei (ilias.log)
+    #Directory for ILIAS log file
+    path: 
+    #Name of the log file
+    file_name: ilias.log
 git_branch:
-    git_url: #URL des Git Repo
-    git_branch_name: #BranchName
+    #URL of your git repository you want to install ILIAS from
+    git_url: https://github.com/ILIAS-eLearning/ILIAS.git
+    #Branch name of the release you want to use
+    git_branch_name: release_5-1
+
+#It is possible to create different object like roles, categories or orunits in ILIAS.
+#In the next lines, it is possible to define default strucures or objects.
+#The setup will automaticly create the structure.
+#These blocks are optional. You can remove them if you won't use.
+
+#Categories on top level in the repository. Each category can hold one or more children.
+#Children will be defined in the same way. See the small example below
 category:
-    categories: #default category structure. it is possible to create categories within categories (children)
-        categories:#categories on top level
-            1: #one category. repeat this for each. if there are no childs enter an empty array
-                title:  #title of the category
-                childs: []# children of the category. array of categories each with title and children
+    categories:
+        categories:
+            0:
+                title: Category1
+                children:
+                    0:
+                        title: Child1
+                        children: []
+                    1:
+                        title: Child2
+                        children: []
+
+#The way to create orgunits is very similar to categories.
+#Have look in the example
 orgunit:
-    orgunits: #default orgunit structure. it is possible to create orgunits within orgunits (children)
-        orgunits:#orgunits on top level
-            1: #one orgunit. repeat this for each. if there are no childs enter an empty array
-                title:  #title of the orgunit
-                childs: []# children of the orgunit. array of categories each with title and children
+    orgunits:
+        orgunits:
+            0:
+                title: Orgunit1
+                children: 
+                    0:
+                        title: Child1
+                        children: []
+                    1:
+                        title: Child2
+                        children: []
+
+#In ILIAS is a RBAC System used. In this block you can definde roles to assign users.
+#Permission must be set after installation in the administration menu
 role:
-    roles: #group of roles
-        roles:#array of roles
-            1: #one role. repeat this for each.
-                title:  #title of the role
-                description: #description of the role
+    roles:
+        roles:
+            0:
+                title: role1
+                description: This is a nice role for Users.
+
+#It is possible in ILIAS to enable user login with the LDAP credentials
 ldap:
-    name: #server name
-    server: #server url
-    basedn: #server dn
-    con_type: #con type (0 or 1)
-    con_user_dn: #user dn
-    con_user_pw: #user pw
-    sync_on_login: #sync user accounts on login (0 or 1)
-    sync_per_cron: #sync user accounts per cron (0 or 1)
-    attr_name_user: #attribute name for user accounts (e.g. sAMAccountName)
-    protocol_version: #protocoll version (2 or 3)
-    user_search_scope: #search scope for user (0 or 1)
-    register_role_name: #assigned role for user after first login. mark created role title with "&LDAP_ROLE" if you want to use this. set register_role_name to "*LDAP_ROLE"
-                        # e.g  #title: &LDAP_ROLE TITLE
-                               #register_role_name: *LDAP_ROLE
-table:
-    tables:
-        0:
-            name: #name of table
-            mode: #mode to executed (create, addColumn, dropColumn, clear, drop)
-            columns: #columns to be effected
-                0:
-                    name: #name of column
-                    type: #type of column (text, integer, float, date, time, timestamp, clob, blob)
-                    db_null: #could column be null or not
-                    length: #length
-                    default: #default value
+    #Name of the LDAP Server
+    name:
+    #URL of the Server
+    server:
+    #DN of the Server
+    basedn:
+    #Connection type. Value options are 0 or 1
+    con_type:
+    #DN user
+    con_user_dn:
+    #Passwort for DN User
+    con_user_pw:
+    #It is possible to sync ILIAS and LDAP user. Define what kind you want to use.
+    #It is necessary to set one option to 1 and the other to 0
+    sync_on_login:
+    sync_per_cron:
+    #Attribute name for user access
+    attr_name_user:
+    #Version of your LDAP. Usually it is 3. Also possible is 2.
+    protocol_version: 3
+    #Scope for user searching. Use 0 or 1. If you are unsure use 0.
+    user_search_scope: 0
+    #Default role user would be assigned to after the first login. You can user ILIAS standard roles like User, Administrator, Guest or Anonymous.
+    #Alternative you can use one of your own created out of this config. For this case mark the name of the role above with "&LDAP_ROLE". e.g. "title: &LDAP_ROLE role1".
+    #After that you only have to mark the register_role_name to use this value with the key "*LDAP_ROLE". e.g. "register_role_name: *LDAP_ROLE".
+    #The parser fills in the title of the role automaticly
+    register_role_name:
