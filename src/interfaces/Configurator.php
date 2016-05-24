@@ -38,5 +38,5 @@ interface Configurator {
 	 *
 	 * @param mixed $ldap_config
 	 */
-	public function configureLDAPServer($ldap_config);
+	public function configurateLDAPServer($ldap_config);
 }
