@@ -4,7 +4,7 @@ $config_path = $argv[1];
 error_reporting(E_ALL & ~E_STRICT & ~E_DEPRECATED);
 
 $cmds = array("php ".__DIR__."/install_ilias.php $config_path"
-			, "php ".__DIR__."/configure_ilias.php $config_path");
+			, "php ".__DIR__."/configurate_ilias.php $config_path");
 
 foreach ($cmds as $cmd) {
 	while (@ob_end_flush()); // end all output buffers if any
