@@ -48,7 +48,13 @@ if(!$requirement_checker->validPHPVersion("5.4")) {
 	die(1);
 }
 
-if(!$requirement_checker->validDatabaseType($general_config->database()->host(), $general_config->database()->user(), $general_config->database()->password())) {
+if(!$requirement_checker->mysqliExist() && !$requirement_checker->oracleExist()) {
+	echo "Neither an option to connect via mysqli or oracle is installed. Please intall at least one of these.\n";
+	die(1);
+}
+
+
+if(!$requirement_checker->databaseConnectable($general_config->database()->host(), $general_config->database()->user(), $general_config->database()->password())) {
 	echo "It's not possible to connect a MySQL or Oracle database.\n";
 	echo "Please ensure you have one of these and the needed extensions installed.\n";
 	die(1);

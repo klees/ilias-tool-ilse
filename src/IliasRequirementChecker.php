@@ -31,15 +31,17 @@ class IliasRequirementChecker implements \CaT\InstILIAS\interfaces\RequirementCh
 	/**
 	 * @inheritdocs
 	 */
-	public function validDatabaseType($host, $user, $passwd) {
-		$mysqli = new \mysqli($host, $user, $passwd);
-		if(function_exists("oci_connect")) {
-			$conn = \oci_connect($user, $passwd);
-		} else {
-			$conn = false;
-		}
+	public function mysqliExist() {
+		return class_exists("mysqli");
+	}
 
-		if ($mysqli->connect_error && !$conn) {
+	/**
+	 * @inheritdocs
+	 */
+	public function databaseConnectable($host, $user, $passwd) {
+		$mysqli = new \mysqli($host, $user, $passwd);
+
+		if ($mysqli->connect_error) {
 			return false;
 		}
 

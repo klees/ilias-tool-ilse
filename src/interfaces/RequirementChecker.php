@@ -29,11 +29,17 @@ interface RequirementChecker {
 	public function validPHPVersion($required);
 
 	/**
+	 *
+	 * @return bool
+	 */
+	public function mysqliExist();
+
+	/**
 	 * 
 	 *
 	 * @return bool
 	 */
-	public function validDatabaseType($host, $user, $passwd);
+	public function databaseConnectable($host, $user, $passwd);
 
 	/**
 	 * 
