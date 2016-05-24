@@ -1,6 +1,21 @@
 <?php
 $config_path = $argv[1];
 
+function getUserInput() {
+	$handle = fopen ("php://stdin","r");
+	$line = fgets($handle);
+	return trim($line);
+}
+
+function clearDirectory($dir) {
+	$files = array_diff(scandir($dir), array('.','..'));
+	foreach ($files as $file) {
+		(is_dir("$dir/$file")) ? clearDirectory("$dir/$file") : unlink("$dir/$file");
+	}
+
+	rmdir($dir);
+}
+
 require __DIR__ . '/../../vendor/autoload.php';
 
 $yaml_string = file_get_contents($config_path);
@@ -18,16 +33,41 @@ $web_dir = "data";
 echo "\n";
 $requirement_checker = new \CaT\InstILIAS\IliasRequirementChecker;
 if(!$requirement_checker->dataDirectoryExists($data_path)) {
-	echo "Data directory does not exist. ";
+	echo "Data directory does not exist. Create the directory (yes|no)? ";
+	$line = getUserInput();
+	if(strtolower($line) != "yes") {
+		echo "Data directory is missing.";
+		die(1);
+	}
+
 	echo "Creating data directory...";
 	mkdir($data_path, 0755, true);
 	echo "\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if(!$requirement_checker->dataDirectoryPermissions($data_path)) {
-	echo "Not enough permissions on data directory. ";
+	echo "Not enough permissions on data directory. Set permissions (yes|no)? ";
+	$line = getUserInput();
+	if(strtolower($line) != "yes") {
+		echo "Not enough permissions on data directory.";
+		die(1);
+	}
+
 	echo "Setting permission to required...";
 	chmod($data_path, 0755);
+	echo "\t\t\t\t\t\tDone!\n";
+}
+
+if(!$requirement_checker->dataDirectoryEmpty($data_path, $client_id, $web_dir)) {
+	echo "Data directory is not empty. Clean the directory (yes|no)? ";
+	$line = getUserInput();
+	if(strtolower($line) != "yes") {
+		echo "Data directory is not empty.";
+		die(1);
+	}
+
+	echo "Cleaning the directory ".$data_path."/".$client_id."...";
+	clearDirectory($data_path."/".$client_id);
 	echo "\t\t\t\t\t\tDone!\n";
 }
 
