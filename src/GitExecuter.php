@@ -6,26 +6,16 @@ class GitExecuter implements \CaT\InstILIAS\interfaces\Git {
 
 	const URL_REG_EX = "/^(https:\/\/github\.com)/";
 
-	public function cloneGitTo($ilias_git_url, $installation_path) {
-
-		if(!preg_match(self::URL_REG_EX, strtolower($ilias_git_url))) {
-			throw new \LogicException("GitExecuter::cloneGitTo: No valid gitHub URL ".$ilias_git_url);
+	public function cloneGitTo($git_url, $git_branch, $installation_path) {
+		if(!preg_match(self::URL_REG_EX, strtolower($git_url))) {
+			throw new \LogicException("GitExecuter::cloneGitTo: No valid gitHub URL ".$git_url);
 		}
 
 		if(is_dir($installation_path)) {
 			throw new \LogicException("GitExecuter::cloneGitTo: No valid destination ".$installation_path);
 		}
 
-		Admin::cloneTo($installation_path, $ilias_git_url, false);
-	}
-
-	public function checkoutBranch($ilias_git_branch_name, $installation_path) {
-		if(!is_dir($installation_path)) {
-			throw new \LogicException("GitExecuter::checkoutBranch: No valid destination ".$installation_path);
-		}
-
-		$repository = Admin::init($installation_path);
-		$wc = $repository->getWorkingCopy();
-		$wc->checkout($ilias_git_branch_name);
+		$args = array("--depth", "1", "--branch", $git_branch);
+		Admin::cloneRepository($installation_path, $git_url, $args);
 	}
 }

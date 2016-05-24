@@ -12,6 +12,5 @@ namespace CaT\InstILIAS\interfaces;
  * TODO: This needs to be documented.
  */
 interface Git {
-	public function cloneGitTo($ilias_git_url, $installation_path);
-	public function checkoutBranch($ilias_git_branch_name, $installation_path);
+	public function cloneGitTo($git_url, $git_branch, $installation_path);
 }

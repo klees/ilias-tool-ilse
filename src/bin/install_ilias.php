@@ -64,27 +64,12 @@ $git = new \CaT\InstILIAS\GitExecuter;
 try {
 	echo "Clone repository from ".$git_url;
 	echo " (This could take a few minutes)...";
-	$git->cloneGitTo($git_url, $absolute_path);
+	$git->cloneGitTo($git_url, $git_branch_name, $absolute_path);
 	echo "\t\t\tDone!\n";
 } catch(\RuntimeException $e) {
 	echo $e->getMessage();
 	die(1);
 } catch(\LogicException $e) {
-	echo $e->getMessage();
-	die(1);
-}
-
-try {
-	echo "Checkout branch... ".$git_url;
-	$git->checkoutBranch($git_branch_name, $absolute_path);
-	echo "\t\t\t\t\t\t\t\tDone!\n";
-} catch(\RuntimeException $e) {
-	echo $e->getMessage();
-	die(1);
-} catch(\LogicException $e) {
-	echo $e->getMessage();
-	die(1);
-} catch(\InvalidArgumentException $e) {
 	echo $e->getMessage();
 	die(1);
 }
