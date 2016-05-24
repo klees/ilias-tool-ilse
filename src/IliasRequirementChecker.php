@@ -23,6 +23,24 @@ class IliasRequirementChecker implements \CaT\InstILIAS\interfaces\RequirementCh
 	/**
 	 * @inheritdocs
 	 */
+	public function dataDirectoryEmpty($path, $client) {
+		if($d = dir($path."/".$client)) {
+			while($n = $d->read() ) {
+				if($n == '.' OR $n == '..') {
+					continue;
+				}
+
+				$d->close();
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * @inheritdocs
+	 */
 	public function validPHPVersion($phpversion, $required) {
 		assert('is_string($required)');
 		return $phpversion >= $required;

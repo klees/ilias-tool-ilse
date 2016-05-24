@@ -24,6 +24,13 @@ interface RequirementChecker {
 
 	/**
 	 * 
+	 *
+	 * @return bool
+	 */
+	public function dataDirectoryEmpty($path, $client);
+
+	/**
+	 * 
 	 * @return bool
 	 */
 	public function validPHPVersion($phpversion, $required);
