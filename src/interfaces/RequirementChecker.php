@@ -26,7 +26,14 @@ interface RequirementChecker {
 	 * 
 	 * @return bool
 	 */
-	public function validPHPVersion($required);
+	public function validPHPVersion($phpversion, $required);
+
+	/**
+	 *
+	 *
+	 * @return bool
+	 */
+	public function phpVersionILIASBranchCompatible($phpversion, $branch_name);
 
 	/**
 	 *

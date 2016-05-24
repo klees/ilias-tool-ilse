@@ -43,7 +43,7 @@ if(!$requirement_checker->logFileExists($general_config->log()->path(), $general
 	chmod($general_config->log()->path()."/".$general_config->log()->fileName(), 0777);
 }
 
-if(!$requirement_checker->validPHPVersion("5.4")) {
+if(!$requirement_checker->validPHPVersion(phpversion(), "5.4")) {
 	echo "Your PHP Version is too old. Please update to 5.4 or higher.\n";
 	die(1);
 }
@@ -57,6 +57,11 @@ if(!$requirement_checker->mysqliExist() && !$requirement_checker->oracleExist())
 if(!$requirement_checker->databaseConnectable($general_config->database()->host(), $general_config->database()->user(), $general_config->database()->password())) {
 	echo "It's not possible to connect a MySQL or Oracle database.\n";
 	echo "Please ensure you have one of these and the needed extensions installed.\n";
+	die(1);
+}
+
+if(!$requirement_checker->phpVersionILIASBranchCompatible(phpversion(), $git_branch_name)) {
+	echo "Your PHP Version (".phpversion().") is not compatible to the selected branch (".$git_branch_name.").";
 	die(1);
 }
 

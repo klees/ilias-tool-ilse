@@ -23,9 +23,17 @@ class IliasRequirementChecker implements \CaT\InstILIAS\interfaces\RequirementCh
 	/**
 	 * @inheritdocs
 	 */
-	public function validPHPVersion($required) {
+	public function validPHPVersion($phpversion, $required) {
 		assert('is_string($required)');
-		return phpversion() >= $required;
+		return $phpversion >= $required;
+	}
+
+	public function phpVersionILIASBranchCompatible($phpversion, $branch_name) {
+		if($phpversion >= "7.0" && $branch_name != "trunk") {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
