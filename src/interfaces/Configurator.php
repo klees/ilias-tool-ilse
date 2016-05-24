@@ -39,11 +39,4 @@ interface Configurator {
 	 * @param mixed $ldap_config
 	 */
 	public function configureLDAPServer($ldap_config);
-
-	/**
-	 * tables are createt or configured
-	 *
-	 * @param mixed $table_config
-	 */
-	public function configureTables($tables_config);
 }
