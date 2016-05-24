@@ -1,6 +1,6 @@
 <?php
 namespace CaT\InstILIAS;
-use Gitonomy\Git\Admin;
+use Gitonomy\Git\Admin as Git;
 
 class GitExecuter implements \CaT\InstILIAS\interfaces\Git {
 
@@ -16,6 +16,6 @@ class GitExecuter implements \CaT\InstILIAS\interfaces\Git {
 		}
 
 		$args = array("--depth", "1", "--branch", $git_branch);
-		Admin::cloneRepository($installation_path, $git_url, $args);
+		Git::cloneRepository($installation_path, $git_url, $args);
 	}
 }
