@@ -2,12 +2,12 @@
 namespace CaT\InstILIAS;
 
 /**
-* implementation of an ilias installator
+* implementation of an ilias installer
 *
 * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
 */
 
-class IliasReleaseInstallator implements \CaT\InstILIAS\interfaces\Installator {
+class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	protected $ilias_setup;
 	protected $general;
 
