@@ -83,7 +83,7 @@ class YamlParser implements \CaT\InstILIAS\interfaces\Parser {
 			}
 		}
 
-		//reflection class is need to be used, because the config constructor do not accept array ay param
+		//reflection class is need to be used, because the config constructor do not accept array as param
 		//ReflectionClass::newInstanceArgs splits the array into single vars and forward them to the class constructor
 		$class_handle = new \ReflectionClass($class);
 		return $class_handle->newInstanceArgs($vals);
