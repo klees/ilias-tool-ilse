@@ -62,7 +62,6 @@ require_once "./Services/Init/classes/class.ilErrorHandling.php";
 
 $ilErr = new ilErrorHandling();
 $ilErr->setErrorHandling(PEAR_ERROR_CALLBACK,array($ilErr,'errorHandler'));
-;
 
 define ("ILIAS_HTTP_PATH", $http_path);
 define ("ILIAS_ABSOLUTE_PATH", $absolute_path);

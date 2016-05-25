@@ -49,7 +49,7 @@ interface Installer {
 	 * @return	null
 	 */
 	public function getDatabaseHandle();
-	
+
 	/**
 	 * Apply hotfixes to the database.
 	 *
@@ -57,7 +57,7 @@ interface Installer {
 	 * @return	null
 	 */
 	public function applyHotfixes(\ilDBUpdate $db_updater);
-	
+
 	/**
 	 * Apply updates to the database.
 	 *
@@ -65,7 +65,7 @@ interface Installer {
 	 * @return	null
 	 */
 	public function applyUpdates(\ilDBUpdate $db_updater);
-	
+
 	/**
 	 * Install languages.
 	 *
