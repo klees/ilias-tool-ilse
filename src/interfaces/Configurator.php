@@ -42,5 +42,5 @@ interface Configurator {
 	 *
 	 * @param \CaT\InstILIAS\Config\LDAP $ldap_config
 	 */
-	public function configurateLDAPServer(\CaT\InstILIAS\Config\LDAP $ldap_config);
+	public function configureLDAPServer(\CaT\InstILIAS\Config\LDAP $ldap_config);
 }

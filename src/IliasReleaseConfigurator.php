@@ -132,7 +132,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	/**
 	 * @inheritdoc
 	 */
-	public function configurateLDAPServer(\CaT\InstILIAS\Config\LDAP $ldap_config) {
+	public function configureLDAPServer(\CaT\InstILIAS\Config\LDAP $ldap_config) {
 		$server = new \ilLDAPServer(0);
 
 		$server->toggleActive(1);
