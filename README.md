@@ -10,7 +10,7 @@
 ### Software requirements
 ```
 * PHP 5.4 or higher (PHP 7 only works with trunk)
-* MySQL 5.0.x or higher or Oracle 10g or higher
+* MySQL 5.0.x or higher
 * Zip and Unzip
 * ImageMagick
 ```
