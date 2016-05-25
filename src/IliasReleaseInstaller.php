@@ -195,7 +195,7 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 		$ret["zip_path"] = $this->general->tools()->zip();
 		$ret["unzip_path"] = $this->general->tools()->unzip();
 		$ret["java_path"] = $this->general->tools()->java();
-		$ret["setup_pass"] = $this->general->setup()->passwd();
+		$ret["setup_pass"] = $this->general->setup()->masterPassword();
 
 		return $ret;
 	}
