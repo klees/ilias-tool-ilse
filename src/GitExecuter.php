@@ -3,6 +3,7 @@
 
 namespace CaT\InstILIAS;
 use Gitonomy\Git\Admin as Git;
+use Gitonomy\Git\Repository;
 
 /**
  * Implementation of the git interface.
@@ -21,15 +22,35 @@ class GitExecuter implements \CaT\InstILIAS\interfaces\Git {
 		assert('is_string($git_branch)');
 		assert('is_string($installation_path)');
 
-		if(!preg_match(self::URL_REG_EX, strtolower($git_url))) {
-			throw new \LogicException("GitExecuter::cloneGitTo: No valid gitHub URL ".$git_url);
+		if(!Git::isValidRepository(strtolower($git_url))) {
+			throw new \LogicException("Did not find a repository at ".$git_url);
 		}
 
 		if(is_dir($installation_path)) {
-			throw new \LogicException("GitExecuter::cloneGitTo: No valid destination ".$installation_path);
+			$repository = new Repository($installation_path);
+			if($repository->isBare()) {
+				$this->cloneRepository($installation_path, $git_url, $git_branch);
+				return;
+			}
+			$this->checkoutBranch($repository, $git_branch);
+			$this->pullBranch($repository, $git_branch);
+		} else {
+			$this->cloneRepository($installation_path, $git_url, $git_branch);
 		}
+	}
 
-		$args = array("--depth", "1", "--branch", $git_branch);
+	protected function checkoutBranch($repository, $git_branch) {
+		$args = array($git_branch);
+		$repository->run("checkout", $args);
+	}
+
+	protected function pullBranch($repository, $git_branch) {
+		$args = array("origin", $git_branch);
+		$repository->run("pull", $args);
+	}
+
+	protected function cloneRepository($installation_path, $git_url, $git_branch) {
+		$args = array("--branch", $git_branch);
 		Git::cloneRepository($installation_path, $git_url, $args);
 	}
 }
