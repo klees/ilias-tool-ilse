@@ -38,7 +38,7 @@ if(!$requirement_checker->dataDirectoryExists($data_path)) {
 	echo "Data directory does not exist. Create the directory (yes|no)? ";
 	$line = getUserInput();
 	if(strtolower($line) != "yes") {
-		echo "Data directory is missing.";
+		echo "Aborted by user.";
 		die(1);
 	}
 
@@ -51,7 +51,7 @@ if(!$requirement_checker->dataDirectoryPermissions($data_path)) {
 	echo "Not enough permissions on data directory. Set permissions (yes|no)? ";
 	$line = getUserInput();
 	if(strtolower($line) != "yes") {
-		echo "Not enough permissions on data directory.";
+		echo "Aborted by user.";
 		die(1);
 	}
 
@@ -64,7 +64,7 @@ if(!$requirement_checker->dataDirectoryEmpty($data_path, $client_id, $web_dir)) 
 	echo "Data directory is not empty. Clean the directory (yes|no)? ";
 	$line = getUserInput();
 	if(strtolower($line) != "yes") {
-		echo "Data directory is not empty.";
+		echo "Aborted by user.";
 		die(1);
 	}
 
