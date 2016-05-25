@@ -28,7 +28,7 @@ server:
     absolute_path: /yourpath
     timezone: Europe/Berlin
 setup:
-    passwd: passwd
+    master_password: passwd
 tools:
     convert: /convert
     zip: /zip

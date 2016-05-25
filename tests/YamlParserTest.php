@@ -116,13 +116,13 @@ timezone: Europe/Berlin';
 
 	public function test_createSetupConfig() {
 		$json_string = '---
-passwd: KarlHeinz';
+master_password: KarlHeinz';
 		$obj = $this->parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\Setup");
 
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Setup", $obj);
 
-		$this->assertEquals($obj->passwd(), "KarlHeinz");
-		$this->assertInternalType("string", $obj->passwd());
+		$this->assertEquals($obj->masterPassword(), "KarlHeinz");
+		$this->assertInternalType("string", $obj->masterPassword());
 	}
 
 	public function test_createToolsConfig() {
@@ -166,7 +166,7 @@ to_install_langs:
 http_path: http://localhost
 absolute_path: /path
 timezone: Europe/Berlin
-passwd: KarlHeinz
+master_password: KarlHeinz
 convert: /ImageMagick
 zip: //zip
 unzip: /n/unzip

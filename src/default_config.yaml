@@ -35,7 +35,7 @@ server:
     timezone: Europe/Berlin
 setup:
     #Master password to enter the setup.
-    passwd: 
+    master_password: 
 tools:
     #ImageMagick is the requested image converter. It is used to create certificates. Enter the installation path
     convert: 

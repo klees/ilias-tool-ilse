@@ -10,7 +10,7 @@ namespace CaT\InstILIAS\Config;
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  *
- * @method string passwd()
+ * @method string masterPassword()
  */
 class Setup extends Base {
 	/**
@@ -18,6 +18,6 @@ class Setup extends Base {
 	 */
 	public static function fields() {
 		return array
-			("passwd"		=> array("string", false));
+			("master_password"		=> array("string", false));
 	}
 }

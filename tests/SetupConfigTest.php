@@ -14,23 +14,23 @@ class SetupConfigTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * @dataProvider	SetupConfigValueProvider
 	 */
-	public function test_SetupConfig($passwd, $valid) {
+	public function test_SetupConfig($master_password, $valid) {
 		if ($valid) {
-			$this->_test_valid_SetupConfig($passwd);
+			$this->_test_valid_SetupConfig($master_password);
 		}
 		else {
-			$this->_test_invalid_SetupConfig($passwd);
+			$this->_test_invalid_SetupConfig($master_password);
 		}
 	}
 
-	public function _test_valid_SetupConfig($passwd) {
-		$config = new Setup($passwd);
-		$this->assertEquals($passwd, $config->passwd());
+	public function _test_valid_SetupConfig($master_password) {
+		$config = new Setup($master_password);
+		$this->assertEquals($master_password, $config->masterPassword());
 	}
 
-	public function _test_invalid_SetupConfig($passwd) {
+	public function _test_invalid_SetupConfig($master_password) {
 		try {
-			$config = new Setup($passwd);
+			$config = new Setup($master_password);
 			$this->assertFalse("Should have raised.");
 		}
 		catch (\InvalidArgumentException $e) {}
@@ -38,15 +38,15 @@ class SetupConfigTest extends PHPUnit_Framework_TestCase{
 
 	public function SetupConfigValueProvider() {
 		$ret = array();
-		foreach ($this->passwdProvider() as $passwd) {
+		foreach ($this->masterPasswordProvider() as $master_password) {
 			$ret[] = array
-				( $passwd[0]
-				, $passwd[1]);
+				( $master_password[0]
+				, $master_password[1]);
 		}
 		return $ret;
 	}
 
-	public function passwdProvider() {
+	public function masterPasswordProvider() {
 		return array(
 				array("pusteblume", true)
 				, array(5, false)
