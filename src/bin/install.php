@@ -8,17 +8,27 @@ error_reporting(E_ALL & ~E_STRICT & ~E_DEPRECATED);
 $cmds = array("php ".__DIR__."/install_ilias.php $config_path"
 			, "php ".__DIR__."/configurate_ilias.php $config_path");
 
+$die = false;
 foreach ($cmds as $cmd) {
 	while (@ob_end_flush());
 	$proc = popen($cmd, 'r');
 
 	while (!feof($proc)) {
-		echo fread($proc, 4096);
+		$output = fread($proc, 4096);
+		if(!$output) {
+			$die = true;
+			break;
+		}
+		echo $output;
 		try{
 			flush();
 		} catch (Exception $e) {
 			//empty because of no exception output is necessary
 		}
+	}
+
+	if($die) {
+		break;
 	}
 }
 die(0);
