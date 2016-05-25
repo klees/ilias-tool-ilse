@@ -6,6 +6,8 @@ namespace CaT\InstILIAS\Config;
 /**
  * Configuration for the Server ILIAS runs on.
  *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
+ *
  * @method string httpPath()
  * @method string absolutePath()
  * @method string timezone()

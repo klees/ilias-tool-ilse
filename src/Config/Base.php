@@ -5,10 +5,12 @@ namespace CaT\InstILIAS\Config;
 
 /**
  * Base class for all configs.
+ *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  */
 abstract class Base {
 	/**
-	 * Get all fields that this config defines and their types.
+	 * Get all fields this config defines and their types.
 	 *
 	 * @return	array		array($name	=> ConfigClass|"string"|"int"|array(ConfigClass|"string"|"int"), optional => false|true)
 	 */
@@ -26,6 +28,16 @@ abstract class Base {
 		$this->fillProperties($params);
 	}
 
+	/**
+	* Return the value of the called property. Substitution for property getter
+	*
+	* @param sring $name  	name of called function
+	* @param array $params 	forwarded params
+	*
+	* @throws BadMethodCallException if no property is available for called $name
+	*
+	* @return mixed Value of called property
+	*/
 	final public function __call($name, $params) {
 		assert('count($params) === 0');
 		$name = $this->from_camel_case($name);
@@ -36,6 +48,13 @@ abstract class Base {
 		return $this->$name;
 	}
 
+	/**
+	 * Change camel case to underscore splittet value
+	 *
+	 * @param string $name
+	 *
+	 * @return string
+	 */
 	private function from_camel_case($name) {
 		return preg_replace_callback("/[A-Z]/", function ($matches) {
 			return "_".strtolower($matches[0]);
@@ -84,7 +103,16 @@ abstract class Base {
 		$this->$key = $value;
 	}
 
-	/** TODO: Document me! */
+	/**
+	* Checks given value is type of needed.
+	*
+	* @param string|integer 		$key
+	* @param string|integer|array 	$type
+	* @param mixed 					$value
+	* @param bool 					$optional
+	*
+	* @throws InvalidArgumentException if value is not of needed type
+	*/
 	private function checkValue($key, $type, $value, $optional) {
 		if ($type == "string") {
 			$ok = is_string($value);
@@ -114,8 +142,10 @@ abstract class Base {
 	/**
 	 * values in array are from $type
 	 *
-	 * @param array $type
-	 * @param string|int|array $value
+	 * @param string|integer 		$key
+	 * @param string|integer|array 	$type
+	 * @param mixed 				$value
+	 * @param bool 					$optional
 	 *
 	 * @return boolean
 	 */
@@ -160,6 +190,7 @@ abstract class Base {
 
 	/**
 	 * is value in array
+	 *
 	 * @param string|int 	$value 		entered value
 	 * @param array 		$valids		valid entries for the key
 	 *

@@ -6,6 +6,8 @@ namespace CaT\InstILIAS\Config;
 /**
  * Configuration for the tools required by ILIAS.
  *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
+ *
  * @method string convert()
  * @method string zip()
  * @method string unzip()

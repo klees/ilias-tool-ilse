@@ -6,8 +6,7 @@ namespace CaT\InstILIAS\Config;
 /**
  * Configuration for the git repo and branch name to get ILIAS from.
  *
- * TODO: This most probably is not specific to ILIAS, so it could be named
- * GitBranch or something.
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  *
  * @method string gitUrl()
  * @method string gitBranchName()

@@ -6,6 +6,8 @@ namespace CaT\InstILIAS\Config;
 /**
  * Configuration for one client of ILIAS.
  *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
+ *
  * @method string dataDir()
  * @method string name()
  * @method string passwordEncoder()

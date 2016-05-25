@@ -4,7 +4,16 @@
 namespace CaT\InstILIAS;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * implementation of a parser
+ * used configuration language is yaml
+ *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
+ */
 class YamlParser implements \CaT\InstILIAS\interfaces\Parser {
+	/**
+	 * @inheritdoc
+	 */
 	public function read_config($string, $class) {
 		assert('is_string($string)');
 		assert('is_string($class)');
@@ -18,7 +27,20 @@ class YamlParser implements \CaT\InstILIAS\interfaces\Parser {
 		return $this->createConfig($yaml, $class);
 	}
 
-	protected function createConfig($yaml, $class, $path = "") {
+	/**
+	 * creates an instance of requested class in $class
+	 *
+	 * @param array $yaml
+	 * @param string $class
+	 * @param string $path
+	 *
+	 * @throws LogicException
+	 *
+	 * @return instance of $class
+	 */
+	protected function createConfig(array $yaml, $class, $path = "") {
+		assert('is_string($class)');
+
 		$vals = array();
 		foreach ($class::fields() as $key => $type) {
 			$type_val = $type[0];
@@ -61,11 +83,24 @@ class YamlParser implements \CaT\InstILIAS\interfaces\Parser {
 			}
 		}
 
+		//reflection class is need to be used, because the config constructor do not accept array ay param
+		//ReflectionClass::newInstanceArgs splits the array into single vars and forward them to the class constructor
 		$class_handle = new \ReflectionClass($class);
 		return $class_handle->newInstanceArgs($vals);
 	}
 
-	protected function yamlValue($yaml, $key, $path, $optional, $baseValue = null) {
+	/**
+	 * get the search value from yaml parsed array
+	 *
+	 * @param array $yaml
+	 * @param string|integer $key
+	 * @param string $path
+	 * @param boolean $optional
+	 * @param string|integer|array|null $baseValue
+	 *
+	 * @return string|integer|array|null
+	 */
+	protected function yamlValue(array $yaml, $key, $path, $optional, $baseValue = null) {
 		if(!array_key_exists($key, $yaml) && $optional) {
 			return $baseValue;
 		} else if(!array_key_exists($key, $yaml) && !$optional) {

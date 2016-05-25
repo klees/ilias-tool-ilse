@@ -6,6 +6,8 @@ namespace CaT\InstILIAS\Config;
 /**
  * Configuration for the log of ILIAS.
  *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
+ *
  * @method string path()
  * @method string fileName()
  */

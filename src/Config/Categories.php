@@ -6,6 +6,8 @@ namespace CaT\InstILIAS\Config;
 /**
  * Configuration for OrgUnits.
  *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
+ *
  * @method array categories()
  */
 class Categories extends Base {

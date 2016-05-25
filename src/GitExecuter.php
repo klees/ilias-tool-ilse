@@ -4,10 +4,18 @@
 namespace CaT\InstILIAS;
 use Gitonomy\Git\Admin as Git;
 
+/**
+ * Implementation of the git interface.
+ *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
+ */
 class GitExecuter implements \CaT\InstILIAS\interfaces\Git {
 
 	const URL_REG_EX = "/^(https:\/\/github\.com)/";
 
+	/**
+	 * @inhertidoc
+	 */
 	public function cloneGitTo($git_url, $git_branch, $installation_path) {
 		assert('is_string($git_url)');
 		assert('is_string($git_branch)');

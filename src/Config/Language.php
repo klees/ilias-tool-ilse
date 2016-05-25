@@ -6,6 +6,8 @@ namespace CaT\InstILIAS\Config;
 /**
  * Config for the languages to be used in ILIAS.
  *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
+ *
  * @method string defaultLang()
  * @method array toInstallLangs()
  */

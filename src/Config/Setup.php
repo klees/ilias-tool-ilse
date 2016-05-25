@@ -4,7 +4,11 @@
 namespace CaT\InstILIAS\Config;
 
 /**
+ * Configuration for server values
+ *
  * TODO: This name seems odd. It's about the master password, right?
+ *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  *
  * @method string passwd()
  */

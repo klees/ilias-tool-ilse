@@ -6,6 +6,8 @@ namespace CaT\InstILIAS\Config;
 /**
  * General Configuration for an ILIAS.
  *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
+ *
  * @method \\CaT\\InstILIAS\\Config\\Client client()
  * @method \\CaT\\InstILIAS\\Config\\DB database()
  * @method \\CaT\\InstILIAS\\Config\\Language language()

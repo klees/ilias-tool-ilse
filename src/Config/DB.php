@@ -6,6 +6,8 @@ namespace CaT\InstILIAS\Config;
 /**
  * Configuration for an ILIAS database.
  *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
+ *
  * @method string host()
  * @method string database()
  * @method string user()
@@ -55,6 +57,11 @@ class DB extends Base {
 		}
 	}
 
+	/**
+	 * Check the host name to be valid
+	 *
+	 * @param $value
+	 */
 	protected function checkContentHost($value) {
 		if(preg_match(self::IP_REGEX, strtolower($value))) {
 			return true;
