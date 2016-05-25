@@ -2,8 +2,9 @@
 namespace CaT\InstILIAS\interfaces;
 
 /**
+ * Interface for config parser
  *
- *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  */
 interface Parser {
 	/**

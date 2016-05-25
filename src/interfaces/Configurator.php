@@ -8,17 +8,19 @@ namespace CaT\InstILIAS\interfaces;
  */
 interface Configurator {
 	/**
-	 * ilias is initialisiert
+	 * initialize ilias for further configuration
 	 */
 	public function initIlias();
 
 	/**
-	 * roles in ilias created
+	 * creates global roles
+	 *
+	 *@param mixed $install_roles
 	 */
 	public function createRoles($install_roles);
 
 	/**
-	 * orgunits in ilias created
+	 * creates organisational units according to defined structur
 	 * recursive
 	 *
 	 * @param mixed $install_orgunits
@@ -26,7 +28,7 @@ interface Configurator {
 	public function createOrgUnits($install_orgunits);
 
 	/**
-	 * categories in ilias created
+	 * creates categories units according to defined structur
 	 * recursive
 	 *
 	 * @param mixed $install_categories
@@ -34,7 +36,7 @@ interface Configurator {
 	public function createCategories($install_categories);
 
 	/**
-	 * ldap server is configured
+	 * configurates the LDAP server settings for login
 	 *
 	 * @param mixed $ldap_config
 	 */
