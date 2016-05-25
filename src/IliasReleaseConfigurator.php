@@ -48,7 +48,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	/**
 	 * @inheritdoc
 	 */
-	public function createRoles($install_roles) {
+	public function createRoles(\CaT\InstILIAS\Config\Roles $install_roles) {
 		global $rbacadmin;
 
 		foreach ($install_roles->roles() as $role => $value) {
@@ -65,7 +65,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	/**
 	 * @inheritdoc
 	 */
-	public function createOrgUnits($install_orgunits) {
+	public function createOrgUnits(\CaT\InstILIAS\Config\OrgUnits $install_orgunits) {
 		
 		foreach ($install_orgunits->orgunits() as $key => $value) {
 			$this->createOrgunit($value, \ilObjOrgUnit::getRootOrgRefId());
@@ -97,7 +97,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	/**
 	 * @inheritdoc
 	 */
-	public function createCategories($install_categories) {
+	public function createCategories(\CaT\InstILIAS\Config\Categories $install_categories) {
 		foreach ($install_categories->categories() as $key => $value) {
 			$this->createCategory($value, $this->gTree->getRootId());
 		}
@@ -128,7 +128,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	/**
 	 * @inheritdoc
 	 */
-	public function configurateLDAPServer($ldap_config) {
+	public function configurateLDAPServer(\CaT\InstILIAS\Config\LDAP $ldap_config) {
 		$server = new \ilLDAPServer(0);
 
 		$server->toggleActive(1);

@@ -7,6 +7,10 @@ class GitExecuter implements \CaT\InstILIAS\interfaces\Git {
 	const URL_REG_EX = "/^(https:\/\/github\.com)/";
 
 	public function cloneGitTo($git_url, $git_branch, $installation_path) {
+		assert('is_string($git_url)');
+		assert('is_string($git_branch)');
+		assert('is_string($installation_path)');
+
 		if(!preg_match(self::URL_REG_EX, strtolower($git_url))) {
 			throw new \LogicException("GitExecuter::cloneGitTo: No valid gitHub URL ".$git_url);
 		}

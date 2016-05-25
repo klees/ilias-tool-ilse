@@ -15,30 +15,30 @@ interface Configurator {
 	/**
 	 * creates global roles
 	 *
-	 *@param mixed $install_roles
+	 *@param \CaT\InstILIAS\Config\Roles $install_roles
 	 */
-	public function createRoles($install_roles);
+	public function createRoles(\CaT\InstILIAS\Config\Roles $install_roles);
 
 	/**
 	 * creates organisational units according to defined structur
 	 * recursive
 	 *
-	 * @param mixed $install_orgunits
+	 * @param \CaT\InstILIAS\Config\OrgUnits $install_orgunits
 	 */
-	public function createOrgUnits($install_orgunits);
+	public function createOrgUnits(\CaT\InstILIAS\Config\OrgUnits $install_orgunits);
 
 	/**
 	 * creates categories units according to defined structur
 	 * recursive
 	 *
-	 * @param mixed $install_categories
+	 * @param \CaT\InstILIAS\Config\OrgUnits $install_categories
 	 */
-	public function createCategories($install_categories);
+	public function createCategories(\CaT\InstILIAS\Config\Categories $install_categories);
 
 	/**
 	 * configurates the LDAP server settings for login
 	 *
-	 * @param mixed $ldap_config
+	 * @param \CaT\InstILIAS\Config\LDAP $ldap_config
 	 */
-	public function configurateLDAPServer($ldap_config);
+	public function configurateLDAPServer(\CaT\InstILIAS\Config\LDAP $ldap_config);
 }
