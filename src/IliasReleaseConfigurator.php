@@ -42,6 +42,8 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		include_once($this->absolute_path."/Services/LDAP/classes/class.ilLDAPServer.php");
 		include_once($this->absolute_path."/Services/LDAP/classes/class.ilLDAPServer.php");
 
+		//context unittest is not required an ilias authentication
+		//we do not need any authentication to configure ILIAS
 		\ilContext::init(\ilContext::CONTEXT_UNITTEST);
 		\ilInitialisation::initILIAS();
 
@@ -150,7 +152,9 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$role_id = $this->getRoleId($ldap_config->registerRoleName());
 		$server->setGlobalRole($role_id);
 
-		// things must be set because of not null
+		//group scope is a not null value in database
+		//we do not need, but it is necessary to be set
+		//1 is the default value
 		$server->setGroupScope(1);
 
 		if(!$server->validate())
