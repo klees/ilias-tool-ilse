@@ -1,4 +1,6 @@
 <?php
+/* Copyright (c) 2016 Stefan Hecken <stefan.hecken@concepts-and-training.de>, Extended GPL, see LICENSE */
+
 $config_path = $argv[1];
 
 function getUserInput() {
