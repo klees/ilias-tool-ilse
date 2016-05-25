@@ -97,7 +97,7 @@ if(!$requirement_checker->mysqliExist() && !$requirement_checker->oracleExist())
 
 
 if(!$requirement_checker->databaseConnectable($general_config->database()->host(), $general_config->database()->user(), $general_config->database()->password())) {
-	echo "It's not possible to connect a MySQL or Oracle database.\n";
+	echo "It's not possible to connect a MySQL database.\n";
 	echo "Please ensure you have one of these and the needed extensions installed.\n";
 	die(1);
 }
@@ -140,10 +140,7 @@ echo "Initializing installer...";
 $iinst = new \CaT\InstILIAS\IliasReleaseInstaller($setup, $general_config);
 echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
-
 echo "\nStart installing ILIAS\n";
-$iinst->setGeneralConfig($general_config);
-
 echo "Creating ilias.ini...";
 $iinst->writeIliasIni();
 echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
@@ -162,7 +159,7 @@ $iinst->applyHotfixes($db_updater);
 $iinst->applyUpdates($db_updater);
 echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
-echo "Installing languages";
+echo "Installing languages...";
 $lng->setDbHandler($ilDB);
 $iinst->installLanguages($lng);
 echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
