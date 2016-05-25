@@ -137,7 +137,7 @@ echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 $setup = new \ilSetup(true,"admin");
 echo "Initializing installer...";
-$iinst = new \CaT\InstILIAS\IliasReleaseInstaller($setup);
+$iinst = new \CaT\InstILIAS\IliasReleaseInstaller($setup, $general_config);
 echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 

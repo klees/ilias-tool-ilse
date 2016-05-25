@@ -13,8 +13,9 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	protected $ilias_setup;
 	protected $general;
 
-	public function __construct(\ilSetup $ilias_setup) {
+	public function __construct(\ilSetup $ilias_setup, \CaT\InstILIAS\Config\General $general) {
 		$this->ilias_setup = $ilias_setup;
+		$this->general = $general;
 	}
 
 	/**
@@ -169,8 +170,7 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	 * validatesetup status again
 	 * and set access mode of the first client to online
 	 */
-	protected function validateSetup()
-	{
+	protected function validateSetup() {
 		foreach ($this->ilias_setup->getClient()->status as $key => $val)
 		{
 			if ($key != "finish" && $key != "access")
@@ -183,14 +183,6 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 		}
 
 		return true;
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function setGeneralConfig(\CaT\InstILIAS\Config\General $general)
-	{
-		$this->general = $general;
 	}
 
 	protected function getIliasIniData() {

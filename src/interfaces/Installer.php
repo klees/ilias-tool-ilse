@@ -104,14 +104,4 @@ interface Installer {
 	 * @return	null
 	 */
 	public function finishSetup();
-
-	/**
-	 * set all Config files
-	 *
-	 * TODO: This seems odd. We might want to pass just one config to the
-	 *       constructor.
-	 *
-	 * @return	null
-	 */
-	public function setGeneralConfig(\CaT\InstILIAS\Config\General $general);
 }

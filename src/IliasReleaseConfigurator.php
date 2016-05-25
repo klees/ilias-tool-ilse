@@ -157,8 +157,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		//1 is the default value
 		$server->setGroupScope(1);
 
-		if(!$server->validate())
-		{
+		if(!$server->validate()) {
 			global $ilErr;
 			throw new \Exception("Error creating LDAP Server: ".$ilErr->getMessage());
 		}
