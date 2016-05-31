@@ -25,7 +25,7 @@ class PluginConfigTest extends PHPUnit_Framework_TestCase {
 
 	public function _test_valid_PluginConfig($comp_type, $comp_name, $plugin_slot, $name, $git) {
 		$config = new Plugin($comp_type, $comp_name, $plugin_slot, $name, $git);
-		$this->assertEquals($comp_type, $config->componentCategory());
+		$this->assertEquals($comp_type, $config->componentType());
 		$this->assertEquals($comp_name, $config->componentName());
 		$this->assertEquals($plugin_slot, $config->pluginSlot());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\GitBranch", $config->git());

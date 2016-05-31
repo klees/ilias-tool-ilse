@@ -99,7 +99,7 @@ ldap:
 plugin:
     plugins:
         0:
-            component_category: Services
+            component_type: Services
             component_name: Cron
             plugin_slot: CronHook
             name: Pluginname
