@@ -12,8 +12,6 @@ namespace CaT\InstILIAS\Config;
  * @method string gitBranchName()
  */
 class GitBranch extends Base {
-	const URL_REG_EX = "/^(https:\/\/github\.com)/";
-
 	/**
 	 * @inheritdocs
 	 */
@@ -22,17 +20,5 @@ class GitBranch extends Base {
 			( "git_url"			=> array("string", false)
 			, "git_branch_name"	=> array("string", false)
 			);
-	}
-
-	/**
-	 * @inheritdocs
-	 */
-	protected function checkValueContent($key, $value) {
-		switch($key) {
-			case "git_url":
-				return $this->checkContentPregmatch($value, self::URL_REG_EX);
-			default:
-				return parent::checkValueContent($key, $value);
-		}
 	}
 }
