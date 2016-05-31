@@ -95,7 +95,16 @@ ldap:
     attr_name_user: sAMAccountName
     protocol_version: 3
     user_search_scope: 0
-    register_role_name: User";
+    register_role_name: User
+plugin:
+    plugins:
+        0:
+            component_category: Services
+            component_name: Cron
+            plugin_slot: CronHook
+            git:
+                git_url: Bernd
+                git_branch_name: master";
 	}
 
 	public function test_not_enough_params() {
@@ -121,5 +130,6 @@ ldap:
         $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgUnits", $config->orgunit());
         $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Roles", $config->role());
         $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\LDAP", $config->ldap());
+        $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Plugins", $config->plugin());
 	}
 }

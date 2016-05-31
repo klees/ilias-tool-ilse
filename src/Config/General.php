@@ -40,6 +40,7 @@ class General extends Base {
 			, "orgunit"	=> array("\\CaT\\InstILIAS\\Config\\OrgUnits", true)
 			, "role"	=> array("\\CaT\\InstILIAS\\Config\\Roles", true)
 			, "ldap"	=> array("\\CaT\\InstILIAS\\Config\\LDAP", true)
+			, "plugin"	=> array("\\CaT\\InstILIAS\\Config\\Plugins", true)
 			);
 	}
 }

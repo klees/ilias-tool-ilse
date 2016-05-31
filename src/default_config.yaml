@@ -128,3 +128,19 @@ ldap:
     #After that you only have to mark the register_role_name to use this value with the key "*LDAP_ROLE". e.g. "register_role_name: *LDAP_ROLE".
     #The parser fills in the title of the role automaticly
     register_role_name:
+
+#In ILIAS you can use plugins to manipulate or add something to the system. Define in this block which plugins you want to use
+plugin:
+    plugins:
+        #single plugin entry
+        0:
+            #Plugins can be used for Modules or Services. Define which category yours be assigned
+            component_category:
+            #Name of the component your plug is written for
+            component_name:
+            #Name of the pluginslot
+            plugin_slot:
+            #Configuration where to find the plugin
+            git:
+                git_url:
+                git_branch_name:
