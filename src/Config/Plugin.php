@@ -8,7 +8,7 @@ namespace CaT\InstILIAS\Config;
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  *
- * @method string componentCategory()
+ * @method string componentType()
  * @method string componentName()
  * @method string pluginSlot()
  * @method \CaT\InstILIAS\Config\GitBranch git()
@@ -19,7 +19,7 @@ class Plugin extends Base {
 	 */
 	public static function fields() {
 		return array
-			( "component_category" => array("string", false)
+			( "component_type" => array("string", false)
 			, "component_name" => array("string", false)
 			, "plugin_slot" => array("string", false)
 			, "name" => array("string", false)
