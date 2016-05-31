@@ -19,10 +19,11 @@ class Plugin extends Base {
 	 */
 	public static function fields() {
 		return array
-			( "component_category" 	=> array("string", false)
+			( "component_category" => array("string", false)
 			, "component_name" => array("string", false)
-			, "plugin_slot"	=> array("string", false)
-			, "git"		=> array("\\CaT\\InstILIAS\\Config\\GitBranch", false)
+			, "plugin_slot" => array("string", false)
+			, "name" => array("string", false)
+			, "git" => array("\\CaT\\InstILIAS\\Config\\GitBranch", false)
 			);
 	}
 }

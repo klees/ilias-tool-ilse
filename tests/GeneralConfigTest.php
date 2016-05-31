@@ -102,6 +102,7 @@ plugin:
             component_category: Services
             component_name: Cron
             plugin_slot: CronHook
+            name: Pluginname
             git:
                 git_url: Bernd
                 git_branch_name: master";

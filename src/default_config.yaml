@@ -140,6 +140,8 @@ plugin:
             component_name:
             #Name of the pluginslot
             plugin_slot:
+            #Name of the plugin
+            name:
             #Configuration where to find the plugin
             git:
                 git_url:
