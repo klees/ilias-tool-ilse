@@ -54,8 +54,8 @@ class GitBranchConfigTest extends PHPUnit_Framework_TestCase {
 	public function urlProvider() {
 		return array(
 				array("https://github.com/", true)
-				, array("http://github.com/", false)
-				, array("brot", false)
+				, array("http://github.com/", true)
+				, array("brot", true)
 				, array(4, false)
 				, array(true, false)
 				, array(array(), false)
