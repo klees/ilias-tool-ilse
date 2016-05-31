@@ -6,44 +6,47 @@ namespace CaT\InstILIAS\interfaces;
 /**
  * Inteface for installing, updating, activate or deactivate an ILIAS Plugin
  *
+ * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  */
 interface Plugin {
 	/**
 	 *
-	 * @param string $absolute_path			Path ILIAS is installed to
-	 * @param string $component_category	Name of the category (Services or Modules)
-	 * @param string $component_name		Name of the component (Cron)
-	 * @param string $plugin_slot			Used plugin slot
+	 * @param \CaT\InstILIAS\Config\Plugin $plugin
+	 * @param string 					   $absolute_path
+	 *
+	 * @throws RuntimeException
+	 *
+	 * @return boolean
 	 */
-	public function createPath($absolute_path, $component_category, $component_name, $plugin_slot);
+	public function install(\CaT\InstILIAS\Config\Plugin $plugin, $absolute_path);
 
 	/**
 	 *
-	 * @param \CaT\InstILIAS\Congig\GitBranch $git_branch 	gitBranch config to find the needed plugin
-	 * @param string $absolute_path							Path ILIAS is installed to
-	 * @param string $component_category					Name of the category (Services or Modules)
-	 * @param string $component_name						Name of the component (Cron)
-	 * @param string $plugin_slot							Used plugin slot
+	 * @param \CaT\InstILIAS\Config\Plugin $plugin
+	 *
+	 * @return boolean
 	 */
-	public function checkout(\CaT\InstILIAS\Congig\GitBranch $git_branch, $absolute_path, $component_category, $component_name, $plugin_slot);
+	public function update(\CaT\InstILIAS\Config\Plugin $plugin);
 
 	/**
 	 *
+	 * @param \CaT\InstILIAS\Config\Plugin $plugin
+	 *
+	 * @return boolean
 	 */
-	public function update();
+	public function activate(\CaT\InstILIAS\Config\Plugin $plugin);
 
 	/**
 	 *
+	 * @param \CaT\InstILIAS\Config\Plugin $plugin
+	 *
+	 * @return boolean
 	 */
-	public function activate();
+	public function deactivate(\CaT\InstILIAS\Config\Plugin $plugin);
 
 	/**
 	 *
+	 * @param \CaT\InstILIAS\Config\Plugin $plugin
 	 */
-	public function deactivate();
-
-	/**
-	 *
-	 */
-	public function updateLanguage();
+	public function updateLanguage(\CaT\InstILIAS\Config\Plugin $plugin);
 }
