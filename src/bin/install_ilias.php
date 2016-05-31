@@ -116,9 +116,6 @@ try {
 } catch(\RuntimeException $e) {
 	echo $e->getMessage();
 	die(1);
-} catch(\LogicException $e) {
-	echo $e->getMessage();
-	die(1);
 }
 
 chdir($absolute_path);
