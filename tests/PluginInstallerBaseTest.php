@@ -23,7 +23,7 @@ plugins:
 	}
 
 	public function test_installPlugin() {
-		$result = $this->plugin_installer->install($this->config->plugins()[0]);
+		$result = $this->plugin_installer->install($this->config->plugins()[0], "pfad_zu_ilias");
 		$this->assertTrue($result);
 	}
 
