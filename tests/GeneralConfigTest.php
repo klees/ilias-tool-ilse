@@ -99,9 +99,6 @@ ldap:
 plugin:
     plugins:
         0:
-            component_type: Services
-            component_name: Cron
-            plugin_slot: CronHook
             name: Pluginname
             git:
                 git_url: Bernd

@@ -114,10 +114,10 @@ ldap:
     #Passwort for DN User
     con_user_pw:
     #It is possible to sync ILIAS and LDAP user. Define what kind you want to use.
-    #It is necessary to set one option to 1 and the other to 0
+    #It is necessary to set one option to 1 and the other to 0.
     sync_on_login:
     sync_per_cron:
-    #Attribute name for user access
+    #Attribute name for user access.
     attr_name_user:
     #Version of your LDAP. Usually it is 3. Also possible is 2.
     protocol_version: 3
@@ -129,20 +129,14 @@ ldap:
     #The parser fills in the title of the role automaticly
     register_role_name:
 
-#In ILIAS you can use plugins to manipulate or add something to the system. Define in this block which plugins you want to use
+#In ILIAS you can use plugins to manipulate or add something to the system. Define in this block which plugins you want to use.
 plugin:
     plugins:
-        #single plugin entry
+        #Single plugin entry.
         0:
-            #Plugins can be used for Modules or Services. Define which category yours be assigned
-            component_category:
-            #Name of the component your plug is written for
-            component_name:
-            #Name of the pluginslot
-            plugin_slot:
-            #Name of the plugin
+            #Name of the ILIAS plugin.
             name:
-            #Configuration where to find the plugin
+            #Configuration where to find the ILIAS plugin.
             git:
                 git_url:
                 git_branch_name:
