@@ -41,4 +41,11 @@ if($general_config->ldap() !== null) {
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
+if($general_config->plugin() !== null) {
+	echo "\nInstalling plugins...";
+	$ilias_configurator->installPlugins($general_config->plugin());
+	$ilias_configurator->activatePlugins($general_config->plugin());
+	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
 echo "\n\nIlias successfull configured.";
