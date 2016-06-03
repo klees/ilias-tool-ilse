@@ -11,7 +11,7 @@ class IliasPluginInstallerMock implements \CaT\InstILIAS\interfaces\Plugin {
 	/**
 	 * @inheritdoc
 	 */
-	public function install(\CaT\InstILIAS\Config\Plugin $plugin, $absolute_path) {
+	public function install(\CaT\InstILIAS\Config\Plugin $plugin) {
 		return true;
 	}
 
