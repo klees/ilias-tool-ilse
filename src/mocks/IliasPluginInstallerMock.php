@@ -18,6 +18,13 @@ class IliasPluginInstallerMock implements \CaT\InstILIAS\interfaces\Plugin {
 	/**
 	 * @inheritdoc
 	 */
+	public function isInstalled(\CaT\InstILIAS\Config\Plugin $plugin) {
+		return true;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	public function update(\CaT\InstILIAS\Config\Plugin $plugin) {
 		return true;
 	}
@@ -41,5 +48,12 @@ class IliasPluginInstallerMock implements \CaT\InstILIAS\interfaces\Plugin {
 	 */
 	public function updateLanguage(\CaT\InstILIAS\Config\Plugin $plugin) {
 		return;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getPluginObject() {
+		return null;
 	}
 }

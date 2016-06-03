@@ -18,7 +18,15 @@ interface Plugin {
 	 *
 	 * @return boolean
 	 */
-	public function install(\CaT\InstILIAS\Config\Plugin $plugin, $absolute_path);
+	public function install(\CaT\InstILIAS\Config\Plugin $plugin);
+
+	/**
+	 *
+	 * @param \CaT\InstILIAS\Config\Plugin $plugin
+	 *
+	 * @return booelan
+	 */
+	public function isInstalled(\CaT\InstILIAS\Config\Plugin $plugin);
 
 	/**
 	 *
@@ -49,4 +57,11 @@ interface Plugin {
 	 * @param \CaT\InstILIAS\Config\Plugin $plugin
 	 */
 	public function updateLanguage(\CaT\InstILIAS\Config\Plugin $plugin);
+
+	/**
+	 * get an instance of installed plugin
+	 *
+	 * @return object
+	 */
+	public function getPluginObject($plugin_name);
 }
