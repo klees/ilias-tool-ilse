@@ -53,7 +53,7 @@ class IliasPluginInstallerMock implements \CaT\InstILIAS\interfaces\Plugin {
 	/**
 	 * @inheritdoc
 	 */
-	public function getPluginObject() {
+	public function getPluginObject($plugin_name) {
 		return null;
 	}
 }
