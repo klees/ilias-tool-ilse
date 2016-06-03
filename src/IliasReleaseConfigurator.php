@@ -41,6 +41,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		require_once($this->absolute_path."/Modules/Category/classes/class.ilObjCategory.php");
 		include_once($this->absolute_path."/Services/LDAP/classes/class.ilLDAPServer.php");
 		include_once($this->absolute_path."/Services/LDAP/classes/class.ilLDAPServer.php");
+		include_once($this->absolute_path."/Services/Component/classes/class.ilPlugin.php");
 
 		//context unittest is not required an ilias authentication
 		//we do not need any authentication to configure ILIAS
@@ -203,5 +204,32 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$row = $this->gDB->fetchAssoc($res);
 
 		return (int)$row["obj_id"];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function installPlugins(\CaT\InstILIAS\Config\Plugins $plugins) {
+		$plugin_installer = new \CaT\InstILIAS\IliasPluginInstaller($this->absolute_path, $this->gDB);
+		foreach ($plugins->plugins() as $plugin) {
+			if(!$plugin_installer->isInstalled($plugin)) {
+				$plugin_installer->install($plugin);
+			} else {
+				$plugin_installer->updateBranch($plugin);
+			}
+		}
+		$plugin_installer = null;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function activatePlugins(\CaT\InstILIAS\Config\Plugins $plugins) {
+		$plugin_installer = new \CaT\InstILIAS\IliasPluginInstaller($this->absolute_path, $this->gDB);
+		foreach ($plugins->plugins() as $plugin) {
+			$plugin_installer->activate($plugin);
+			$plugin_installer->updateLanguage($plugin);
+		}
+		$plugin_installer = null;
 	}
 }
