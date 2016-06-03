@@ -98,7 +98,7 @@ if(!$requirement_checker->mysqliExist() && !$requirement_checker->oracleExist())
 
 if(!$requirement_checker->databaseConnectable($general_config->database()->host(), $general_config->database()->user(), $general_config->database()->password())) {
 	echo "It's not possible to connect a MySQL database.\n";
-	echo "Please ensure you have one of these and the needed extensions installed.\n";
+	echo "Please ensure you have a MySQL database installed or started.\n";
 	die(1);
 }
 
