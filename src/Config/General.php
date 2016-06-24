@@ -20,7 +20,8 @@ namespace CaT\InstILIAS\Config;
  * @method \\CaT\\InstILIAS\\Config\\OrgUnits orgunit()
  * @method \\CaT\\InstILIAS\\Config\\Roles role()
  * @method \\CaT\\InstILIAS\\Config\\LDAP ldap()
- * @method \\CaT\\InstILIAS\\Config\\Tables table()
+ * @method \\CaT\\InstILIAS\\Config\\Plugins plugin()
+ * @method \\CaT\\InstILIAS\\Config\\HTTPSAutoDetect httpsAutoDetect()
  */
 class General extends Base {
 	/**
@@ -41,6 +42,7 @@ class General extends Base {
 			, "role"	=> array("\\CaT\\InstILIAS\\Config\\Roles", true)
 			, "ldap"	=> array("\\CaT\\InstILIAS\\Config\\LDAP", true)
 			, "plugin"	=> array("\\CaT\\InstILIAS\\Config\\Plugins", true)
+			, "https_auto_detect"	=> array("\\CaT\\InstILIAS\\Config\\HTTPSAutoDetect", true)
 			);
 	}
 }

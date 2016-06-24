@@ -102,7 +102,11 @@ plugin:
             name: Pluginname
             git:
                 git_url: Bernd
-                git_branch_name: master";
+                git_branch_name: master
+https_auto_detect:
+    enabled: 0
+    header_name:
+    header_value:";
 	}
 
 	public function test_not_enough_params() {
@@ -125,9 +129,10 @@ plugin:
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Log", $config->log());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\GitBranch", $config->git_branch());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Categories", $config->category());
-        $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgUnits", $config->orgunit());
-        $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Roles", $config->role());
-        $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\LDAP", $config->ldap());
-        $this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Plugins", $config->plugin());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgUnits", $config->orgunit());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Roles", $config->role());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\LDAP", $config->ldap());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Plugins", $config->plugin());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\HTTPSAutoDetect", $config->httpsAutoDetect());
 	}
 }
