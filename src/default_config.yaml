@@ -140,3 +140,11 @@ plugin:
             git:
                 git_url:
                 git_branch_name:
+#should ilias detect https automaticly
+https_auto_detect:
+    #en- or disable with value 0 or 1
+    enabled: 0
+    #default https header name
+    header_name:
+    #default https header value
+    header_value:
