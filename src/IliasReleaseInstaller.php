@@ -196,6 +196,9 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 		$ret["unzip_path"] = $this->general->tools()->unzip();
 		$ret["java_path"] = $this->general->tools()->java();
 		$ret["setup_pass"] = $this->general->setup()->masterPassword();
+		$ret["auto_https_detect_enabled"] = $this->general->httpsAutoDetect()->enabled();
+		$ret["auto_https_detect_header_name"] = $this->general->httpsAutoDetect()->headerName();
+		$ret["auto_https_detect_header_value"] = $this->general->httpsAutoDetect()->headerValue();
 
 		return $ret;
 	}
