@@ -47,7 +47,11 @@ For new installation of ILIAS you need these configuration entries.
 ```
 
 ### Execution
-To install your ILIAS execute the install script.
+It is possible to run the installation in a non interactiv mode.
+If you would use this, just add the second optional parameter. Value of the parameter is "non_interactiv".
+
+Bevor you execute the installation, please switch to your www user, e.g _www or www-data.
+Now execute the install script.
 ```
-$ php src/bin/install.php src/config.yaml
+$ php src/bin/install.php src/config.yaml [non_interactiv]
 ```
