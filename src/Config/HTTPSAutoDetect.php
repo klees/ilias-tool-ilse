@@ -13,7 +13,7 @@ namespace CaT\InstILIAS\Config;
  * @method string headerValue()
  */
 class HTTPSAutoDetect extends Base {
-	const URL_REG_EX = "/^^(https:\/\/|http:\/\/)/";
+	const URL_REG_EX = "/^(https:\/\/|http:\/\/)/";
 
 	/**
 	 * @inheritdocs
