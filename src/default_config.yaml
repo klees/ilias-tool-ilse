@@ -1,16 +1,18 @@
 ---
 client:
     #Directory beside the webserver. ILIAS use it to save data or files. e.g. images before upload to the webserver.
+    #Example: /var/www/ilias/data/
     data_dir : 
     #ILIAS is a client based system. Client with this name will be created
+    #Example: ACMECorp
     name : 
-    #It is possible to encode passwords in two ways. Enter the one you want to use. Possible encoder are md5 and bcrypt
+    #It is possible to encode passwords in two ways. Enter the one you want to use. Possible encoder are 'md5' and 'bcrypt'
     password_encoder : bcrypt
 database:
-    #Host of your databe.
-    host: 
+    #Host of your database.
+    host: localhost
     #Name for the ILIAS database.
-    database: 
+    database: ilias
     #User with permissions to create database / tables
     user: 
     #Password for above user
@@ -28,8 +30,10 @@ language:
         - de
 server:
     #Url ILIAS could be accessed by web browser
+    #Example: https://www.example.com/ilias/
     http_path: 
     #Directory on the webserver ILIAS should be installed in
+    #Example: /var/www/html/ilias/
     absolute_path: 
     #Timezone for PHP
     timezone: Europe/Berlin
@@ -38,15 +42,16 @@ setup:
     master_password: 
 tools:
     #ImageMagick is the requested image converter. It is used to create certificates. Enter the installation path
-    convert: 
+    convert: /usr/bin/convert
     #Installation path to zip
-    zip:
+    zip: /bin/zip
     #Installation path to unzip
-    unzip: 
+    unzip: /bin/unzip
     #Installation path to java
-    java: 
+    java: /usr/bin/java
 log:
-    #Directory for ILIAS log file
+    #Directory for ILIAS log file (must be writeable for webserver user)
+    #Example: /var/log/ilias/
     path: 
     #Name of the log file
     file_name: ilias.log
@@ -145,6 +150,6 @@ https_auto_detect:
     #en- or disable with value 0 or 1
     enabled: 0
     #default https header name
-    header_name:
+    header_name: X-FORWARDED-SCHEME
     #default https header value
-    header_value:
+    header_value: https
