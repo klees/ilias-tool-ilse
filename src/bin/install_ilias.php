@@ -2,6 +2,12 @@
 /* Copyright (c) 2016 Stefan Hecken <stefan.hecken@concepts-and-training.de>, Extended GPL, see LICENSE */
 
 $config_path = $argv[1];
+$non_interactiv = ($argv[2] !== null) ? $argv[2] : null;
+$skip = false;
+
+if($non_interactiv !== null) {
+	$skip = $non_interactiv == "non_interactiv";
+}
 
 function getUserInput() {
 	$handle = fopen ("php://stdin","r");
@@ -34,7 +40,8 @@ $web_dir = "data";
 
 echo "\n";
 $requirement_checker = new \CaT\InstILIAS\IliasRequirementChecker;
-if(!$requirement_checker->dataDirectoryExists($data_path)) {
+$check = $requirement_checker->dataDirectoryExists($data_path);
+if(!$skip && !$check) {
 	echo "Data directory does not exist. Create the directory (yes|no)? ";
 	$line = getUserInput();
 	if(strtolower($line) != "yes") {
@@ -45,9 +52,14 @@ if(!$requirement_checker->dataDirectoryExists($data_path)) {
 	echo "Creating data directory...";
 	mkdir($data_path, 0755, true);
 	echo "\t\t\t\t\t\t\t\tDone!\n";
+} else if($skip && !$check) {
+	echo "Creating data directory...";
+	mkdir($data_path, 0755, true);
+	echo "\t\t\t\t\t\t\t\tDone!\n";
 }
 
-if(!$requirement_checker->dataDirectoryPermissions($data_path)) {
+$check = $requirement_checker->dataDirectoryPermissions($data_path);
+if(!$skip && !$check) {
 	echo "Not enough permissions on data directory. Set permissions (yes|no)? ";
 	$line = getUserInput();
 	if(strtolower($line) != "yes") {
@@ -58,9 +70,14 @@ if(!$requirement_checker->dataDirectoryPermissions($data_path)) {
 	echo "Setting permission to required...";
 	chmod($data_path, 0755);
 	echo "\t\t\t\t\t\tDone!\n";
+} else if($skip && !$check) {
+	echo "Setting permission to required...";
+	chmod($data_path, 0755);
+	echo "\t\t\t\t\t\tDone!\n";
 }
 
-if(!$requirement_checker->dataDirectoryEmpty($data_path, $client_id, $web_dir)) {
+$check = $requirement_checker->dataDirectoryEmpty($data_path, $client_id, $web_dir);
+if(!$skip && !$check) {
 	echo "Data directory is not empty. Clean the directory (yes|no)? ";
 	$line = getUserInput();
 	if(strtolower($line) != "yes") {
@@ -71,10 +88,24 @@ if(!$requirement_checker->dataDirectoryEmpty($data_path, $client_id, $web_dir)) 
 	echo "Cleaning the directory ".$data_path."/".$client_id."...";
 	clearDirectory($data_path."/".$client_id);
 	echo "\t\t\t\t\t\tDone!\n";
+} else if($skip && !$check) {
+	echo "Data directory is not empty! ".$data_path."/".$client_id."...";
+	die(1);
 }
 
-if(!$requirement_checker->logDirectoryExists($general_config->log()->path())) {
-	echo "Log directory does not exist. ";
+$check = $requirement_checker->logDirectoryExists($general_config->log()->path());
+if(!$skip && !$check) {
+	echo "Log directory does not exist. Create the directory (yes|no)? ";
+	$line = getUserInput();
+	if(strtolower($line) != "yes") {
+		echo "Aborted by user.";
+		die(1);
+	}
+
+	echo "Creating log directory...";
+	mkdir($general_config->log()->path(), 0755, true);
+	echo "\t\t\t\t\t\t\t\t\tDone!\n";
+} else if($skip && !$check) {
 	echo "Creating log directory...";
 	mkdir($general_config->log()->path(), 0755, true);
 	echo "\t\t\t\t\t\t\t\t\tDone!\n";
@@ -82,7 +113,7 @@ if(!$requirement_checker->logDirectoryExists($general_config->log()->path())) {
 
 if(!$requirement_checker->logFileExists($general_config->log()->path(), $general_config->log()->fileName())) {
 	touch($general_config->log()->path()."/".$general_config->log()->fileName());
-	chmod($general_config->log()->path()."/".$general_config->log()->fileName(), 0777);
+	chmod($general_config->log()->path()."/".$general_config->log()->fileName(), 0755);
 }
 
 if(!$requirement_checker->validPHPVersion(phpversion(), "5.4")) {
@@ -90,11 +121,10 @@ if(!$requirement_checker->validPHPVersion(phpversion(), "5.4")) {
 	die(1);
 }
 
-if(!$requirement_checker->mysqliExist() && !$requirement_checker->oracleExist()) {
+if(!$requirement_checker->mysqliExist()) {
 	echo "Neither an option to connect via mysqli or oracle is installed. Please intall at least one of these.\n";
 	die(1);
 }
-
 
 if(!$requirement_checker->databaseConnectable($general_config->database()->host(), $general_config->database()->user(), $general_config->database()->password())) {
 	echo "It's not possible to connect a MySQL database.\n";
@@ -117,6 +147,8 @@ try {
 	echo $e->getMessage();
 	die(1);
 }
+
+chmod($absolute_path, 0777);
 
 chdir($absolute_path);
 if(file_exists($absolute_path.'/libs/composer/vendor/autoload.php')) {
@@ -151,10 +183,16 @@ $iinst->connectDatabase();
 echo "Creating database...";
 $iinst->installDatabase();
 $db = $iinst->getDatabaseHandle();
+echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 $db_updater = new \ilDBUpdate($db);
-$iinst->applyHotfixes($db_updater);
+
+echo "Applying updates...";
 $iinst->applyUpdates($db_updater);
 echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+echo "Applying hotfixes...";
+$iinst->applyHotfixes($db_updater);
+echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+
 
 echo "Installing languages...";
 $lng->setDbHandler($ilDB);

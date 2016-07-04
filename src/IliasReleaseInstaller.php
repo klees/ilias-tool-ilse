@@ -77,15 +77,23 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	public function getDatabaseHandle() {
 		global $ilDB;
 
+		chown($this->general->server()->absolutePath()."/data/".$this->general->client()->name()."/client.ini.php", "_www");
+
 		return $ilDB;
 	}
 
 	public function applyHotfixes(\ilDBUpdate $db_updater) {
+		global $ilCtrlStructureReader;
+
+		$ilCtrlStructureReader->setIniFile($this->ilias_setup->getClient()->ini);
 		$db_updater->applyHotfix();
 		$this->setDBSetupFinished();
 	}
 
 	public function applyUpdates(\ilDBUpdate $db_updater) {
+		global $ilCtrlStructureReader;
+
+		$ilCtrlStructureReader->setIniFile($this->ilias_setup->getClient()->ini);
 		$db_updater->applyUpdate();
 	}
 
@@ -196,9 +204,11 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 		$ret["unzip_path"] = $this->general->tools()->unzip();
 		$ret["java_path"] = $this->general->tools()->java();
 		$ret["setup_pass"] = $this->general->setup()->masterPassword();
-		$ret["auto_https_detect_enabled"] = $this->general->httpsAutoDetect()->enabled();
-		$ret["auto_https_detect_header_name"] = $this->general->httpsAutoDetect()->headerName();
-		$ret["auto_https_detect_header_value"] = $this->general->httpsAutoDetect()->headerValue();
+		if($this->general->httpsAutoDetect()) {
+			$ret["auto_https_detect_enabled"] = $this->general->httpsAutoDetect()->enabled();
+			$ret["auto_https_detect_header_name"] = $this->general->httpsAutoDetect()->headerName();
+			$ret["auto_https_detect_header_value"] = $this->general->httpsAutoDetect()->headerValue();
+		}
 
 		return $ret;
 	}
