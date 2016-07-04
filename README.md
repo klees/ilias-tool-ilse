@@ -13,6 +13,7 @@
 * MySQL 5.0.x or higher
 * Zip and Unzip
 * ImageMagick
+* Composer
 ```
 ### Installation
 ```
