@@ -22,6 +22,8 @@ namespace CaT\InstILIAS\Config;
  * @method \\CaT\\InstILIAS\\Config\\LDAP ldap()
  * @method \\CaT\\InstILIAS\\Config\\Plugins plugin()
  * @method \\CaT\\InstILIAS\\Config\\HTTPSAutoDetect httpsAutoDetect()
+ * @method \\CaT\\InstILIAS\\Config\\OrgunitTypes OrgunitType()
+ * @method \\CaT\\InstILIAS\\Config\\OrgunitTypeAssignments OrgunitTypeAssignment()
  */
 class General extends Base {
 	/**
@@ -43,6 +45,8 @@ class General extends Base {
 			, "ldap"	=> array("\\CaT\\InstILIAS\\Config\\LDAP", true)
 			, "plugin"	=> array("\\CaT\\InstILIAS\\Config\\Plugins", true)
 			, "https_auto_detect"	=> array("\\CaT\\InstILIAS\\Config\\HTTPSAutoDetect", true)
+			, "orgunit_type" => array("\\CaT\\InstILIAS\\Config\\OrgunitTypes", true)
+			, "orgunit_type_assignment" => array("\\CaT\\InstILIAS\\Config\\OrgunitTypeAssignments", true)
 			);
 	}
 }

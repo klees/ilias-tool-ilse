@@ -51,11 +51,11 @@ if(!$skip && !$check) {
 
 	echo "Creating data directory...";
 	mkdir($data_path, 0755, true);
-	echo "\t\t\t\t\t\t\t\tDone!\n";
+	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 } else if($skip && !$check) {
 	echo "Creating data directory...";
 	mkdir($data_path, 0755, true);
-	echo "\t\t\t\t\t\t\t\tDone!\n";
+	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 $check = $requirement_checker->dataDirectoryPermissions($data_path);
@@ -104,11 +104,11 @@ if(!$skip && !$check) {
 
 	echo "Creating log directory...";
 	mkdir($general_config->log()->path(), 0755, true);
-	echo "\t\t\t\t\t\t\t\t\tDone!\n";
+	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 } else if($skip && !$check) {
 	echo "Creating log directory...";
 	mkdir($general_config->log()->path(), 0755, true);
-	echo "\t\t\t\t\t\t\t\t\tDone!\n";
+	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if(!$requirement_checker->logFileExists($general_config->log()->path(), $general_config->log()->fileName())) {
@@ -122,7 +122,7 @@ if(!$requirement_checker->validPHPVersion(phpversion(), "5.4")) {
 }
 
 if(!$requirement_checker->mysqliExist()) {
-	echo "Neither an option to connect via mysqli or oracle is installed. Please intall at least one of these.\n";
+	echo "Mysqli is not installed.\n";
 	die(1);
 }
 

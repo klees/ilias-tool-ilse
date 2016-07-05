@@ -33,6 +33,10 @@ class IliasRequirementChecker implements \CaT\InstILIAS\interfaces\RequirementCh
 		assert('is_string($path)');
 		assert('is_string($client)');
 
+		if(!is_dir($path."/".$client)) {
+			return true;
+		}
+
 		if($d = dir($path."/".$client)) {
 			while($n = $d->read() ) {
 				if($n == '.' OR $n == '..') {

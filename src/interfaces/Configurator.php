@@ -57,4 +57,18 @@ interface Configurator {
 	 * @param \CaT\InstILIAS\Config\Plugins $plugins
 	 */
 	public function activatePlugins(\CaT\InstILIAS\Config\Plugins $plugins);
+
+	/**
+	 *
+	 *
+	 * @param \CaT\InstILIAS\Config\OrgunitTypes $orgunit_types
+	 */
+	public function createOrgunitTypes(\CaT\InstILIAS\Config\OrgunitTypes $orgunit_types);
+
+	/**
+	 *
+	 *
+	 * @param \CaT\InstILIAS\Config\OrgunitTypeAssignment $orgunit_type_assignment
+	 */
+	public function assignOrgunitTypesToOrgunits(\CaT\InstILIAS\Config\OrgunitTypeAssignments $orgunit_type_assignment);
 }

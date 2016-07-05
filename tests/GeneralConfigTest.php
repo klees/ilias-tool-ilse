@@ -59,7 +59,7 @@ category:
 orgunit:
     orgunits:
         0:
-            title: OrgEins
+            title: &ORGU1 OrgEins
         1:
             title: OrgZwei
             children:
@@ -106,7 +106,23 @@ plugin:
 https_auto_detect:
     enabled: 0
     header_name:
-    header_value:";
+    header_value:
+orgunit_type:
+    orgunit_types:
+        0:
+            default_language: &ORGU1_TYPE_DEFAULT_LANGUAGE de
+            type_language_settings:
+                0:
+                    language: de
+                    title: &ORGU1_TYPE OrgunitTypeTest
+                    description: Ich bin ein Test
+orgunit_type_assignment:
+    orgunit_type_assignments:
+        0:
+            orgunit_title: *ORGU1
+            orgunit_type_default_language: *ORGU1_TYPE_DEFAULT_LANGUAGE
+            orgunit_type_title: *ORGU1_TYPE";
+
 	}
 
 	public function test_not_enough_params() {
@@ -134,5 +150,9 @@ https_auto_detect:
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\LDAP", $config->ldap());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Plugins", $config->plugin());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\HTTPSAutoDetect", $config->httpsAutoDetect());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgunitTypes", $config->orgunitType());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgunitTypeAssignments", $config->orgunitTypeAssignment());
+
+		var_dump($config->orgunitTypeAssignment());
 	}
 }

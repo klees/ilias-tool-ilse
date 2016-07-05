@@ -42,6 +42,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		include_once($this->absolute_path."/Services/LDAP/classes/class.ilLDAPServer.php");
 		include_once($this->absolute_path."/Services/LDAP/classes/class.ilLDAPServer.php");
 		include_once($this->absolute_path."/Services/Component/classes/class.ilPlugin.php");
+		require_once($this->absolute_path."/Modules/OrgUnit/classes/Types/class.ilOrgUnitType.php");
 
 		//context unittest is not required an ilias authentication
 		//we do not need any authentication to configure ILIAS
@@ -231,5 +232,108 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 			$plugin_installer->updateLanguage($plugin);
 		}
 		$plugin_installer = null;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function createOrgunitTypes(\CaT\InstILIAS\Config\OrgunitTypes $orgunit_types) {
+		foreach ($orgunit_types->orgunitTypes() as $orgunit_type) {
+			$this->createOrgunitType($orgunit_type);
+		}
+	}
+
+	/**
+	 *
+	 * @param \CaT\InstILIAS\Config\OrgunitType $orgunit_type
+	 */
+	protected function createOrgunitType(\CaT\InstILIAS\Config\OrgunitType $orgunit_type) {
+		$type = new \ilOrgUnitType();
+
+		$type->setDefaultLang($orgunit_type->defaultLanguage());
+		foreach ($orgunit_type->typeLanguageSettings() as $type_language_setting) {
+			$title = $type_language_setting->title();
+			$description = $type_language_setting->description();
+			$lang_code = $type_language_setting->language();
+			$type->setTitle($title, $lang_code);
+			$type->setDescription($description, $lang_code);
+		}
+
+		$type->save();
+	}
+
+	/**
+	 * @inheritdocs
+	 */
+	public function assignOrgunitTypesToOrgunits(\CaT\InstILIAS\Config\OrgunitTypeAssignments $orgunit_type_assignments) {
+		foreach ($orgunit_type_assignments->orgunitTypeAssignments() as $orgunit_type_assignment) {
+			$this->orgunitTypeAssignment($orgunit_type_assignment);
+		}
+	}
+
+	/**
+	 *
+	 *
+	 * @param \CaT\InstILIAS\Config\OrgunitTypeAssignment $orgunit_type_assignment
+	 */
+	protected function orgunitTypeAssignment(\CaT\InstILIAS\Config\OrgunitTypeAssignment $orgunit_type_assignment) {
+		$orgunit_id = $this->getOrgunitId($orgunit_type_assignment->orgunitTitle());
+		$orgunit_type_id = $this->getOrgunitTypeId($orgunit_type_assignment->orgunitTypeTitle(),$orgunit_type_assignment->orgunitTypeDefaultLanguage());
+
+		if(!$orgunit_id || !$orgunit_type_id) {
+			echo "hier stimmt was nicht ";
+			var_dump($orgunit_id);
+			echo " ";
+			var_dump($orgunit_type_id);
+			return;
+		}
+
+		$orgunit = new \ilObjOrgUnit($orgunit_id, false);
+		$orgunit->setOrgUnitTypeId($orgunit_type_id);
+		$orgunit->update();
+	}
+
+	/**
+	 *
+	 *
+	 * @param string $orgunit_type_assignment
+	 *
+	 * @return integer;
+	 */
+	protected function getOrgunitId($orgunit_tite) {
+		$select = "SELECT obj_id\n"
+				 ." FROM object_data\n"
+				 ." WHERE title = ".$this->gDB->quote($orgunit_tite,"text")
+				 ."    AND type = 'orgu'";
+		$res = $this->gDB->query($select);
+		if($this->gDB->numRows($res) == 1) {
+			return $this->gDB->fetchAssoc($res)["obj_id"];
+		}
+
+		return null;
+	}
+
+	/**
+	 *
+	 *
+	 * @param string $orgunit_type_title
+	 * @param string $orgunit_default_lang
+	 *
+	 * @return integer;
+	 */
+	protected function getOrgunitTypeId($orgunit_type_title, $orgunit_default_lang) {
+		$select = "SELECT orgu_types.id\n"
+				 ." FROM orgu_types\n"
+				 ." JOIN orgu_types_trans ON orgu_types.id = orgu_types_trans.orgu_type_id"
+				 ." WHERE member = ".$this->gDB->quote("title","text")
+				 ."    AND value = ".$this->gDB->quote($orgunit_type_title,"text")
+				 ."    AND lang = ".$this->gDB->quote($orgunit_default_lang,"text");
+echo $select;
+		$res = $this->gDB->query($select);
+		if($this->gDB->numRows($res) == 1) {
+			return $this->gDB->fetchAssoc($res)["id"];
+		}
+
+		return null;
 	}
 }

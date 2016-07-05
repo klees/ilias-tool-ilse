@@ -48,4 +48,17 @@ if($general_config->plugin() !== null) {
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
+if($general_config->orgunitType() !== null) {
+	echo "\nCreating orgunit types...";
+	$ilias_configurator->createOrgunitTypes($general_config->orgunitType());
+	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
+if($general_config->orgunitTypeAssignment() !== null) {
+	echo "\nAssigning orgunit types to orgunit...";
+	$ilias_configurator->assignOrgunitTypesToOrgunits($general_config->orgunitTypeAssignment());
+	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
+
 echo "\n\nIlias successfull configured.";
