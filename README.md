@@ -46,12 +46,18 @@ For new installation of ILIAS you need these configuration entries.
 * git_branch
 ```
 
-### Execution
-It is possible to run the installation in a non interactiv mode.
+### Re- / Installation of ILIAS
+With InstILIAS it is possible to install a new ILIAS or drop your old an install in one step.
+For both it is possible to run the installation in a non interactiv mode.
 If you would use this, just add the second optional parameter. Value of the parameter is "non_interactiv".
 
-Before you execute the installation, please switch to your www user, e.g _www or www-data.
-Now execute the install script.
+Before you install or reinstall, please switch to your www user, e.g _www or www-data.
+##### Installation
 ```
 $ php src/bin/install.php src/config.yaml [non_interactiv]
+```
+
+##### Reinstallation
+```
+$ ./src/bin/reinstall_ilias.sh src/config.yaml [non_interactiv]
 ```
