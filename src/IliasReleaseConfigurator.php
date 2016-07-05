@@ -281,10 +281,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$orgunit_type_id = $this->getOrgunitTypeId($orgunit_type_assignment->orgunitTypeTitle(),$orgunit_type_assignment->orgunitTypeDefaultLanguage());
 
 		if(!$orgunit_id || !$orgunit_type_id) {
-			echo "hier stimmt was nicht ";
-			var_dump($orgunit_id);
-			echo " ";
-			var_dump($orgunit_type_id);
+			echo "No orgunit or orgunit type found";
 			return;
 		}
 
@@ -328,7 +325,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 				 ." WHERE member = ".$this->gDB->quote("title","text")
 				 ."    AND value = ".$this->gDB->quote($orgunit_type_title,"text")
 				 ."    AND lang = ".$this->gDB->quote($orgunit_default_lang,"text");
-echo $select;
+
 		$res = $this->gDB->query($select);
 		if($this->gDB->numRows($res) == 1) {
 			return $this->gDB->fetchAssoc($res)["id"];
