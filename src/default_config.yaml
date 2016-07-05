@@ -153,3 +153,34 @@ https_auto_detect:
     header_name: X-FORWARDED-SCHEME
     #default https header value
     header_value: https
+#Each ordunit can be more specified with orgunit types. fill in these to create one ore more types.
+#To assign a type to an orgunit, you musst mark the orunit with an identifier like '&ORGU1'.
+#orgunit:
+#    orgunits:
+#        0:
+#            title: &ORGU1 OrgEins
+orgunit_type:
+    orgunit_types:
+        0:
+            #Default language for the type
+            #You musst mark it with an identifier like '&ORGU1_TYPE_DEFAULT_LANGUAGE' if would to assign this on to an org unit
+            #Example: default_language: &ORGU1_TYPE_DEFAULT_LANGUAGE de
+            default_language: de
+            #Each installed language can have is own title and description.
+            #At least it is necessary to define one set of language settings for the default language of the type
+            type_language_settings:
+                0:
+                    language: de
+                    #You musst mark it with an identifier like '&ORGU1_TYPE' if would to assign this on to an org unit
+                    #Example: title: &ORGU1_TYPE OrgunitTypeTest
+                    title: OrgunitTypeTest
+                    description: Ich bin ein Test
+#This part defines the assignment.
+orgunit_type_assignment:
+    orgunit_type_assignments:
+        #One assigment definition. reuse the identiefier from orgunt and orgunit_type. The example below uses the identiers from the examples above.
+        #example:
+        #0:
+            #orgunit_title: *ORGU1
+            #orgunit_type_default_language: *ORGU1_TYPE_DEFAULT_LANGUAGE
+            #orgunit_type_title: *ORGU1_TYPE
