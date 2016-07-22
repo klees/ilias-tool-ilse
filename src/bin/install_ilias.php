@@ -203,8 +203,8 @@ echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 $iinst->setProxy();
 $iinst->registerNoNic();
 
-$encoder_factory = new \ilUserPasswordEncoderFactory(array());
-$iinst->setPasswordEncoder($encoder_factory);
+//$encoder_factory = new \ilUserPasswordEncoderFactory(array());
+//$iinst->setPasswordEncoder($encoder_factory);
 
 if(!$iinst->finishSetup()) {
 	echo "\nSomething went wrong.";
