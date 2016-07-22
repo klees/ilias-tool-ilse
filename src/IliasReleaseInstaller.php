@@ -77,8 +77,7 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	public function getDatabaseHandle() {
 		global $ilDB;
 
-		chown($this->general->server()->absolutePath()."/data/".$this->general->client()->name()."/client.ini.php", "_www");
-
+		
 		return $ilDB;
 	}
 
