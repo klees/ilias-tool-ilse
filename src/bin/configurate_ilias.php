@@ -60,5 +60,16 @@ if($general_config->orgunitTypeAssignment() !== null) {
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
+if($general_config->passwordSettings() !== null) {
+	echo "\nConfigure password settings...";
+	$ilias_configurator->passwordSettings($general_config->passwordSettings());
+	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
+if($general_config->user() !== null) {
+	echo "\nCreating user accounts...";
+	$ilias_configurator->createUserAccounts($general_config->user());
+	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
 
 echo "\n\nIlias successfull configured.";

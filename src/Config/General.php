@@ -24,6 +24,8 @@ namespace CaT\InstILIAS\Config;
  * @method \\CaT\\InstILIAS\\Config\\HTTPSAutoDetect httpsAutoDetect()
  * @method \\CaT\\InstILIAS\\Config\\OrgunitTypes OrgunitType()
  * @method \\CaT\\InstILIAS\\Config\\OrgunitTypeAssignments OrgunitTypeAssignment()
+ * @method \\CaT\\InstILIAS\\Config\\Users user()
+ * @method \\CaT\\InstILIAS\\Config\\PasswordSettings passwordSettings()
  */
 class General extends Base {
 	/**
@@ -47,6 +49,8 @@ class General extends Base {
 			, "https_auto_detect"	=> array("\\CaT\\InstILIAS\\Config\\HTTPSAutoDetect", true)
 			, "orgunit_type" => array("\\CaT\\InstILIAS\\Config\\OrgunitTypes", true)
 			, "orgunit_type_assignment" => array("\\CaT\\InstILIAS\\Config\\OrgunitTypeAssignments", true)
+			, "user" => array("\\CaT\\InstILIAS\\Config\\Users", true)
+			, "password_settings" => array("\\CaT\\InstILIAS\\Config\\PasswordSettings", false)
 			);
 	}
 }

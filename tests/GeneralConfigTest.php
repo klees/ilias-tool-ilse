@@ -121,7 +121,27 @@ orgunit_type_assignment:
         0:
             orgunit_title: *ORGU1
             orgunit_type_default_language: *ORGU1_TYPE_DEFAULT_LANGUAGE
-            orgunit_type_title: *ORGU1_TYPE";
+            orgunit_type_title: *ORGU1_TYPE
+user:
+    users:
+        0:
+           login: auto_test
+           firstname: auto
+           lastname: test
+           gender: w
+           email: stefan.hecken@concepts-and-training.de
+           role: Administrator
+password_settings:
+    change_on_first_login: 1
+    use_special_chars: 1
+    numbers_and_chars: 1
+    min_length: 8
+    max_length: 0
+    num_upper_chars: 1
+    num_lower_chars: 1
+    expire_in_days: 0
+    forgot_password_aktive: 1
+    max_num_login_attempts: 10";
 
 	}
 
@@ -152,7 +172,9 @@ orgunit_type_assignment:
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\HTTPSAutoDetect", $config->httpsAutoDetect());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgunitTypes", $config->orgunitType());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgunitTypeAssignments", $config->orgunitTypeAssignment());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Users", $config->user());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\PasswordSettings", $config->passwordSettings());
 
-		var_dump($config->orgunitTypeAssignment());
+		var_dump($config->passwordSettings());
 	}
 }

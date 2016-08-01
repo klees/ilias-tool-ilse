@@ -70,31 +70,29 @@ git_branch:
 #Children will be defined in the same way. See the small example below
 category:
     categories:
-        categories:
-            0:
-                title: Category1
-                children:
-                    0:
-                        title: Child1
-                        children: []
-                    1:
-                        title: Child2
-                        children: []
+        0:
+            title: Category1
+            children:
+                0:
+                    title: Child1
+                    children: []
+                1:
+                    title: Child2
+                    children: []
 
 #The way to create orgunits is very similar to categories.
 #Have look in the example
 orgunit:
     orgunits:
-        orgunits:
-            0:
-                title: Orgunit1
-                children: 
-                    0:
-                        title: Child1
-                        children: []
-                    1:
-                        title: Child2
-                        children: []
+        0:
+            title: Orgunit1
+            children: 
+                0:
+                    title: Child1
+                    children: []
+                1:
+                    title: Child2
+                    children: []
 
 #In ILIAS is a RBAC System used. In this block you can definde roles to assign users.
 #Permission must be set after installation in the administration menu
@@ -184,3 +182,40 @@ orgunit_type_assignment:
             #orgunit_title: *ORGU1
             #orgunit_type_default_language: *ORGU1_TYPE_DEFAULT_LANGUAGE
             #orgunit_type_title: *ORGU1_TYPE
+
+#If you would like to have some user right after installation, you can use these lines to create them
+user:
+    users:
+        0:
+            login: 
+            firstname: 
+            lastname: 
+            #It is possible to decide between "m" and "w"
+            gender: 
+            email: 
+            #Each user must have assigned to a global role. Basic roles are "User" or "Administration"
+            #Also it is possible to assign roles created by own in roles part of this installation
+            role: User
+
+#With this part you are able to configure the passwors settings like number of upper or lower chars, user special chars and so on
+password_settings:
+    #If activated the user is forced to change his passwort after first login. You can toggle with 1 (active) or 0 (inactive)
+    change_on_first_login: 1
+    #At least one special char is required in password. You can toggle with 1 (active) or 0 (inactive)
+    use_special_chars: 1
+    #Numbers and chars are required in password. You can toggle with 1 (active) or 0 (inactive)
+    numbers_and_chars: 1
+    #Minimum length for the password.
+    min_length: 8
+    #Maximum length for the password. If set to 0 the lenght is open end.
+    max_length: 0
+    #Number of required upper chars
+    num_upper_chars: 1
+    #Number of requires lower chars
+    num_lower_chars: 1
+    #Value in days the password will be expired
+    expire_in_days:0
+    #If active the you can see the link "Forgot Password". You can toggle with 1 (active) or 0 (inactive)
+    forgot_password_aktive: 1
+    #Max Number of login attemps, before account get blocked. if you enter 0 user account never will be blocked
+    max_num_login_attempts: 0

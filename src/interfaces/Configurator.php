@@ -71,4 +71,18 @@ interface Configurator {
 	 * @param \CaT\InstILIAS\Config\OrgunitTypeAssignment $orgunit_type_assignment
 	 */
 	public function assignOrgunitTypesToOrgunits(\CaT\InstILIAS\Config\OrgunitTypeAssignments $orgunit_type_assignment);
+
+	/**
+	 *
+	 *
+	 * @param \CaT\InstILIAS\Config\Users $orgunit_type_assignment
+	 */
+	public function createUserAccounts(\CaT\InstILIAS\Config\Users $users);
+
+	/**
+	 *
+	 *
+	 * @param \CaT\InstILIAS\Config\PasswordSettings $password_settings
+	 */
+	public function passwordSettings(\CaT\InstILIAS\Config\PasswordSettings $password_settings);
 }

@@ -29,7 +29,7 @@ class deleteIlias {
 		$passwd = $this->general_config->database()->password();
 
 		$this->con = new mysqli($host, $user, $passwd);
-		echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+		echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 	}
 
 	protected function dropDatabase() {
@@ -42,19 +42,19 @@ class deleteIlias {
 				throw new Exception("Database could noch be deleted. (Error: )");
 			}
 		}
-		echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+		echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 	}
 
 	protected function deleteILIASFolder() {
 		echo "Deleting ILIAS files...";
 		$this->clearDirectory($this->general_config->server()->absolutePath());
-		echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+		echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 	}
 
 	protected function deleteDataFolder() {
 		echo "Deleting data folder...";
 		$this->clearDirectory($this->general_config->client()->dataDir()."/".$this->general_config->client()->name());
-		echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+		echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 	}
 
 	protected function clearDirectory($dir) {

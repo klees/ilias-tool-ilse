@@ -23,10 +23,12 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$this->absolute_path = $absolute_path;
 		$this->initIlias();
 
-		global $ilDB, $tree;
+		global $ilDB, $tree, $ilUser, $rbacadmin;
 
 		$this->gDB = $ilDB;
 		$this->gTree = $tree;
+		$this->gUser = $ilUser;
+		$this->gRbacadmin = $rbacadmin;
 	}
 
 	/**
@@ -43,6 +45,8 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		include_once($this->absolute_path."/Services/LDAP/classes/class.ilLDAPServer.php");
 		include_once($this->absolute_path."/Services/Component/classes/class.ilPlugin.php");
 		require_once($this->absolute_path."/Modules/OrgUnit/classes/Types/class.ilOrgUnitType.php");
+		require_once($this->absolute_path."/Services/User/classes/class.ilObjUser.php");
+		require_once($this->absolute_path."/Services/PrivacySecurity/classes/class.ilSecuritySettings.php");
 
 		//context unittest is not required an ilias authentication
 		//we do not need any authentication to configure ILIAS
@@ -332,5 +336,71 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		}
 
 		return null;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function createUserAccounts(\CaT\InstILIAS\Config\Users $users) {
+		foreach ($users->users() as $user) {
+			echo "\nCreating user account for :".$user->email()."...";
+			$password = $this->createUser($user);
+			echo "\tDone. Initialize password: ".$password;
+		}
+	}
+
+	protected function createUser(\CaT\InstILIAS\Config\User $user) {
+		$new_user = new \ilObjUser();
+
+		$new_user->setTimeLimitUnlimited(true);
+		$new_user->setTimeLimitOwner($this->gUser->getId());
+		$new_user->setLogin($user->login());
+		$new_user->setGender($user->gender());
+
+		$new_user->setFirstname($user->firstname());
+		$new_user->setLastname($user->lastname());
+		$new_user->setEmail($user->email());
+		$new_user->setActive(true);
+
+		$password = $this->generatePasswort();
+		$new_user->setPasswd($password, IL_PASSWD_PLAIN);
+		$new_user->setTitle($new_user->getFullname());
+		$new_user->setDescription($new_user->getEmail());
+
+		$new_user->create();
+
+		$new_user->setLastPasswordChangeTS(time());
+		$new_user->saveAsNew();
+
+		$this->gRbacadmin->assignUser($this->getRoleId($user->role()), $new_user->getId(),true);
+
+		$new_user->setProfileIncomplete(true);
+		$new_user->update();
+
+		return $password;
+	}
+
+	protected function generatePasswort() {
+		return \ilUtil::generatePasswords(1)[0];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function passwordSettings(\CaT\InstILIAS\Config\PasswordSettings $password_settings) {
+			$security = \ilSecuritySettings::_getInstance();
+
+			// account security settings
+			$security->setPasswordCharsAndNumbersEnabled((bool) $password_settings->numbersAndChars());
+			$security->setPasswordSpecialCharsEnabled((bool) $password_settings->useSpecialChars());
+			$security->setPasswordMinLength((int) $password_settings->minLength());
+			$security->setPasswordMaxLength((int) $password_settings->maxLength());
+			$security->setPasswordNumberOfUppercaseChars((int) $password_settings->numUpperChars());
+			$security->setPasswordNumberOfLowercaseChars((int) $password_settings->numLowerChars());
+			$security->setPasswordMaxAge((int) $password_settings->expireInDays());
+			$security->setLoginMaxAttempts((int) $password_settings->maxNumLoginAttempts());
+			$security->setPasswordChangeOnFirstLoginEnabled((bool) $password_settings->forgotPasswordAktive());
+
+			$security->save();
 	}
 }
