@@ -50,7 +50,8 @@ class General extends Base {
 			, "orgunit_type" => array("\\CaT\\InstILIAS\\Config\\OrgunitTypes", true)
 			, "orgunit_type_assignment" => array("\\CaT\\InstILIAS\\Config\\OrgunitTypeAssignments", true)
 			, "user" => array("\\CaT\\InstILIAS\\Config\\Users", true)
-			, "password_settings" => array("\\CaT\\InstILIAS\\Config\\PasswordSettings", false)
+			, "password_settings" => array("\\CaT\\InstILIAS\\Config\\PasswordSettings", true)
+			, "tiny_mce" => array("\\CaT\\InstILIAS\\Config\\TinyMCE", true)
 			);
 	}
 }

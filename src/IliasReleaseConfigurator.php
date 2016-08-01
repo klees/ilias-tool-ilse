@@ -47,6 +47,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		require_once($this->absolute_path."/Modules/OrgUnit/classes/Types/class.ilOrgUnitType.php");
 		require_once($this->absolute_path."/Services/User/classes/class.ilObjUser.php");
 		require_once($this->absolute_path."/Services/PrivacySecurity/classes/class.ilSecuritySettings.php");
+		require_once($this->absolute_path."/Services/Object/classes/class.ilObjectFactory.php");
 
 		//context unittest is not required an ilias authentication
 		//we do not need any authentication to configure ILIAS
@@ -402,5 +403,24 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 			$security->setPasswordChangeOnFirstLoginEnabled((bool) $password_settings->forgotPasswordAktive());
 
 			$security->save();
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function tinyMCE(\CaT\InstILIAS\Config\TinyMCE $tiny_mce) {
+		$query = "SELECT obj_id FROM object_data WHERE type = ".$this->gDB->quote('adve', 'text');
+		$res = $this->gDB->query($query);
+		$row = $this->gDB->fetchAssoc($res);
+
+		$object = \ilObjectFactory::getInstanceByObjId($row["obj_id"]);
+
+		if((bool)$tiny_mce->active()) {
+			$object->_setRichTextEditor("tinymce");
+		} else {
+			$object->_setRichTextEditor("");
+		}
+
+		$object->update();
 	}
 }

@@ -141,7 +141,9 @@ password_settings:
     num_lower_chars: 1
     expire_in_days: 0
     forgot_password_aktive: 1
-    max_num_login_attempts: 10";
+    max_num_login_attempts: 10
+tiny_mce:
+    active: 1";
 
 	}
 
@@ -174,7 +176,8 @@ password_settings:
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgunitTypeAssignments", $config->orgunitTypeAssignment());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Users", $config->user());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\PasswordSettings", $config->passwordSettings());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\TinyMCE", $config->tinyMce());
 
-		var_dump($config->passwordSettings());
+		var_dump($config->tinyMce());
 	}
 }

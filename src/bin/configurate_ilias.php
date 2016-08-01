@@ -72,4 +72,10 @@ if($general_config->user() !== null) {
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
+if($general_config->tinyMce() !== null) {
+	echo "\nSet usage of TinyMCE...";
+	$ilias_configurator->tinyMCE($general_config->tinyMce());
+	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
 echo "\n\nIlias successfull configured.";

@@ -85,4 +85,11 @@ interface Configurator {
 	 * @param \CaT\InstILIAS\Config\PasswordSettings $password_settings
 	 */
 	public function passwordSettings(\CaT\InstILIAS\Config\PasswordSettings $password_settings);
+
+	/**
+	 *
+	 *
+	 * @param \CaT\InstILIAS\Config\TinyMCE $tiny_mce
+	 */
+	public function tinyMCE(\CaT\InstILIAS\Config\TinyMCE $tiny_mce);
 }
