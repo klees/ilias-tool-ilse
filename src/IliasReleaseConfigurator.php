@@ -23,12 +23,13 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$this->absolute_path = $absolute_path;
 		$this->initIlias();
 
-		global $ilDB, $tree, $ilUser, $rbacadmin;
+		global $ilDB, $tree, $ilUser, $rbacadmin, $ilSetting;
 
 		$this->gDB = $ilDB;
 		$this->gTree = $tree;
 		$this->gUser = $ilUser;
 		$this->gRbacadmin = $rbacadmin;
+		$this->gSetting = $ilSetting;
 	}
 
 	/**
@@ -409,9 +410,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	 * @inheritdoc
 	 */
 	public function tinyMCE(\CaT\InstILIAS\Config\TinyMCE $tiny_mce) {
-		$query = "SELECT obj_id FROM object_data WHERE type = ".$this->gDB->quote('adve', 'text');
-		$res = $this->gDB->query($query);
-		$row = $this->gDB->fetchAssoc($res);
+		$obj_id = $this->getObjIdByType("adve");
 
 		$object = \ilObjectFactory::getInstanceByObjId($row["obj_id"]);
 
@@ -422,5 +421,21 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		}
 
 		$object->update();
+	}
+
+	protected function getObjIdByType($type) {
+		$query = "SELECT obj_id FROM object_data WHERE type = ".$this->gDB->quote($type, 'text');
+		$res = $this->gDB->query($query);
+		$row = $this->gDB->fetchAssoc($res);
+
+		return $row["obj_id"];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function javaServer(\CaT\InstILIAS\Config\JavaServer $java_server) {
+		$this->gSetting->set("rpc_server_host", trim($java_server->host()));
+		$this->gSetting->set("rpc_server_port", trim($java_server->port()));
 	}
 }

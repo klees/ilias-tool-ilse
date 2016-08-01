@@ -26,6 +26,7 @@ namespace CaT\InstILIAS\Config;
  * @method \\CaT\\InstILIAS\\Config\\OrgunitTypeAssignments OrgunitTypeAssignment()
  * @method \\CaT\\InstILIAS\\Config\\Users user()
  * @method \\CaT\\InstILIAS\\Config\\PasswordSettings passwordSettings()
+ * @method \\CaT\\InstILIAS\\Config\\JavaServer javaServer()
  */
 class General extends Base {
 	/**
@@ -52,6 +53,7 @@ class General extends Base {
 			, "user" => array("\\CaT\\InstILIAS\\Config\\Users", true)
 			, "password_settings" => array("\\CaT\\InstILIAS\\Config\\PasswordSettings", true)
 			, "tiny_mce" => array("\\CaT\\InstILIAS\\Config\\TinyMCE", true)
+			, "java_server" => array("\\CaT\\InstILIAS\\Config\\JavaServer", true)
 			);
 	}
 }

@@ -222,3 +222,7 @@ password_settings:
 #Active the TyniMCE editor. You can toggle with 1 (active) or 0 (inactive)
 tyni_mce:
     active: 1
+#Configure the java server. if configured ilias is able to generate pdf files and an extended search mode is activated
+java_server:
+    host: 
+    port: 

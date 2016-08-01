@@ -143,8 +143,10 @@ password_settings:
     forgot_password_aktive: 1
     max_num_login_attempts: 10
 tiny_mce:
-    active: 1";
-
+    active: 1
+java_server:
+    host: einemenmug_server
+    port: 8080";
 	}
 
 	public function test_not_enough_params() {
@@ -177,7 +179,8 @@ tiny_mce:
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Users", $config->user());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\PasswordSettings", $config->passwordSettings());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\TinyMCE", $config->tinyMce());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\JavaServer", $config->javaServer());
 
-		var_dump($config->tinyMce());
+		var_dump($config->javaServer());
 	}
 }

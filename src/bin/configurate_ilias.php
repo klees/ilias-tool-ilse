@@ -61,7 +61,7 @@ if($general_config->orgunitTypeAssignment() !== null) {
 }
 
 if($general_config->passwordSettings() !== null) {
-	echo "\nConfigure password settings...";
+	echo "\nConfiguring password settings...";
 	$ilias_configurator->passwordSettings($general_config->passwordSettings());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
@@ -73,8 +73,14 @@ if($general_config->user() !== null) {
 }
 
 if($general_config->tinyMce() !== null) {
-	echo "\nSet usage of TinyMCE...";
+	echo "\nSetting usage of TinyMCE...";
 	$ilias_configurator->tinyMCE($general_config->tinyMce());
+	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
+if($general_config->javaServer() !== null) {
+	echo "\nConfiguring java server...";
+	$ilias_configurator->javaServer($general_config->javaServer());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 

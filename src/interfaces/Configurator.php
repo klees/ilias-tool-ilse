@@ -92,4 +92,12 @@ interface Configurator {
 	 * @param \CaT\InstILIAS\Config\TinyMCE $tiny_mce
 	 */
 	public function tinyMCE(\CaT\InstILIAS\Config\TinyMCE $tiny_mce);
+
+	/**
+	 *
+	 *
+	 * @param \CaT\InstILIAS\Config\JavaServer $java_server
+	 */
+	public function javaServer(\CaT\InstILIAS\Config\JavaServer $java_server);
+
 }
