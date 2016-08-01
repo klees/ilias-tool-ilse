@@ -72,9 +72,13 @@ if($general_config->user() !== null) {
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
-if($general_config->tinyMce() !== null) {
+if($general_config->editor() !== null) {
 	echo "\nSetting usage of TinyMCE...";
-	$ilias_configurator->tinyMCE($general_config->tinyMce());
+	$ilias_configurator->tinyMCE($general_config->editor());
+	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+
+	echo "\nSetting usage of repo page editor...";
+	$ilias_configurator->repoPageEditor($general_config->editor());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 

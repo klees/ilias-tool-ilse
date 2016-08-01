@@ -142,8 +142,22 @@ password_settings:
     expire_in_days: 0
     forgot_password_aktive: 1
     max_num_login_attempts: 10
-tiny_mce:
-    active: 1
+editor:
+    enable_tinymce: 1
+    repo_page_editor:
+        enable: 1
+        heavy_marked: 1
+        marked: 1
+        importand: 1
+        superscript: 1
+        subscript: 1
+        comment: 1
+        quote: 1
+        accent: 1
+        code: 1
+        latex: 1
+        footnote: 1
+        external_link: 1
 java_server:
     host: einemenmug_server
     port: 8080";
@@ -178,7 +192,7 @@ java_server:
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgunitTypeAssignments", $config->orgunitTypeAssignment());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Users", $config->user());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\PasswordSettings", $config->passwordSettings());
-		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\TinyMCE", $config->tinyMce());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Editor", $config->editor());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\JavaServer", $config->javaServer());
 
 		var_dump($config->javaServer());

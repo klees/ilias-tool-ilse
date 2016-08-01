@@ -49,6 +49,8 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		require_once($this->absolute_path."/Services/User/classes/class.ilObjUser.php");
 		require_once($this->absolute_path."/Services/PrivacySecurity/classes/class.ilSecuritySettings.php");
 		require_once($this->absolute_path."/Services/Object/classes/class.ilObjectFactory.php");
+		require_once($this->absolute_path."/Services/COPage/classes/class.ilPageEditorSettings.php");
+		require_once($this->absolute_path."/Services/COPage/classes/class.ilPageContentGUI.php");
 
 		//context unittest is not required an ilias authentication
 		//we do not need any authentication to configure ILIAS
@@ -409,18 +411,34 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	/**
 	 * @inheritdoc
 	 */
-	public function tinyMCE(\CaT\InstILIAS\Config\TinyMCE $tiny_mce) {
+	public function tinyMCE(\CaT\InstILIAS\Config\Editor $editor) {
 		$obj_id = $this->getObjIdByType("adve");
 
-		$object = \ilObjectFactory::getInstanceByObjId($row["obj_id"]);
+		$object = \ilObjectFactory::getInstanceByObjId($obj_id);
 
-		if((bool)$tiny_mce->active()) {
+		if((bool)$editor->enableTinymce()) {
 			$object->_setRichTextEditor("tinymce");
 		} else {
 			$object->_setRichTextEditor("");
 		}
 
 		$object->update();
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function repoPageEditor(\CaT\InstILIAS\Config\Editor $editor) {
+			$repoPageEdit = $editor->repoPageEditor();
+
+			$buttons = \ilPageContentGUI::_getCommonBBButtons();
+			foreach ($buttons as $b => $t)
+			{
+				\ilPageEditorSettings::writeSetting("rep", "active_".$b,
+					$repoPageEdit->valueFor($b));
+			}
+
+			$this->gSetting->set("enable_cat_page_edit", (int) $repoPageEdit->enable());
 	}
 
 	protected function getObjIdByType($type) {

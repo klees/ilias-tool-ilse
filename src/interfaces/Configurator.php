@@ -91,7 +91,7 @@ interface Configurator {
 	 *
 	 * @param \CaT\InstILIAS\Config\TinyMCE $tiny_mce
 	 */
-	public function tinyMCE(\CaT\InstILIAS\Config\TinyMCE $tiny_mce);
+	public function tinyMCE(\CaT\InstILIAS\Config\Editor $editor);
 
 	/**
 	 *
@@ -99,5 +99,12 @@ interface Configurator {
 	 * @param \CaT\InstILIAS\Config\JavaServer $java_server
 	 */
 	public function javaServer(\CaT\InstILIAS\Config\JavaServer $java_server);
+
+	/**
+	 *
+	 *
+	 * @param \CaT\InstILIAS\Config\Editor $editor
+	 */
+	public function repoPageEditor(\CaT\InstILIAS\Config\Editor $editor);
 
 }

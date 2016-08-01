@@ -219,9 +219,26 @@ password_settings:
     forgot_password_aktive: 1
     #Max Number of login attemps, before account get blocked. if you enter 0 user account never will be blocked
     max_num_login_attempts: 0
-#Active the TyniMCE editor. You can toggle with 1 (active) or 0 (inactive)
-tyni_mce:
-    active: 1
+#Configurate youre changings for the editor administratio part. It's possible to toggle usage of tinyMCE and configure
+#repository page edit settings
+editor:
+    #Active the TyniMCE editor. You can toggle with 1 (active) or 0 (inactive)
+    enable_tinymce: 1
+    #Settings for the repository page editor. You can toggle each part with 1 (active) or 0 (inactive)
+    repo_page_editor:
+        enable: 1
+        heavy_marked: 1
+        marked: 1
+        importand: 1
+        superscript: 1
+        subscript: 1
+        comment: 1
+        quote: 1
+        accent: 1
+        code: 1
+        latex: 1
+        footnote: 1
+        external_link: 1
 #Configure the java server. if configured ilias is able to generate pdf files and an extended search mode is activated
 java_server:
     host: 

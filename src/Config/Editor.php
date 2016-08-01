@@ -8,15 +8,17 @@ namespace CaT\InstILIAS\Config;
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  *
- * @method array active()
+ * @method int enableTinymce()
+ * @method \\CaT\\InstILIAS\\Config\\Category repoPageEditor()
  */
-class TinyMCE extends Base {
+class Editor extends Base {
 	/**
 	 * @inheritdocs
 	 */
 	public static function fields() {
 		return array
-			( "active" => array("int", false)
+			( "enable_tinymce" => array("int", true)
+			, "repo_page_editor" =>array("\\CaT\\InstILIAS\\Config\\RepoPageEditor", true)
 			);
 	}
 }
