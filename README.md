@@ -18,7 +18,7 @@
 ### Installation
 ```
 $ cd DESTINATION_FOLDER
-$ git clone https://github.com/shecken/InstILIAS.git
+$ git clone https://github.com/conceptsandtraining/InstILIAS.git
 $ cd InstILIAS
 $ composer install
 ```
