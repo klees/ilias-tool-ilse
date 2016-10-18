@@ -107,4 +107,10 @@ interface Configurator {
 	 */
 	public function repoPageEditor(\CaT\InstILIAS\Config\Editor $editor);
 
+	/**
+	 * Enable or disable certifcates
+	 *
+	 * @param \CaT\InstILIAS\Config\Certificate $certificate
+	 */
+	public function certificate(\CaT\InstILIAS\Config\Certificate $certificate);
 }

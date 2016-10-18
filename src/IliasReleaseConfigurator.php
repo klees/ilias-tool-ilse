@@ -456,4 +456,12 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$this->gSetting->set("rpc_server_host", trim($java_server->host()));
 		$this->gSetting->set("rpc_server_port", trim($java_server->port()));
 	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function certificate(\CaT\InstILIAS\Config\Certificate $certificate) {
+		$certificate_settings = new \ilSetting("certificate");
+		$certificate_settings->set("active", $certificate->enable());
+	}
 }
