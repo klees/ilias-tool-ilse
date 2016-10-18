@@ -160,7 +160,9 @@ editor:
         external_link: 1
 java_server:
     host: einemenmug_server
-    port: 8080";
+    port: 8080
+certificate:
+    enable: 1";
 	}
 
 	public function test_not_enough_params() {
@@ -194,7 +196,6 @@ java_server:
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\PasswordSettings", $config->passwordSettings());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Editor", $config->editor());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\JavaServer", $config->javaServer());
-
-		var_dump($config->javaServer());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Certificate", $config->certificate());
 	}
 }

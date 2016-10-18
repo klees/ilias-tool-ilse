@@ -28,6 +28,7 @@ namespace CaT\InstILIAS\Config;
  * @method \\CaT\\InstILIAS\\Config\\PasswordSettings passwordSettings()
  * @method \\CaT\\InstILIAS\\Config\\Editor editor()
  * @method \\CaT\\InstILIAS\\Config\\JavaServer javaServer()
+ * @method \\CaT\\InstILIAS\\Config\\Certificate certificate()
  */
 class General extends Base {
 	/**
@@ -55,6 +56,7 @@ class General extends Base {
 			, "password_settings" => array("\\CaT\\InstILIAS\\Config\\PasswordSettings", true)
 			, "editor" => array("\\CaT\\InstILIAS\\Config\\Editor", true)
 			, "java_server" => array("\\CaT\\InstILIAS\\Config\\JavaServer", true)
+			, "certificate" => array("\\CaT\\InstILIAS\\Config\\Certificate", true)
 			);
 	}
 }

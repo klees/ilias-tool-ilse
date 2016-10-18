@@ -226,7 +226,7 @@ editor:
     enable_tinymce: 1
     #Settings for the repository page editor. You can toggle each part with 1 (active) or 0 (inactive)
     repo_page_editor:
-        enable: 1
+        enable: 0
         heavy_marked: 1
         marked: 1
         importand: 1
@@ -243,3 +243,6 @@ editor:
 java_server:
     host: 
     port: 
+#Configure the ilias certificate generator. You can toggle with 1 (active) or 0 (inactive)
+certificate:
+    enable: 1

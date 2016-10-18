@@ -88,4 +88,10 @@ if($general_config->javaServer() !== null) {
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
+if($general_config->certificate() !== null) {
+	echo "\nConfiguring certificate...";
+	$ilias_configurator->certificate($general_config->certificate());
+	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
 echo "\n\nIlias successfull configured.";
