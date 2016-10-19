@@ -11,6 +11,7 @@ namespace CaT\InstILIAS\Config;
  * @method string dataDir()
  * @method string name()
  * @method string passwordEncoder()
+ * @method string sessionExpire()
  */
 class Client extends Base {
 	/**
@@ -21,6 +22,7 @@ class Client extends Base {
 			( "data_dir"			=> array("string", false)
 			, "name"				=> array("string", false)
 			, "password_encoder"	=> array("string", false)
+			, "session_expire"		=> array("int", false)
 			);
 	}
 

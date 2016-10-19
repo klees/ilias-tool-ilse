@@ -178,6 +178,12 @@ echo "Creating client.ini...";
 $iinst->writeClientIni();
 echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
+echo "Checken session lifetime...";
+if(!$iinst->checkSessionLifeTime()) {
+	echo "\n\t\tYour session max lifetime in php.ini is smaller then ILIAS lifetime. Please change it or ILIAS lifetime will never be used.\n";
+}
+echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+
 $iinst->connectDatabase();
 
 echo "Creating database...";

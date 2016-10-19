@@ -5,9 +5,11 @@ client:
     data_dir: 
     #ILIAS is a client based system. Client with this name will be created
     #Example: ACMECorp
-    name : 
+    name: 
     #It is possible to encode passwords in two ways. Enter the one you want to use. Possible encoder are 'md5' and 'bcrypt'
-    password_encoder : bcrypt
+    password_encoder: bcrypt
+    #Session life time in minutes. Default is 120.
+    session_expire: 120
 database:
     #Host of your database.
     host: localhost

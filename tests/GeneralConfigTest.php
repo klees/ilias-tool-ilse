@@ -8,9 +8,10 @@ class GeneralConfigTest extends PHPUnit_Framework_TestCase {
 		$this->parser = new YamlParser();
 		$this->yaml_string = "---
 client:
-    data_dir : /data_dir
-    name : Ilias5
-    password_encoder : bcrypt 
+    data_dir: /data_dir
+    name: Ilias5
+    password_encoder: bcrypt
+    session_expire: 120
 database:
     host: 127.0.0.1
     database: ilias

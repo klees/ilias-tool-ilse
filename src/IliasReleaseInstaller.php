@@ -13,6 +13,8 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	protected $ilias_setup;
 	protected $general;
 
+	const SESSION_EXPIRE_VALUE = 7200;
+
 	public function __construct(\ilSetup $ilias_setup, \CaT\InstILIAS\Config\General $general) {
 		$this->ilias_setup = $ilias_setup;
 		$this->general = $general;
@@ -44,12 +46,24 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 		$this->ilias_setup->getClient()->setDbPass($ret["db_pass"]);
 		$this->ilias_setup->getClient()->setDbType($ret["db_type"]);
 		$this->ilias_setup->getClient()->setDSN();
+		$this->ilias_setup->getClient()->ini->setVariable("session", "expire", ($ret["session_expire"] * 60));
 
 		if(!$this->ilias_setup->saveNewClient()) {
 			throw new \Exception($this->ilias_setup->getError());
 		}
 
 		$this->setClientIniSetupFinsihed();
+	}
+
+	public function checkSessionLifeTime() {
+		$ilias_session_lifetime = ($this->general->client()->sessionExpire() * 60);
+		$php_session_lifetime = ini_get('session.gc_maxlifetime');
+
+		if($php_session_lifetime < $ilias_session_lifetime) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	protected function setClientIniSetupFinsihed() {
@@ -221,6 +235,7 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 		$ret["db_user"] = $this->general->database()->user();
 		$ret["db_pass"] = $this->general->database()->password();
 		$ret["db_type"] = $this->general->database()->engine();
+		$ret["session_expire"] = $this->general->client()->sessionExpire();
 
 		return $ret;
 	}

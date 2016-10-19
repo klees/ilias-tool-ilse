@@ -19,7 +19,8 @@ class YamlParserTest extends PHPUnit_Framework_TestCase {
 		$json_string = "--- 
 data_dir : sdasdads
 name : hugo
-password_encoder : md5";
+password_encoder : md5
+session_expire: 120";
 		$obj = $this->parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\Client");
 
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Client", $obj);
@@ -153,6 +154,7 @@ java: /java';
 data_dir : /data_dir
 name : ILIAS
 password_encoder : bcrypt
+session_expire: 120
 host: 127.0.0.1
 database: ilias
 user: user
