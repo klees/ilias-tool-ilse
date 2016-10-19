@@ -367,34 +367,39 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	}
 
 	protected function createUser(\CaT\InstILIAS\Config\User $user) {
-		$new_user = new \ilObjUser();
 
-		$new_user->setTimeLimitUnlimited(true);
-		$new_user->setTimeLimitOwner($this->gUser->getId());
-		$new_user->setLogin($user->login());
-		$new_user->setGender($user->gender());
+		if(!\ilObjUser::_lookupId($user->login())) {
+			$new_user = new \ilObjUser();
 
-		$new_user->setFirstname($user->firstname());
-		$new_user->setLastname($user->lastname());
-		$new_user->setEmail($user->email());
-		$new_user->setActive(true);
+			$new_user->setTimeLimitUnlimited(true);
+			$new_user->setTimeLimitOwner($this->gUser->getId());
+			$new_user->setLogin($user->login());
+			$new_user->setGender($user->gender());
 
-		$password = $this->generatePasswort();
-		$new_user->setPasswd($password, IL_PASSWD_PLAIN);
-		$new_user->setTitle($new_user->getFullname());
-		$new_user->setDescription($new_user->getEmail());
+			$new_user->setFirstname($user->firstname());
+			$new_user->setLastname($user->lastname());
+			$new_user->setEmail($user->email());
+			$new_user->setActive(true);
 
-		$new_user->create();
+			$password = $this->generatePasswort();
+			$new_user->setPasswd($password, IL_PASSWD_PLAIN);
+			$new_user->setTitle($new_user->getFullname());
+			$new_user->setDescription($new_user->getEmail());
 
-		$new_user->setLastPasswordChangeTS(time());
-		$new_user->saveAsNew();
+			$new_user->create();
 
-		$this->gRbacadmin->assignUser($this->getRoleId($user->role()), $new_user->getId(),true);
+			$new_user->setLastPasswordChangeTS(time());
+			$new_user->saveAsNew();
 
-		$new_user->setProfileIncomplete(true);
-		$new_user->update();
+			$this->gRbacadmin->assignUser($this->getRoleId($user->role()), $new_user->getId(),true);
 
-		return $password;
+			$new_user->setProfileIncomplete(true);
+			$new_user->update();
+
+			return $password;
+		}
+
+		return "User with login ".$user->login()." has been created yet. No new User was created.";
 	}
 
 	protected function generatePasswort() {
