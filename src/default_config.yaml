@@ -241,8 +241,22 @@ editor:
         external_link: 1
 #Configure the java server. if configured ilias is able to generate pdf files and an extended search mode is activated
 java_server:
-    host: 
-    port: 
+    #host of running java server
+    host: Test
+    #port the java server is listening
+    port: 8889
+    #path for saving index files
+    index_path:
+    #path and name of logfile. could be the same path as ilias log
+    log_file: 
+    #log lever. possible DEBUG, INFO, WARN, ERROR, FATAL
+    log_level: INFO
+    #number of threads
+    num_threads: 1
+    #max size of files to get indexed. Value is given in MB
+    max_file_size: 500
+    #Path to create ilServer.ini
+    ini_path:
 #Configure the ilias certificate generator. You can toggle with 1 (active) or 0 (inactive)
 certificate:
     enable: 1

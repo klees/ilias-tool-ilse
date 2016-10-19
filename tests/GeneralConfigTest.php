@@ -159,8 +159,14 @@ editor:
         footnote: 1
         external_link: 1
 java_server:
-    host: einemenmug_server
-    port: 8080
+    host: Test
+    port: 8889
+    index_path: /data_dir
+    log_file: /path/log.file
+    log_level: WARN
+    num_threads: 1
+    max_file_size: 500
+    ini_path: /path
 certificate:
     enable: 1
 soap:

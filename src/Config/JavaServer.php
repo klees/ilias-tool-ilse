@@ -8,7 +8,14 @@ namespace CaT\InstILIAS\Config;
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  *
- * @method array active()
+ * @method string string()
+ * @method int port()
+ * @method string indexPath()
+ * @method string logFile()
+ * @method string logLevel()
+ * @method int numThreads()
+ * @method int maxFileSize()
+ * @method string iniPath()
  */
 class JavaServer extends Base {
 	/**
@@ -18,6 +25,12 @@ class JavaServer extends Base {
 		return array
 			( "host" => array("string", false)
 			, "port" => array("int", false)
+			, "index_path" => array("string", false)
+			, "log_file" => array("string", false)
+			, "log_level" => array("string", false)
+			, "num_threads" => array("int", false)
+			, "max_file_size" => array("int", false)
+			, "ini_path" => array("string", false)
 			);
 	}
 }

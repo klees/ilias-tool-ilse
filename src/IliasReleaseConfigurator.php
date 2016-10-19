@@ -455,6 +455,22 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	public function javaServer(\CaT\InstILIAS\Config\JavaServer $java_server) {
 		$this->gSetting->set("rpc_server_host", trim($java_server->host()));
 		$this->gSetting->set("rpc_server_port", trim($java_server->port()));
+
+		include_once './Services/WebServices/RPC/classes/class.ilRpcIniFileWriter.php';
+		$ini = new \ilRpcIniFileWriter();
+		$ini->setHost($java_server->host());
+		$ini->setPort($java_server->port());
+		$ini->setIndexPath($java_server->indexPath());
+		$ini->setLogPath($java_server->logFile());
+		$ini->setLogLevel($java_server->logLevel());
+		$ini->setNumThreads($java_server->numThreads());
+		$ini->setMaxFileSize($java_server->maxFileSize());
+
+		$ini->write();
+
+		$fh = fopen($java_server->iniPath()."/ilServer.ini", "w+");
+		fwrite($fh, $ini->getIniString());
+		fclose($fh);
 	}
 
 	/**
