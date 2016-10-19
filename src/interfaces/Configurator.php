@@ -73,9 +73,16 @@ interface Configurator {
 	public function assignOrgunitTypesToOrgunits(\CaT\InstILIAS\Config\OrgunitTypeAssignments $orgunit_type_assignment);
 
 	/**
+	 * Configurate the type of self registration
+	 *
+	 * @param \CaT\InstILIAS\Config\Users $users
+	 */
+	public function registration(\CaT\InstILIAS\Config\Users $users);
+
+	/**
 	 *
 	 *
-	 * @param \CaT\InstILIAS\Config\Users $orgunit_type_assignment
+	 * @param \CaT\InstILIAS\Config\Users $users
 	 */
 	public function createUserAccounts(\CaT\InstILIAS\Config\Users $users);
 

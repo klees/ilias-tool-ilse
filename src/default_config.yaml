@@ -183,8 +183,12 @@ orgunit_type_assignment:
             #orgunit_type_default_language: *ORGU1_TYPE_DEFAULT_LANGUAGE
             #orgunit_type_title: *ORGU1_TYPE
 
-#If you would like to have some user right after installation, you can use these lines to create them
+#Enable user self registration or add some for initial create after ilias installation
 user:
+    #User can registrate themself. Decide which mode will be used. 1 (inactive) or 4 (registration with email confirmation)
+    registration: 1
+    #Lifetime of the registration link. Value is required in seconds
+    link_lifetime: 
     users:
         0:
             login: 

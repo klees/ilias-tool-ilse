@@ -8,6 +8,8 @@ namespace CaT\InstILIAS\Config;
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  *
+ * @method int registration()
+ * @method int linkLifetime()
  * @method array users()
  */
 class Users extends Base {
@@ -16,7 +18,9 @@ class Users extends Base {
 	 */
 	public static function fields() {
 		return array
-			( "users" => array(array("\\CaT\\InstILIAS\\Config\\User"), false)
+			( "registration" => array("int", false)
+			, "link_lifetime" => array("int", false)
+			, "users" => array(array("\\CaT\\InstILIAS\\Config\\User"), true)
 			);
 	}
 }

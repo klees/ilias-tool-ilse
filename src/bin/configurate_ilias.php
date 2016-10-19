@@ -67,9 +67,15 @@ if($general_config->passwordSettings() !== null) {
 }
 
 if($general_config->user() !== null) {
-	echo "\nCreating user accounts...";
-	$ilias_configurator->createUserAccounts($general_config->user());
+	echo "\nConfiguring self registration mode...";
+	$ilias_configurator->registration($general_config->user());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+
+	if($general_config->user()->users()) {
+		echo "\nCreating user accounts...";
+		$ilias_configurator->createUserAccounts($general_config->user());
+		echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+	}
 }
 
 if($general_config->editor() !== null) {

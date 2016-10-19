@@ -123,6 +123,8 @@ orgunit_type_assignment:
             orgunit_type_default_language: *ORGU1_TYPE_DEFAULT_LANGUAGE
             orgunit_type_title: *ORGU1_TYPE
 user:
+    registration: 1
+    link_lifetime: 1800
     users:
         0:
            login: auto_test

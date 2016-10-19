@@ -345,6 +345,19 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	/**
 	 * @inheritdoc
 	 */
+	public function registration(\CaT\InstILIAS\Config\Users $users) {
+		require_once './Services/Registration/classes/class.ilRegistrationSettings.php';
+		$this->registration_settings = new \ilRegistrationSettings();
+
+		$this->registration_settings->setRegistrationType((int)$users->registration());
+		$this->registration_settings->setRegistrationHashLifetime(max((int)$users->linkLifetime(), \ilRegistrationSettings::REG_HASH_LIFETIME_MIN_VALUE));
+
+		$this->registration_settings->save();
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	public function createUserAccounts(\CaT\InstILIAS\Config\Users $users) {
 		foreach ($users->users() as $user) {
 			echo "\nCreating user account for :".$user->email()."...";
