@@ -94,4 +94,10 @@ if($general_config->certificate() !== null) {
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
+if($general_config->soap() !== null) {
+	echo "\nConfiguring soap...";
+	$ilias_configurator->soap($general_config->soap());
+	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
 echo "\n\nIlias successfull configured.";

@@ -29,6 +29,7 @@ namespace CaT\InstILIAS\Config;
  * @method \\CaT\\InstILIAS\\Config\\Editor editor()
  * @method \\CaT\\InstILIAS\\Config\\JavaServer javaServer()
  * @method \\CaT\\InstILIAS\\Config\\Certificate certificate()
+ * @method \\CaT\\InstILIAS\\Config\\Soap soap()
  */
 class General extends Base {
 	/**
@@ -57,6 +58,7 @@ class General extends Base {
 			, "editor" => array("\\CaT\\InstILIAS\\Config\\Editor", true)
 			, "java_server" => array("\\CaT\\InstILIAS\\Config\\JavaServer", true)
 			, "certificate" => array("\\CaT\\InstILIAS\\Config\\Certificate", true)
+			, "soap" => array("\\CaT\\InstILIAS\\Config\\Soap", true)
 			);
 	}
 }

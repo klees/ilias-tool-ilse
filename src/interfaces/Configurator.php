@@ -113,4 +113,11 @@ interface Configurator {
 	 * @param \CaT\InstILIAS\Config\Certificate $certificate
 	 */
 	public function certificate(\CaT\InstILIAS\Config\Certificate $certificate);
+
+	/**
+	 * Configure SOAP
+	 *
+	 * @param \CaT\InstILIAS\Config\Soap $soap
+	 */
+	public function soap(\CaT\InstILIAS\Config\Soap $soap);
 }

@@ -2,7 +2,7 @@
 client:
     #Directory beside the webserver. ILIAS use it to save data or files. e.g. images before upload to the webserver.
     #Example: /var/www/ilias/data/
-    data_dir : 
+    data_dir: 
     #ILIAS is a client based system. Client with this name will be created
     #Example: ACMECorp
     name : 
@@ -214,7 +214,7 @@ password_settings:
     #Number of requires lower chars
     num_lower_chars: 1
     #Value in days the password will be expired
-    expire_in_days:0
+    expire_in_days: 0
     #If active the you can see the link "Forgot Password". You can toggle with 1 (active) or 0 (inactive)
     forgot_password_aktive: 1
     #Max Number of login attemps, before account get blocked. if you enter 0 user account never will be blocked
@@ -246,3 +246,11 @@ java_server:
 #Configure the ilias certificate generator. You can toggle with 1 (active) or 0 (inactive)
 certificate:
     enable: 1
+#ILIAS is working with SOAP. In this line it is possible to configure
+soap:
+    #Toggle SOAP is active or not. 1 (active) or 0 (inactive)
+    enable: 1
+    #Path to WSDL Files
+    wdsl_path: 
+    #Conenction timeout in seconds
+    timeout: 10

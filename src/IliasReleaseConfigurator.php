@@ -464,4 +464,13 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$certificate_settings = new \ilSetting("certificate");
 		$certificate_settings->set("active", $certificate->enable());
 	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function soap(\CaT\InstILIAS\Config\Soap $soap) {
+		$this->gSetting->set('soap_user_administration', $soap->enable());
+		$this->gSetting->set('soap_wsdl_path', trim($soap->wdslPath()));
+		$this->gSetting->set('soap_connect_timeout',$soap->timeout());
+	}
 }

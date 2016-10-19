@@ -162,7 +162,11 @@ java_server:
     host: einemenmug_server
     port: 8080
 certificate:
-    enable: 1";
+    enable: 1
+soap:
+    enable: 1
+    wdsl_path: http://files.php
+    timeout: 10";
 	}
 
 	public function test_not_enough_params() {
