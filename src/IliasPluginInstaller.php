@@ -15,7 +15,7 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	const CLASSES_FOLDER = "classes";
 	const PLUGIN_MAIN_PATH = "Customizing/global/plugins";
 
-	private static $slot_names = array("ilRepositoryObjectPlugin" => "RepositoryObject");
+	private static $slot_names = array("ilRepositoryObjectPlugin" => "RepositoryObject", "ilUserInterfaceHookPlugin" => "UserInterfaceHook");
 
 	public function __construct($absolute_path, $gDB) {
 		$this->gDB = $gDB;
@@ -133,6 +133,14 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 			return $class->newInstanceWithoutConstructor();
 		}
 		
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function uninstall($plugin_name) {
+		$plugin = $this->getPluginObject($plugin_name);
+		$plugin->uninstall();
 	}
 
 	/**

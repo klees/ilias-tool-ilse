@@ -36,7 +36,7 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	public function writeClientIni() {
 		$ret = $this->getClientIniData();
 
-		$this->ilias_setup->ini_client_exists = $this->ilias_setup->newClient($ret["client_id"]);
+		$this->ilias_setup->ini_client_exists = $this->newClient($ret["client_id"]);
 		$this->ilias_setup->getClient()->setId($ret["client_id"]);
 		$this->ilias_setup->getClient()->setName($ret["client_id"]);
 		$this->ilias_setup->getClient()->setDbHost($ret["db_host"]);
@@ -53,6 +53,10 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 		}
 
 		$this->setClientIniSetupFinsihed();
+	}
+
+	public function newClient($client_id) {
+		return $this->ilias_setup->newClient($client_id);
 	}
 
 	public function checkSessionLifeTime() {

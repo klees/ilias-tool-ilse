@@ -32,11 +32,17 @@ class GitExecuter implements \CaT\InstILIAS\interfaces\Git {
 				$this->cloneRepository($installation_path, $git_url, $git_branch);
 				return;
 			}
+
+			$this->fetch($repository);
 			$this->checkoutBranch($repository, $git_branch);
 			$this->pullBranch($repository, $git_branch);
 		} else {
 			$this->cloneRepository($installation_path, $git_url, $git_branch);
 		}
+	}
+
+	protected function fetch($repository) {
+		$repository->run("fetch");
 	}
 
 	protected function checkoutBranch($repository, $git_branch) {

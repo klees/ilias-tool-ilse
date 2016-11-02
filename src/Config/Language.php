@@ -24,7 +24,8 @@ class Language extends Base {
 
 	protected static $valid_languages = array(
 		"de"
-		,"en");
+		,"en"
+		,"nl");
 
 	/**
 	 * @inheritdocs

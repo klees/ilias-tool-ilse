@@ -64,4 +64,11 @@ interface Plugin {
 	 * @return object
 	 */
 	public function getPluginObject($plugin_name);
+
+	/**
+	 * Uninstall plugin
+	 *
+	 * @param string $plugin_name
+	 */
+	public function uninstall($plugin_name);
 }
