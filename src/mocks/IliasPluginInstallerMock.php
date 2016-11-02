@@ -56,4 +56,8 @@ class IliasPluginInstallerMock implements \CaT\InstILIAS\interfaces\Plugin {
 	public function getPluginObject($plugin_name) {
 		return null;
 	}
+
+	public function uninstall($plugin_name) {
+		return null;
+	}
 }
