@@ -18,12 +18,6 @@ else
 }
 
 define("DEBUG",false);
-set_include_path("./Services/PEAR/lib".PATH_SEPARATOR.ini_get('include_path'));
-require_once "./include/inc.check_pear.php";
-
-//include files from PEAR
-require_once "PEAR.php";
-
 // wrapper for php 4.3.2 & higher
 
 @include_once "HTML/Template/ITX.php";		// new implementation
@@ -43,7 +37,7 @@ require_once "./Services/Logging/classes/class.ilLog.php";
 require_once "./Services/Authentication/classes/class.ilSession.php";
 require_once "./Services/Utilities/classes/class.ilUtil.php";
 require_once "./Services/Init/classes/class.ilIniFile.php";
-require_once "./Services/Database/classes/class.ilDB.php";
+require_once "./Services/Database/classes/MDB2/class.ilDB.php";
 require_once "./setup/classes/class.ilSetupGUI.php";
 require_once "./setup/classes/class.Session.php";
 require_once "./setup/classes/class.ilClientList.php";
@@ -100,3 +94,8 @@ $GLOBALS['ilBench'] = $ilBench;
 include_once("./Services/Database/classes/class.ilDBAnalyzer.php");
 include_once("./Services/Database/classes/class.ilMySQLAbstraction.php");
 include_once("./Services/Database/classes/class.ilDBGenerator.php");
+
+include_once './Services/Init/classes/class.ilIniFile.php';
+$ini = new ilIniFile(ILIAS_ABSOLUTE_PATH.'/ilias.ini.php');
+$ini->read();
+$DIC["ini"] = function($c) { return $GLOBALS["ini"]; };
