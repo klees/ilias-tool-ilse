@@ -39,6 +39,7 @@ $git_branch_name = $general_config->gitBranch()->gitBranchName();
 $web_dir = "data";
 
 echo "\n";
+/*
 $requirement_checker = new \CaT\InstILIAS\IliasRequirementChecker;
 $check = $requirement_checker->dataDirectoryExists($data_path);
 if(!$skip && !$check) {
@@ -146,7 +147,7 @@ try {
 } catch(\RuntimeException $e) {
 	echo $e->getMessage();
 	die(1);
-}
+}*/
 
 chmod($absolute_path, 0777);
 
