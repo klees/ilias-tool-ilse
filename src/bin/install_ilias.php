@@ -39,7 +39,7 @@ $git_branch_name = $general_config->gitBranch()->gitBranchName();
 $web_dir = "data";
 
 echo "\n";
-/*
+
 $requirement_checker = new \CaT\InstILIAS\IliasRequirementChecker;
 $check = $requirement_checker->dataDirectoryExists($data_path);
 if(!$skip && !$check) {
@@ -147,7 +147,7 @@ try {
 } catch(\RuntimeException $e) {
 	echo $e->getMessage();
 	die(1);
-}*/
+}
 
 chmod($absolute_path, 0777);
 
@@ -209,9 +209,6 @@ echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 $iinst->setProxy();
 $iinst->registerNoNic();
-
-//$encoder_factory = new \ilUserPasswordEncoderFactory(array());
-//$iinst->setPasswordEncoder($encoder_factory);
 
 if(!$iinst->finishSetup()) {
 	echo "\nSomething went wrong.";
