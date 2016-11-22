@@ -36,7 +36,8 @@ class DB extends Base {
 
 	protected static $valid_engines = array(
 		"innodb"
-		,"myisam");
+		,"myisam"
+		,"galera");
 
 	protected static $valid_encodings = array(
 		"utf8_general_ci");
