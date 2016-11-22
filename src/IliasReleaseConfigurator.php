@@ -51,6 +51,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		require_once($this->absolute_path."/Services/Object/classes/class.ilObjectFactory.php");
 		require_once($this->absolute_path."/Services/COPage/classes/class.ilPageEditorSettings.php");
 		require_once($this->absolute_path."/Services/COPage/classes/class.ilPageContentGUI.php");
+		require_once($this->absolute_path."/Services/Logging/classes/public/class.ilLoggerFactory.php");
 
 		//context unittest is not required an ilias authentication
 		//we do not need any authentication to configure ILIAS
