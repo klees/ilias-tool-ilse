@@ -50,6 +50,7 @@ require_once("Services/Database/classes/class.ilDBUpdate.php");
 require_once("setup/classes/class.ilSetup.php");
 require_once 'Services/User/classes/class.ilUserPasswordEncoderFactory.php';
 require_once("Services/Password/exceptions/class.ilPasswordException.php");
+require_once("Services/Logging/classes/public/class.ilLoggerFactory.php");
 
 // include error_handling
 require_once "./Services/Init/classes/class.ilErrorHandling.php";
