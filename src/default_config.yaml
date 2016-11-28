@@ -25,9 +25,9 @@ database:
     encoding: utf8_general_ci
 language:
     #Default language ILIAS will use.
-    default_lang: en
+    default: en
     #Install languages user can decide to use. Default language must be listed too!
-    to_install_langs: 
+    available: 
         - en
         - de
 server:

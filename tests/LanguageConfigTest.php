@@ -25,8 +25,8 @@ class LanguageConfigTest extends PHPUnit_Framework_TestCase {
 
 	public function _test_valid_LanguageConfig($default_lang, array $install_lang) {
 		$config = new Language($default_lang, $install_lang);
-		$this->assertEquals($default_lang, $config->defaultLang());
-		$this->assertEquals($install_lang, $config->toInstallLangs());
+		$this->assertEquals($default_lang, $config->default());
+		$this->assertEquals($install_lang, $config->available());
 	}
 
 	public function _test_invalid_LanguageConfig($default_lang, array $install_lang) {

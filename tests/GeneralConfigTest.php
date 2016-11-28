@@ -20,8 +20,8 @@ database:
     engine: innodb
     encoding: utf8_general_ci 
 language:
-    default_lang: de
-    to_install_langs:
+    default: de
+    available:
         - en
         - de
 server:
