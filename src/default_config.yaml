@@ -274,3 +274,25 @@ soap:
     wdsl_path: 
     #Conenction timeout in seconds
     timeout: 10
+#Active and configure the learning progress
+learning_progress:
+    #Just active or not (0, 1)
+    enabled: 1
+    #Should the user data in LP tabs be anonymized or not (0, 1)
+    anonym: 1
+    #Maximum time of LP calls
+    time_span: 300
+    #Enable additional inforamtions. Add the values of extension you like to use.
+    #0 => no extended values
+    #1 => last access
+    #2 => count accesses
+    #4 => spendet time
+    extended_data: 0
+    #Enable object statistics (0, 1)
+    object_statistics: 0
+    #Enable session statistics (0, 1)
+    session_statistics: 1
+    #User have a look on his own LP (0, 1)
+    own_lp: 1
+    #Show the LP state in list GUI elements
+    personal_desktop: 0

@@ -134,4 +134,11 @@ interface Configurator {
 	 * @param \CaT\InstILIAS\Config\Soap $soap
 	 */
 	public function soap(\CaT\InstILIAS\Config\Soap $soap);
+
+	/**
+	 * Configure LP
+	 *
+	 * @param \CaT\InstILIAS\Config\LearningProgress $lp
+	 */
+	public function learningProgress(\CaT\InstILIAS\Config\LearningProgress $lp);
 }

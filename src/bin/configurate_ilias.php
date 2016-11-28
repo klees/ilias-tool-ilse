@@ -106,4 +106,10 @@ if($general_config->soap() !== null) {
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
+if($general_config->learningProgress() !== null) {
+	echo "\nConfiguring LP...";
+	$ilias_configurator->learningProgress($general_config->learningProgress());
+	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+}
+
 echo "\n\nIlias successfull configured.";

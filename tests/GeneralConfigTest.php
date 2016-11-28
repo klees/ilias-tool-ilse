@@ -175,7 +175,17 @@ certificate:
 soap:
     enable: 1
     wdsl_path: http://files.php
-    timeout: 10";
+    timeout: 10
+learning_progress:
+    enabled: 1
+    anonym: 1
+    time_span: 300
+    extended_data: 0
+    object_statistics: 1
+    session_statistics: 0
+    own_lp: 1
+    personal_desktop: 0
+";
 	}
 
 	public function test_not_enough_params() {
@@ -210,5 +220,7 @@ soap:
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Editor", $config->editor());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\JavaServer", $config->javaServer());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Certificate", $config->certificate());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Soap", $config->soap());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\LearningProgress", $config->learningProgress());
 	}
 }

@@ -30,6 +30,7 @@ namespace CaT\InstILIAS\Config;
  * @method \\CaT\\InstILIAS\\Config\\JavaServer javaServer()
  * @method \\CaT\\InstILIAS\\Config\\Certificate certificate()
  * @method \\CaT\\InstILIAS\\Config\\Soap soap()
+ * @method \\CaT\\InstILIAS\\Config\\LearningProgress learningProgress()
  */
 class General extends Base {
 	/**
@@ -59,6 +60,7 @@ class General extends Base {
 			, "java_server" => array("\\CaT\\InstILIAS\\Config\\JavaServer", true)
 			, "certificate" => array("\\CaT\\InstILIAS\\Config\\Certificate", true)
 			, "soap" => array("\\CaT\\InstILIAS\\Config\\Soap", true)
+			, "learning_progress" => array("\\CaT\\InstILIAS\\Config\\LearningProgress", true)
 			);
 	}
 }

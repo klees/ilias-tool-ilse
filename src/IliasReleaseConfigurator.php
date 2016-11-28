@@ -521,4 +521,18 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$this->gSetting->set('soap_wsdl_path', trim($soap->wdslPath()));
 		$this->gSetting->set('soap_connect_timeout',$soap->timeout());
 	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function learningProgress(\CaT\InstILIAS\Config\LearningProgress $lp) {
+		$this->gSetting->set("enable_tracking", $lp->enabled());
+		$this->gSetting->set("save_user_related_data", !$lp->anonym());
+		$this->gSetting->set("tracking_time_span",$lp->timeSpan());
+		$this->gSetting->set("lp_extended_data", $lp->extendedData());
+		$this->gSetting->set("object_statistics", $lp->objectStatistics());
+		$this->gSetting->set("lp_learner", $lp->ownLp());
+		$this->gSetting->set("session_statistics", $lp->sessionStatistics());
+		$this->gSetting->set("lp_list_gui", $lp->personalDesktop());
+	}
 }
