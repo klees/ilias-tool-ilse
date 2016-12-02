@@ -18,7 +18,7 @@ class Plugins {
 	protected $absolute_path;
 
 	public function __construct($absolute_path, \ilDB $db) {
-		$this->gDB = $gDB;
+		$this->gDB = $db;
 		$this->absolute_path = $absolute_path;
 	}
 
@@ -27,7 +27,6 @@ class Plugins {
 	 */
 	public function installPlugins(\CaT\InstILIAS\Config\Plugins $plugins) {
 		$plugin_installer = new \CaT\InstILIAS\IliasPluginInstaller($this->absolute_path, $this->gDB);
-		$current_plugins = array();
 		foreach ($plugins->plugins() as $plugin) {
 			if(!$plugin_installer->isInstalled($plugin)) {
 				$plugin_installer->install($plugin);

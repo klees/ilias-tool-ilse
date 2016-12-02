@@ -87,7 +87,7 @@ class OrgUnits {
 	/**
 	 *
 	 *
-	 * @param \CaT\InstILIAS\Config\OrgunitTypeAssignment $orgunit_type_assignment
+	 * @param \CaT\InstILIAS\Config\OrgunitTypeAssignment $orgunit_type_assignments
 	 */
 	public function assignOrgunitTypesToOrgunits(\CaT\InstILIAS\Config\OrgunitTypeAssignments $orgunit_type_assignments) {
 		foreach ($orgunit_type_assignments->orgunitTypeAssignments() as $orgunit_type_assignment) {
@@ -119,7 +119,7 @@ class OrgUnits {
 	 *
 	 * @param string $orgunit_tite
 	 *
-	 * @return integer;
+	 * @return integer
 	 */
 	protected function getOrgunitId($orgunit_tite) {
 		$select = "SELECT obj_id\n"
@@ -140,7 +140,7 @@ class OrgUnits {
 	 * @param string $orgunit_type_title
 	 * @param string $orgunit_default_lang
 	 *
-	 * @return integer;
+	 * @return integer
 	 */
 	protected function getOrgunitTypeId($orgunit_type_title, $orgunit_default_lang) {
 		$select = "SELECT orgu_types.id\n"
