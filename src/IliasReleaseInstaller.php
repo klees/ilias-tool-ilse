@@ -94,8 +94,6 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	 */
 	public function getDatabaseHandle() {
 		global $ilDB;
-
-		
 		return $ilDB;
 	}
 
