@@ -191,6 +191,9 @@ user:
     registration: 1
     #Lifetime of the registration link. Value is required in seconds
     link_lifetime: 
+    #Define which of these fields are required in user profil. Not listed field names will be set as not required.
+    #If required_fields is an empty array, all fields will be not requred
+    required_fields: []
     users:
         0:
             login: 

@@ -126,6 +126,22 @@ orgunit_type_assignment:
 user:
     registration: 1
     link_lifetime: 1800
+    required_fields:
+        - title
+        - birthday
+        - gender
+        - institution
+        - department
+        - street
+        - zipcode
+        - city
+        - country
+        - phone_office
+        - phone_home
+        - phone_mobile
+        - fax
+        - email
+        - matriculation
     users:
         0:
            login: auto_test

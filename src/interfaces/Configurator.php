@@ -141,4 +141,11 @@ interface Configurator {
 	 * @param \CaT\InstILIAS\Config\LearningProgress $lp
 	 */
 	public function learningProgress(\CaT\InstILIAS\Config\LearningProgress $lp);
+
+	/**
+	 * Change the settings of required basic user fields.
+	 *
+	 * @param \CaT\InstILIAS\Config\User $user
+	 */
+	public function changeRequirementSettings(\CaT\InstILIAS\Config\Users $user);
 }

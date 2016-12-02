@@ -23,13 +23,14 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$this->absolute_path = $absolute_path;
 		$this->initIlias();
 
-		global $ilDB, $tree, $ilUser, $rbacadmin, $ilSetting;
+		global $ilDB, $tree, $ilUser, $rbacadmin, $ilSetting, $ilias;
 
 		$this->gDB = $ilDB;
 		$this->gTree = $tree;
 		$this->gUser = $ilUser;
 		$this->gRbacadmin = $rbacadmin;
 		$this->gSetting = $ilSetting;
+		$this->gIlias = $ilias;
 	}
 
 	/**
@@ -534,5 +535,20 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 		$this->gSetting->set("lp_learner", $lp->ownLp());
 		$this->gSetting->set("session_statistics", $lp->sessionStatistics());
 		$this->gSetting->set("lp_list_gui", $lp->personalDesktop());
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function changeRequirementSettings(\CaT\InstILIAS\Config\Users $user) {
+		$required_fields = $user->requiredFields();
+
+		foreach ($user->getBasicFields() as $field) {
+			if(is_array($required_fields) && !empty($required_fields) && in_array($field, $required_fields)) {
+				$this->gIlias->setSetting("require_".$field, "1");
+			} else {
+				$this->gIlias->deleteSetting("require_".$field);
+			}
+		}
 	}
 }

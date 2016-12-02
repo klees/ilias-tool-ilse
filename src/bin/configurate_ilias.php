@@ -71,6 +71,10 @@ if($general_config->user() !== null) {
 	$ilias_configurator->registration($general_config->user());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
+	echo "\nChanging requirement settings for basic fields...";
+	$ilias_configurator->changeRequirementSettings($general_config->user());
+	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
+
 	if($general_config->user()->users()) {
 		echo "\nCreating user accounts...";
 		$ilias_configurator->createUserAccounts($general_config->user());
