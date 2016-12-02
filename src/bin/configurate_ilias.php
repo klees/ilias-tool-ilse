@@ -19,100 +19,101 @@ $ilias_configurator = new \CaT\InstILIAS\IliasReleaseConfigurator($absolute_path
 
 if($general_config->category() !== null) {
 	echo "\nCreating categories...";
-	$ilias_configurator->createCategories($general_config->category());
+	$ilias_configurator->getCategoriesConfigurator()->createCategories($general_config->category());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->orgunit() !== null) {
 	echo "\nCreating orgunits...";
-	$ilias_configurator->createOrgUnits($general_config->orgunit());
+	$ilias_configurator->getOrgUnitsConfigurator()->createOrgUnits($general_config->orgunit());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->role() !== null) {
 	echo "\nCreating global roles...";
-	$ilias_configurator->createRoles($general_config->role());
+	$ilias_configurator->getRolesConfigurator()->createRoles($general_config->role());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->ldap() !== null) {
 	echo "\nConfiguring LDAP server settings...";
-	$ilias_configurator->configureLDAPServer($general_config->ldap());
+	$ilias_configurator->getLDAPConfigurator()->configureLDAPServer($general_config->ldap());
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->plugin() !== null) {
 	echo "\nInstalling plugins...";
-	$ilias_configurator->installPlugins($general_config->plugin());
-	$ilias_configurator->activatePlugins($general_config->plugin());
+	$ilias_configurator->getPluginsConfigurator()->installPlugins($general_config->plugin());
+	$ilias_configurator->getPluginsConfigurator()->activatePlugins($general_config->plugin());
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->orgunitType() !== null) {
 	echo "\nCreating orgunit types...";
-	$ilias_configurator->createOrgunitTypes($general_config->orgunitType());
+	$ilias_configurator->getOrgUnitsConfigurator()->createOrgunitTypes($general_config->orgunitType());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->orgunitTypeAssignment() !== null) {
 	echo "\nAssigning orgunit types to orgunit...";
-	$ilias_configurator->assignOrgunitTypesToOrgunits($general_config->orgunitTypeAssignment());
+	$ilias_configurator->getOrgUnitsConfigurator()->assignOrgunitTypesToOrgunits($general_config->orgunitTypeAssignment());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->passwordSettings() !== null) {
 	echo "\nConfiguring password settings...";
-	$ilias_configurator->passwordSettings($general_config->passwordSettings());
+	$ilias_configurator->getUserConfigurator()->passwordSettings($general_config->passwordSettings());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->user() !== null) {
+	$user_configurator = $ilias_configurator->getUserConfigurator();
 	echo "\nConfiguring self registration mode...";
-	$ilias_configurator->registration($general_config->user());
+	$user_configurator->registration($general_config->user());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 	echo "\nChanging requirement settings for basic fields...";
-	$ilias_configurator->changeRequirementSettings($general_config->user());
+	$user_configurator->changeRequirementSettings($general_config->user());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 	if($general_config->user()->users()) {
 		echo "\nCreating user accounts...";
-		$ilias_configurator->createUserAccounts($general_config->user());
+		$user_configurator->createUserAccounts($general_config->user());
 		echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 	}
 }
 
 if($general_config->editor() !== null) {
 	echo "\nSetting usage of TinyMCE...";
-	$ilias_configurator->tinyMCE($general_config->editor());
+	$ilias_configurator->getEditorConfigurator()->tinyMCE($general_config->editor());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 	echo "\nSetting usage of repo page editor...";
-	$ilias_configurator->repoPageEditor($general_config->editor());
+	$ilias_configurator->getEditorConfigurator()->repoPageEditor($general_config->editor());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->javaServer() !== null) {
 	echo "\nConfiguring java server...";
-	$ilias_configurator->javaServer($general_config->javaServer());
+	$ilias_configurator->getJavaServerConfigurator()->javaServer($general_config->javaServer());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->certificate() !== null) {
 	echo "\nConfiguring certificate...";
-	$ilias_configurator->certificate($general_config->certificate());
+	$ilias_configurator->getCertificatesConfigurator()->certificate($general_config->certificate());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->soap() !== null) {
 	echo "\nConfiguring soap...";
-	$ilias_configurator->soap($general_config->soap());
+	$ilias_configurator->getSoapConfigurator()->soap($general_config->soap());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if($general_config->learningProgress() !== null) {
 	echo "\nConfiguring LP...";
-	$ilias_configurator->learningProgress($general_config->learningProgress());
+	$ilias_configurator->getLearningProgressConfigurator()->learningProgress($general_config->learningProgress());
 	echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
