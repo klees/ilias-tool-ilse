@@ -8,6 +8,7 @@ namespace CaT\InstILIAS\Config;
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  *
+ * @method \CaT\InstILIAS\Config\GitBranch name()
  * @method \CaT\InstILIAS\Config\GitBranch git()
  */
 class Plugin extends Base {

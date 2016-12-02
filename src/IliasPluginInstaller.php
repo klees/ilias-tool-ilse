@@ -17,6 +17,11 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 
 	private static $slot_names = array("ilRepositoryObjectPlugin" => "RepositoryObject", "ilUserInterfaceHookPlugin" => "UserInterfaceHook");
 
+	protected $gDB;
+	protected $absolute_path;
+	protected $temp_folder;
+	protected $installed_plugins;
+
 	public function __construct($absolute_path, $gDB) {
 		$this->gDB = $gDB;
 		$this->absolute_path = $absolute_path;
@@ -170,7 +175,6 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	 *
 	 * @param string $temp_folder
 	 * @param string $destination_folder
-	 * @param string $plugin_name
 	 */
 	protected function movePlugin($temp_folder, $destination_folder) {
 		assert('is_string($temp_folder)');

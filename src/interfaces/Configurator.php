@@ -103,7 +103,7 @@ interface Configurator {
 	/**
 	 *
 	 *
-	 * @param \CaT\InstILIAS\Config\TinyMCE $tiny_mce
+	 * @param \CaT\InstILIAS\Config\Editor $editor
 	 */
 	public function tinyMCE(\CaT\InstILIAS\Config\Editor $editor);
 

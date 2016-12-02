@@ -8,7 +8,7 @@ namespace CaT\InstILIAS\Config;
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  *
- * @method string string()
+ * @method string host()
  * @method int port()
  * @method string indexPath()
  * @method string logFile()

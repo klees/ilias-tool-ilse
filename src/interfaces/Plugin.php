@@ -12,7 +12,6 @@ interface Plugin {
 	/**
 	 *
 	 * @param \CaT\InstILIAS\Config\Plugin $plugin
-	 * @param string 					   $absolute_path
 	 *
 	 * @throws RuntimeException
 	 *
@@ -24,7 +23,7 @@ interface Plugin {
 	 *
 	 * @param \CaT\InstILIAS\Config\Plugin $plugin
 	 *
-	 * @return booelan
+	 * @return boolean
 	 */
 	public function isInstalled(\CaT\InstILIAS\Config\Plugin $plugin);
 

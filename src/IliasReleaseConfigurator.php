@@ -14,6 +14,11 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	protected $absolute_path;
 	protected $gDB;
 	protected $gTree;
+	protected $gUser;
+	protected $gRbacadmin;
+	protected $gSetting;
+	protected $gIlias;
+	protected $registration_settings;
 
 	public function __construct($absolute_path, $client_id) {
 		define ("CLIENT_ID", $client_id);
@@ -316,7 +321,7 @@ class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator
 	/**
 	 *
 	 *
-	 * @param string $orgunit_type_assignment
+	 * @param string $orgunit_tite
 	 *
 	 * @return integer;
 	 */
