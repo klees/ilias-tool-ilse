@@ -193,7 +193,22 @@ user:
     link_lifetime: 
     #Define which of these fields are required in user profil. Not listed field names will be set as not required.
     #If required_fields is an empty array, all fields will be not requred
-    required_fields: []
+    required_fields:
+        - title
+        - birthday
+        - gender
+        - institution
+        - department
+        - street
+        - zipcode
+        - city
+        - country
+        - phone_office
+        - phone_home
+        - phone_mobile
+        - fax
+        - email
+        - matriculation
     users:
         0:
             login: 
