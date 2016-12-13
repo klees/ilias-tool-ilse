@@ -20,8 +20,8 @@ database:
     engine: innodb
     encoding: utf8_general_ci 
 language:
-    default_lang: de
-    to_install_langs:
+    default: de
+    available:
         - en
         - de
 server:
@@ -39,8 +39,9 @@ log:
     path: /path
     file_name: ilias.log
 git_branch:
-    git_url: https://github.com/ILIAS-eLearning/ILIAS.git
-    git_branch_name: release_5-1
+    url: https://github.com/ILIAS-eLearning/ILIAS.git
+    branch: release_5-1
+    hash: 
 category:
     categories:
         0:
@@ -102,8 +103,8 @@ plugin:
         0:
             name: Pluginname
             git:
-                git_url: Bernd
-                git_branch_name: master
+                url: Bernd
+                branch: master
 https_auto_detect:
     enabled: 0
     header_name:
@@ -126,6 +127,22 @@ orgunit_type_assignment:
 user:
     registration: 1
     link_lifetime: 1800
+    required_fields:
+        - title
+        - birthday
+        - gender
+        - institution
+        - department
+        - street
+        - zipcode
+        - city
+        - country
+        - phone_office
+        - phone_home
+        - phone_mobile
+        - fax
+        - email
+        - matriculation
     users:
         0:
            login: auto_test
@@ -175,7 +192,17 @@ certificate:
 soap:
     enable: 1
     wdsl_path: http://files.php
-    timeout: 10";
+    timeout: 10
+learning_progress:
+    enabled: 1
+    anonym: 1
+    time_span: 300
+    extended_data: 0
+    object_statistics: 1
+    session_statistics: 0
+    own_lp: 1
+    personal_desktop: 0
+";
 	}
 
 	public function test_not_enough_params() {
@@ -210,5 +237,7 @@ soap:
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Editor", $config->editor());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\JavaServer", $config->javaServer());
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Certificate", $config->certificate());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Soap", $config->soap());
+		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\LearningProgress", $config->learningProgress());
 	}
 }

@@ -25,9 +25,9 @@ database:
     encoding: utf8_general_ci
 language:
     #Default language ILIAS will use.
-    default_lang: en
+    default: en
     #Install languages user can decide to use. Default language must be listed too!
-    to_install_langs: 
+    available: 
         - en
         - de
 server:
@@ -191,6 +191,24 @@ user:
     registration: 1
     #Lifetime of the registration link. Value is required in seconds
     link_lifetime: 
+    #Define which of these fields are required in user profil. Not listed field names will be set as not required.
+    #If required_fields is an empty array, all fields will be not requred
+    required_fields:
+        - title
+        - birthday
+        - gender
+        - institution
+        - department
+        - street
+        - zipcode
+        - city
+        - country
+        - phone_office
+        - phone_home
+        - phone_mobile
+        - fax
+        - email
+        - matriculation
     users:
         0:
             login: 
@@ -274,3 +292,25 @@ soap:
     wdsl_path: 
     #Conenction timeout in seconds
     timeout: 10
+#Active and configure the learning progress
+learning_progress:
+    #Just active or not (0, 1)
+    enabled: 1
+    #Should the user data in LP tabs be anonymized or not (0, 1)
+    anonym: 1
+    #Maximum time of LP calls
+    time_span: 300
+    #Enable additional inforamtions. Add the values of extension you like to use.
+    #0 => no extended values
+    #1 => last access
+    #2 => count accesses
+    #4 => spendet time
+    extended_data: 0
+    #Enable object statistics (0, 1)
+    object_statistics: 0
+    #Enable session statistics (0, 1)
+    session_statistics: 1
+    #User have a look on his own LP (0, 1)
+    own_lp: 1
+    #Show the LP state in list GUI elements
+    personal_desktop: 0

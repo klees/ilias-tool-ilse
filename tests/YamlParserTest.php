@@ -65,8 +65,8 @@ encoding: utf8_general_ci';
 
 	public function test_createGitConfig() {
 		$json_string = '---
-git_url: https://github.com/
-git_branch_name: ilias';
+url: https://github.com/
+branch: ilias';
 
 		$obj = $this->parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\GitBranch");
 
@@ -81,19 +81,19 @@ git_branch_name: ilias';
 
 	public function test_createLanguageConfig() {
 		$json_string = '---
-default_lang: de
-to_install_langs:
+default: de
+available:
     - en
     - de';
 		$obj = $this->parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\Language");
 
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\Language", $obj);
 		
-		$this->assertEquals($obj->defaultLang(), "de");
-		$this->assertInternalType("string", $obj->defaultLang());
+		$this->assertEquals($obj->default(), "de");
+		$this->assertInternalType("string", $obj->default());
 
-		$this->assertEquals($obj->toInstallLangs(), array("en","de"));
-		$this->assertInternalType("array", $obj->toInstallLangs());
+		$this->assertEquals($obj->available(), array("en","de"));
+		$this->assertInternalType("array", $obj->available());
 	}
 
 	public function test_createServerConfig() {
@@ -161,8 +161,8 @@ user: user
 password: passwd
 engine: innodb
 encoding: utf8_general_ci
-default_lang: de
-to_install_langs:
+default: de
+available:
     - en 
     - de
 http_path: http://localhost

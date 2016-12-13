@@ -94,8 +94,6 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	 */
 	public function getDatabaseHandle() {
 		global $ilDB;
-
-		
 		return $ilDB;
 	}
 
@@ -122,7 +120,7 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	 * @inheritdoc
 	 */
 	public function installLanguages(\ilLanguage $lng) {
-		$done = $lng->installLanguages($this->general->language()->toInstallLangs(), array());
+		$done = $lng->installLanguages($this->general->language()->available(), array());
 		
 		if($done !== true) {
 			throw new \Exception("Error installing languages");
@@ -133,7 +131,7 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	}
 
 	protected function setDefaultLanguage() {
-		$this->ilias_setup->getClient()->setDefaultLanguage($this->general->language()->defaultLang());
+		$this->ilias_setup->getClient()->setDefaultLanguage($this->general->language()->default());
 	}
 
 	/**

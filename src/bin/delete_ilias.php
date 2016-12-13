@@ -3,6 +3,9 @@ require_once(__DIR__.'/../../vendor/autoload.php');
 
 class deleteIlias {
 
+	protected $general_config;
+	protected $con;
+
 	public function __construct($config_path) {
 		assert('is_string($config_path)');
 

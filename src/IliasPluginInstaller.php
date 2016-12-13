@@ -17,6 +17,11 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 
 	private static $slot_names = array("ilRepositoryObjectPlugin" => "RepositoryObject", "ilUserInterfaceHookPlugin" => "UserInterfaceHook");
 
+	protected $gDB;
+	protected $absolute_path;
+	protected $temp_folder;
+	protected $installed_plugins;
+
 	public function __construct($absolute_path, $gDB) {
 		$this->gDB = $gDB;
 		$this->absolute_path = $absolute_path;
@@ -35,7 +40,7 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	 * @inheritdoc
 	 */
 	public function install(\CaT\InstILIAS\Config\Plugin $plugin) {
-		$this->checkout($plugin->git()->gitUrl(), $plugin->git()->gitBranchName(), $this->temp_folder."/".$plugin->name());
+		$this->checkout($plugin->git()->url(), $plugin->git()->branch(), $this->temp_folder."/".$plugin->name());
 
 		$plugin_path = $this->getPluginPath($this->temp_folder, $plugin->name());
 
@@ -51,7 +56,7 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	public function updateBranch(\CaT\InstILIAS\Config\Plugin $plugin) {
 		$pl = $this->getPluginObject($plugin->name());
 		$plugin_path = $pl->getDirectory();
-		$this->checkout($plugin->git()->gitUrl(), $plugin->git()->gitBranchName(), $plugin_path);
+		$this->checkout($plugin->git()->url(), $plugin->git()->branch(), $plugin_path);
 	}
 
 	/**
@@ -170,7 +175,6 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	 *
 	 * @param string $temp_folder
 	 * @param string $destination_folder
-	 * @param string $plugin_name
 	 */
 	protected function movePlugin($temp_folder, $destination_folder) {
 		assert('is_string($temp_folder)');

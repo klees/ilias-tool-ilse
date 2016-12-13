@@ -17,8 +17,8 @@ class Language extends Base {
 	 */
 	public static function fields() {
 		return array
-			( "default_lang"			=> array("string", false)
-			, "to_install_langs"		=> array(array("string"), false)
+			( "default"			=> array("string", false)
+			, "available"		=> array(array("string"), false)
 			);
 	}
 
@@ -32,8 +32,8 @@ class Language extends Base {
 	 */
 	protected function checkValueContent($key, $value) {
 		switch($key) {
-			case "to_install_langs":
-			case "default_lang":
+			case "available":
+			case "default":
 				return $this->checkContentValueInArray($value, self::$valid_languages);
 			default:
 				return parent::checkValueContent($key, $value);

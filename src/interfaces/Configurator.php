@@ -15,123 +15,73 @@ interface Configurator {
 	public function initIlias();
 
 	/**
-	 * creates global roles
+	 * Get the configurator for user actions
 	 *
-	 *@param \CaT\InstILIAS\Config\Roles $install_roles
+	 * @return CaT\InstILIAS\Configurators\Users
 	 */
-	public function createRoles(\CaT\InstILIAS\Config\Roles $install_roles);
+	public function getUserConfigurator();
 
 	/**
-	 * creates organisational units according to defined structur
-	 * recursive
+	 * Get the configurator for role actions
 	 *
-	 * @param \CaT\InstILIAS\Config\OrgUnits $install_orgunits
+	 * @return CaT\InstILIAS\Configurators\Roles
 	 */
-	public function createOrgUnits(\CaT\InstILIAS\Config\OrgUnits $install_orgunits);
+	public function getRolesConfigurator();
 
 	/**
-	 * creates categories units according to defined structur
-	 * recursive
+	 * Get the configurator for org unit actions
 	 *
-	 * @param \CaT\InstILIAS\Config\OrgUnits $install_categories
+	 * @return CaT\InstILIAS\Configurators\OrgUnits
 	 */
-	public function createCategories(\CaT\InstILIAS\Config\Categories $install_categories);
+	public function getOrgUnitsConfigurator();
 
 	/**
-	 * configurates the LDAP server settings for login
+	 * Get the configurator for categorie actions
 	 *
-	 * @param \CaT\InstILIAS\Config\LDAP $ldap_config
+	 * @return CaT\InstILIAS\Configurators\Categories
 	 */
-	public function configureLDAPServer(\CaT\InstILIAS\Config\LDAP $ldap_config);
+	public function getCategoriesConfigurator();
 
 	/**
+	 * Get the configurator for ldap actions
 	 *
-	 *
-	 * @param \CaT\InstILIAS\Config\Plugins $plugins
+	 * @return CaT\InstILIAS\Configurators\LDAP
 	 */
-	public function installPlugins(\CaT\InstILIAS\Config\Plugins $plugins);
+	public function getLDAPConfigurator();
 
 	/**
+	 * Get the configurator for plugins actions
 	 *
-	 *
-	 * @param \CaT\InstILIAS\Config\Plugins $plugins
+	 * @return CaT\InstILIAS\Configurators\Plugins
 	 */
-	public function activatePlugins(\CaT\InstILIAS\Config\Plugins $plugins);
+	public function getPluginsConfigurator();
 
 	/**
+	 * Get the configurator for editor actions
 	 *
-	 *
-	 * @param \CaT\InstILIAS\Config\Plugins $plugins
+	 * @return CaT\InstILIAS\Configurators\Editor
 	 */
-	public function updatePlugins(\CaT\InstILIAS\Config\Plugins $plugins);
+	public function getEditorConfigurator();
 
 	/**
+	 * Get the configurator for java server actions
 	 *
-	 *
-	 * @param \CaT\InstILIAS\Config\OrgunitTypes $orgunit_types
+	 * @return CaT\InstILIAS\Configurators\JavaServer
 	 */
-	public function createOrgunitTypes(\CaT\InstILIAS\Config\OrgunitTypes $orgunit_types);
+	public function getJavaServerConfigurator();
 
 	/**
+	 * Get the configurator for soap actions
 	 *
-	 *
-	 * @param \CaT\InstILIAS\Config\OrgunitTypeAssignment $orgunit_type_assignment
+	 * @return CaT\InstILIAS\Configurators\Soap
 	 */
-	public function assignOrgunitTypesToOrgunits(\CaT\InstILIAS\Config\OrgunitTypeAssignments $orgunit_type_assignment);
+	public function getSoapConfigurator();
 
 	/**
-	 * Configurate the type of self registration
+	 * Get the configurator for java learning progress actions
 	 *
-	 * @param \CaT\InstILIAS\Config\Users $users
+	 * @return CaT\InstILIAS\Configurators\LearningProgress
 	 */
-	public function registration(\CaT\InstILIAS\Config\Users $users);
-
-	/**
-	 *
-	 *
-	 * @param \CaT\InstILIAS\Config\Users $users
-	 */
-	public function createUserAccounts(\CaT\InstILIAS\Config\Users $users);
-
-	/**
-	 *
-	 *
-	 * @param \CaT\InstILIAS\Config\PasswordSettings $password_settings
-	 */
-	public function passwordSettings(\CaT\InstILIAS\Config\PasswordSettings $password_settings);
-
-	/**
-	 *
-	 *
-	 * @param \CaT\InstILIAS\Config\TinyMCE $tiny_mce
-	 */
-	public function tinyMCE(\CaT\InstILIAS\Config\Editor $editor);
-
-	/**
-	 *
-	 *
-	 * @param \CaT\InstILIAS\Config\JavaServer $java_server
-	 */
-	public function javaServer(\CaT\InstILIAS\Config\JavaServer $java_server);
-
-	/**
-	 *
-	 *
-	 * @param \CaT\InstILIAS\Config\Editor $editor
-	 */
-	public function repoPageEditor(\CaT\InstILIAS\Config\Editor $editor);
-
-	/**
-	 * Enable or disable certifcates
-	 *
-	 * @param \CaT\InstILIAS\Config\Certificate $certificate
-	 */
-	public function certificate(\CaT\InstILIAS\Config\Certificate $certificate);
-
-	/**
-	 * Configure SOAP
-	 *
-	 * @param \CaT\InstILIAS\Config\Soap $soap
-	 */
-	public function soap(\CaT\InstILIAS\Config\Soap $soap);
+	public function getLearningProgressConfigurator();
+	
 }
