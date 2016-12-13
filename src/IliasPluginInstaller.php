@@ -40,7 +40,7 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	 * @inheritdoc
 	 */
 	public function install(\CaT\InstILIAS\Config\Plugin $plugin) {
-		$this->checkout($plugin->git()->gitUrl(), $plugin->git()->gitBranchName(), $this->temp_folder."/".$plugin->name());
+		$this->checkout($plugin->git()->url(), $plugin->git()->branch(), $this->temp_folder."/".$plugin->name());
 
 		$plugin_path = $this->getPluginPath($this->temp_folder, $plugin->name());
 
@@ -56,7 +56,7 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	public function updateBranch(\CaT\InstILIAS\Config\Plugin $plugin) {
 		$pl = $this->getPluginObject($plugin->name());
 		$plugin_path = $pl->getDirectory();
-		$this->checkout($plugin->git()->gitUrl(), $plugin->git()->gitBranchName(), $plugin_path);
+		$this->checkout($plugin->git()->url(), $plugin->git()->branch(), $plugin_path);
 	}
 
 	/**

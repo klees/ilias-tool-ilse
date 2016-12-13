@@ -15,8 +15,8 @@ plugins:
         plugin_slot: CronHook
         name: Pluginname
         git:
-            git_url: Bernd
-            git_branch_name: master";
+            url: Bernd
+            branch: master";
 
         $this->config = $this->parser->read_config($this->yaml_string, "\\CaT\\InstILIAS\\Config\\Plugins");
         $this->plugin_installer = new IliasPluginInstallerMock();

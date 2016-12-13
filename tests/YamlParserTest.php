@@ -65,8 +65,8 @@ encoding: utf8_general_ci';
 
 	public function test_createGitConfig() {
 		$json_string = '---
-git_url: https://github.com/
-git_branch_name: ilias';
+url: https://github.com/
+branch: ilias';
 
 		$obj = $this->parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\GitBranch");
 

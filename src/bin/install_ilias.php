@@ -34,8 +34,8 @@ $http_path = $general_config->server()->httpPath();
 $absolute_path = $general_config->server()->absolutePath();
 $data_path = $general_config->client()->dataDir();
 $client_id = $general_config->client()->name();
-$git_url = $general_config->gitBranch()->gitUrl();
-$git_branch_name = $general_config->gitBranch()->gitBranchName();
+$git_url = $general_config->gitBranch()->url();
+$git_branch_name = $general_config->gitBranch()->branch();
 $web_dir = "data";
 
 echo "\n";

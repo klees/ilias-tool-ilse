@@ -39,8 +39,9 @@ log:
     path: /path
     file_name: ilias.log
 git_branch:
-    git_url: https://github.com/ILIAS-eLearning/ILIAS.git
-    git_branch_name: release_5-1
+    url: https://github.com/ILIAS-eLearning/ILIAS.git
+    branch: release_5-1
+    hash: 
 category:
     categories:
         0:
@@ -102,8 +103,8 @@ plugin:
         0:
             name: Pluginname
             git:
-                git_url: Bernd
-                git_branch_name: master
+                url: Bernd
+                branch: master
 https_auto_detect:
     enabled: 0
     header_name:
