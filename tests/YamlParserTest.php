@@ -72,11 +72,11 @@ branch: ilias';
 
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\GitBranch", $obj);
 		
-		$this->assertEquals($obj->gitUrl(), "https://github.com/");
-		$this->assertInternalType("string", $obj->gitUrl());
+		$this->assertEquals($obj->url(), "https://github.com/");
+		$this->assertInternalType("string", $obj->url());
 
-		$this->assertEquals($obj->gitBranchName(), "ilias");
-		$this->assertInternalType("string", $obj->gitBranchName());
+		$this->assertEquals($obj->branch(), "ilias");
+		$this->assertInternalType("string", $obj->branch());
 	}
 
 	public function test_createLanguageConfig() {
@@ -175,8 +175,8 @@ unzip: /n/unzip
 java: /java
 path: /path
 file_name: ilias.log
-git_url: https://github.com/
-git_branch_name: ilias';
+url: https://github.com/
+branch: ilias';
 
 		return array
 			( array($json_string, "\\CaT\\InstILIAS\\Config\\Client")

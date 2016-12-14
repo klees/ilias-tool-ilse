@@ -98,6 +98,9 @@ ldap:
     protocol_version: 3
     user_search_scope: 0
     register_role_name: User
+    mappings:
+        firstname: sn
+        lastname: blaa
 plugin:
     plugins:
         0:

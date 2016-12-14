@@ -133,6 +133,26 @@ ldap:
     #After that you only have to mark the register_role_name to use this value with the key "*LDAP_ROLE". e.g. "register_role_name: *LDAP_ROLE".
     #The parser fills in the title of the role automaticly
     register_role_name:
+    #ILIAS can syncronize user data with values from your LDAP.
+    #Map your LDAP fields to ILIAS fields in the lines below
+    mappings:
+        firstname:
+        lastname:
+        department:
+        email:
+        fax:
+        gender:
+        hobby:
+        institution:
+        matriculation:
+        phone_home:
+        phone_mobile:
+        phone_office:
+        street:
+        title:
+        zipcode:
+        city:
+        country:
 
 #In ILIAS you can use plugins to manipulate or add something to the system. Define in this block which plugins you want to use.
 plugin:

@@ -38,6 +38,7 @@ if($general_config->role() !== null) {
 if($general_config->ldap() !== null) {
 	echo "\nConfiguring LDAP server settings...";
 	$ilias_configurator->getLDAPConfigurator()->configureLDAPServer($general_config->ldap());
+	$ilias_configurator->getLDAPConfigurator()->mapLDAPValues($general_config->ldap());
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
