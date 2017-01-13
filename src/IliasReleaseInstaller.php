@@ -48,6 +48,8 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 		$this->ilias_setup->getClient()->setDSN();
 		$this->ilias_setup->getClient()->ini->setVariable("session", "expire", ($ret["session_expire"] * 60));
 
+		define("SYSTEM_FOLDER_ID", $this->ilias_setup->getClient()->ini->readVariable('system', 'SYSTEM_FOLDER_ID'));
+
 		if(!$this->ilias_setup->saveNewClient()) {
 			throw new \Exception($this->ilias_setup->getError());
 		}
