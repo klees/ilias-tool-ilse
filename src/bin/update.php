@@ -4,8 +4,10 @@
 $config_path = $argv[1];
 error_reporting(E_ALL & ~E_STRICT & ~E_DEPRECATED);
 
-$cmds = array("php ".__DIR__."/update_ilias.php $config_path"
-			, "php ".__DIR__."/update_configuration_ilias.php $config_path");
+$php = PHP_BINARY;
+
+$cmds = array($php." ".__DIR__."/update_ilias.php $config_path"
+			, $php." ".__DIR__."/update_configuration_ilias.php $config_path");
 
 $die = false;
 foreach ($cmds as $cmd) {
