@@ -22,6 +22,8 @@ class GitExecuter implements \CaT\InstILIAS\interfaces\Git {
 		assert('is_string($git_branch)');
 		assert('is_string($installation_path)');
 
+		$cur_dir = getcwd();
+		chdir($installation_path);
 		if(!Git::isValidRepository(strtolower($git_url))) {
 			throw new \LogicException("Did not find a repository at ".$git_url);
 		}
@@ -39,6 +41,7 @@ class GitExecuter implements \CaT\InstILIAS\interfaces\Git {
 		} else {
 			$this->cloneRepository($installation_path, $git_url, $git_branch);
 		}
+		chdir($cur_dir);
 	}
 
 	protected function fetch($repository) {
