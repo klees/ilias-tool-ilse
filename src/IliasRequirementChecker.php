@@ -75,8 +75,8 @@ class IliasRequirementChecker implements \CaT\InstILIAS\interfaces\RequirementCh
 	/**
 	 * @inheritdocs
 	 */
-	public function mysqliExist() {
-		return class_exists("mysqli");
+	public function pdoExist() {
+		return class_exists("PDO");
 	}
 
 	/**
@@ -87,9 +87,10 @@ class IliasRequirementChecker implements \CaT\InstILIAS\interfaces\RequirementCh
 		assert('is_string($user)');
 		assert('is_string($passwd)');
 
-		$mysqli = new \mysqli($host, $user, $passwd);
-
-		if ($mysqli->connect_error) {
+		try{
+			$dsn = 'mysql:host=' . $host . ';charset=utf8';
+			$this->pdo = new \PDO($dsn, $user, $passwd, array(3=>2, 10000=>true, 2=>18000));
+		} catch(Exception $e) {
 			return false;
 		}
 

@@ -59,11 +59,11 @@ interface RequirementChecker {
 	public function phpVersionILIASBranchCompatible($phpversion, $branch_name);
 
 	/**
-	 * Checks if the mysqli extension is installed
+	 * Checks if the pdo extension is installed
 	 *
 	 * @return bool
 	 */
-	public function mysqliExist();
+	public function pdoExist();
 
 	/**
 	 * Checks if its possible to connect to MySQL Database

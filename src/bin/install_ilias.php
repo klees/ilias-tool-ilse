@@ -122,8 +122,8 @@ if(!$requirement_checker->validPHPVersion(phpversion(), "5.4")) {
 	die(1);
 }
 
-if(!$requirement_checker->mysqliExist()) {
-	echo "Mysqli is not installed.\n";
+if(!$requirement_checker->pdoExist()) {
+	echo "PDO is not installed.\n";
 	die(1);
 }
 
