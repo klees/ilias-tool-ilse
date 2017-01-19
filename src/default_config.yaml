@@ -143,8 +143,8 @@ plugin:
             name:
             #Configuration where to find the ILIAS plugin.
             git:
-                git_url:
-                git_branch_name:
+                url:
+                branch:
 #should ilias detect https automaticly
 https_auto_detect:
     #en- or disable with value 0 or 1

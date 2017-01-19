@@ -72,11 +72,11 @@ branch: ilias';
 
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\GitBranch", $obj);
 		
-		$this->assertEquals($obj->gitUrl(), "https://github.com/");
-		$this->assertInternalType("string", $obj->gitUrl());
+		$this->assertEquals($obj->url(), "https://github.com/");
+		$this->assertInternalType("string", $obj->url());
 
-		$this->assertEquals($obj->gitBranchName(), "ilias");
-		$this->assertInternalType("string", $obj->gitBranchName());
+		$this->assertEquals($obj->branch(), "ilias");
+		$this->assertInternalType("string", $obj->branch());
 	}
 
 	public function test_createLanguageConfig() {

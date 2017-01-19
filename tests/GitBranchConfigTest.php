@@ -24,14 +24,14 @@ class GitBranchConfigTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function _test_valid_GitBranchConfig($url, $branch) {
-		$config = new GitBranch($url, $branch);
-		$this->assertEquals($url, $config->gitUrl());
-		$this->assertEquals($branch, $config->gitBranchName());
+		$config = new GitBranch($url, $branch, '');
+		$this->assertEquals($url, $config->url());
+		$this->assertEquals($branch, $config->branch());
 	}
 
 	public function _test_invalid_GitBranchConfig($url, $branch) {
 		try {
-			$config = new GitBranch($url, $branch);
+			$config = new GitBranch($url, $branch, '');
 			$this->assertFalse("Should have raised.");
 		}
 		catch (\InvalidArgumentException $e) {}

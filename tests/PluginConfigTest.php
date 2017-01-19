@@ -51,7 +51,7 @@ class PluginConfigTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function gitBranchProvider() {
-		return array(array(new \CaT\InstILIAS\Config\GitBranch("url", "branch"), true)
+		return array(array(new \CaT\InstILIAS\Config\GitBranch("url", "branch", ""), true)
 					, array(4, false)
 					, array(true, false)
 					, array(array(), false)
