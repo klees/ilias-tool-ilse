@@ -127,7 +127,8 @@ class Users {
 	}
 
 	protected function generatePasswort() {
-		return \ilUtil::generatePasswords(1)[0];
+		$pwd = \ilUtil::generatePasswords(1);
+		return $pwd[0];
 	}
 
 	/**

@@ -128,7 +128,8 @@ class OrgUnits {
 				 ."    AND type = 'orgu'";
 		$res = $this->gDB->query($select);
 		if($this->gDB->numRows($res) == 1) {
-			return $this->gDB->fetchAssoc($res)["obj_id"];
+			$row = $this->gDB->fetchAssoc($res);
+			return $row["obj_id"];
 		}
 
 		return null;
@@ -152,7 +153,8 @@ class OrgUnits {
 
 		$res = $this->gDB->query($select);
 		if($this->gDB->numRows($res) == 1) {
-			return $this->gDB->fetchAssoc($res)["id"];
+			$row = $this->gDB->fetchAssoc($res);
+			return $row["id"];
 		}
 
 		return null;
