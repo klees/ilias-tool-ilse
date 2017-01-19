@@ -175,8 +175,8 @@ unzip: /n/unzip
 java: /java
 path: /path
 file_name: ilias.log
-git_url: https://github.com/
-git_branch_name: ilias';
+url: https://github.com/
+branch: ilias';
 
 		return array
 			( array($json_string, "\\CaT\\InstILIAS\\Config\\Client")

@@ -59,9 +59,9 @@ log:
     file_name: ilias.log
 git_branch:
     #URL of your git repository you want to install ILIAS from
-    git_url: https://github.com/ILIAS-eLearning/ILIAS.git
+    url: https://github.com/ILIAS-eLearning/ILIAS.git
     #Branch name of the release you want to use
-    git_branch_name: release_5-1
+    branch: release_5-1
 
 #It is possible to create different object like roles, categories or orunits in ILIAS.
 #In the next lines, it is possible to define default strucures or objects.
