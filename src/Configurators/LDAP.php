@@ -17,6 +17,7 @@ class LDAP {
 
 	public function __construct($absolute_path, \ilDB $db) {
 		require_once($absolute_path."/Services/LDAP/classes/class.ilLDAPServer.php");
+		require_once($absolute_path."/Services/LDAP/classes/class.ilLDAPAttributeMapping.php");
 		$this->gDB = $db;
 	}
 	/**
@@ -56,9 +57,21 @@ class LDAP {
 
 		$server->create();
 
-		include_once './Services/LDAP/classes/class.ilLDAPAttributeMapping.php';
 		$mapping = \ilLDAPAttributeMapping::_getInstanceByServerId($server->getServerId());
 		$mapping->setRule('global_role', $role_id, false);
+		$mapping->save();
+	}
+
+	public function mapLDAPValues(\CaT\InstILIAS\Config\LDAP $ldap_config) {
+		$server_id = \ilLDAPServer::_getFirstServer();
+		$mapping = \ilLDAPAttributeMapping::_getInstanceByServerId($server_id);
+
+		foreach ($ldap_config->mappings()->getAvailableMappings() as $rule) {
+			if($ldap_config->mappings()->$rule) {
+				$mapping->setRule($rule, $ldap_config->mappings()->$rule, true);
+			}
+		}
+
 		$mapping->save();
 	}
 }
