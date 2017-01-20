@@ -10,11 +10,11 @@
 // remove notices from error reporting
 if (version_compare(PHP_VERSION, '5.3.0', '>='))
 {
-	error_reporting((ini_get("error_reporting") & ~E_NOTICE) & ~E_DEPRECATED);
+	error_reporting((ini_get("error_reporting") & ~E_NOTICE) & ~E_DEPRECATED & ~E_STRICT);
 }
 else
 {
-	error_reporting(ini_get('error_reporting') & ~E_NOTICE);
+	error_reporting(ini_get('error_reporting') & ~E_NOTICE & ~E_STRICT);
 }
 
 define("DEBUG",false);
