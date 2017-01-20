@@ -23,9 +23,34 @@ class Language extends Base {
 	}
 
 	protected static $valid_languages = array(
-		"de"
+		"ar"
+		,"bg"
+		,"cs"
+		,"da"
+		,"de"
+		,"el"
 		,"en"
-		,"nl");
+		,"es"
+		,"et"
+		,"fa"
+		,"fr"
+		,"hu"
+		,"it"
+		,"ja"
+		,"ka"
+		,"lt"
+		,"nl"
+		,"pl"
+		,"pt"
+		,"ro"
+		,"ru"
+		,"sk"
+		,"sq"
+		,"sr"
+		,"tr"
+		,"uk"
+		,"vi"
+		,"zh");
 
 	/**
 	 * @inheritdocs
