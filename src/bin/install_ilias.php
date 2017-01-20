@@ -89,9 +89,6 @@ if(!$skip && !$check) {
 	echo "Cleaning the directory ".$data_path."/".$client_id."...";
 	clearDirectory($data_path."/".$client_id);
 	echo "\t\t\t\t\t\tDone!\n";
-} else if($skip && !$check) {
-	echo "Data directory is not empty! ".$data_path."/".$client_id."...";
-	die(1);
 }
 
 $check = $requirement_checker->logDirectoryExists($general_config->log()->path());
