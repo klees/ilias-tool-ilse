@@ -15,7 +15,26 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	const CLASSES_FOLDER = "classes";
 	const PLUGIN_MAIN_PATH = "Customizing/global/plugins";
 
-	private static $slot_names = array("ilRepositoryObjectPlugin" => "RepositoryObject", "ilUserInterfaceHookPlugin" => "UserInterfaceHook");
+	private static $slot_names = array("CloudHook" => "ilCloudHookPlugin"
+									  , "OrgUnitExtension" => "ilOrgUnitExtensionPlugin"
+									  , "OrgUnitTypeHook" => "ilOrgUnitTypeHookPlugin"
+									  , "SurveyQuestions" => "ilSurveyQuestionsPlugin"
+									  , "Export" => "ilExportPlugin"
+									  , "Signature" => "ilSignaturePlugin"
+									  , "Questions" => "ilQuestionsPlugin"
+									  , "AdvancedMDClaiming" => "ilAdvancedMDClaimingPlugin"
+									  , "AuthenticationHook" => "ilAuthenticationHookPlugin"
+									  , "ShibbolethAuthenticationHook" => "ilShibbolethAuthenticationHookPlugin"
+									  , "PageComponent" => "ilPageComponentPlugin"
+									  , "CronHook" => "ilCronHookPlugin"
+									  , "EventHook" => "ilEventHookPlugin"
+									  , "LDAPHook" => "ilLDAPHookPlugin"
+									  , "PersonalDesktopHook" => "ilPersonalDesktopHookPlugin"
+									  , "PreviewRenderer" => "ilPreviewRendererPlugin"
+									  , "RepositoryObject" => "ilRepositoryObjectPlugin"
+									  , "UserInterfaceHook" => "ilUserInterfaceHookPlugin"
+									  , "UDFClaiming" => "ilUDFClaimingPlugin"
+								);
 
 	protected $gDB;
 	protected $absolute_path;
