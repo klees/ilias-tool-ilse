@@ -23,6 +23,8 @@ database:
     engine: innodb
     #Encoding for database
     encoding: utf8_general_ci
+    #Should a database be created. Possible option are 1 = create and 0 = no create
+    create_db: 1
 language:
     #Default language ILIAS will use.
     default: en

@@ -39,7 +39,8 @@ database: ilias
 user: user
 password: passwd
 engine: innodb
-encoding: utf8_general_ci';
+encoding: utf8_general_ci
+create_db: 1';
 		$obj = $this->parser->read_config($json_string, "\\CaT\\InstILIAS\\Config\\DB");
 
 		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\DB", $obj);
@@ -61,6 +62,9 @@ encoding: utf8_general_ci';
 
 		$this->assertEquals($obj->encoding(), "utf8_general_ci");
 		$this->assertInternalType("string", $obj->encoding());
+
+		$this->assertEquals($obj->createDb(), 1);
+		$this->assertInternalType("int", $obj->createDb());
 	}
 
 	public function test_createGitConfig() {
@@ -161,6 +165,7 @@ user: user
 password: passwd
 engine: innodb
 encoding: utf8_general_ci
+create_db: 1
 default: de
 available:
     - en 

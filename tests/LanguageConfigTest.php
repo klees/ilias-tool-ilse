@@ -52,10 +52,6 @@ class LanguageConfigTest extends PHPUnit_Framework_TestCase {
 	public function defaultLangProvider() {
 		return array(array("de", true)
 					, array("en", true)
-					, array("es", false)
-					, array("da", false)
-					, array("ar", false)
-					, array("el", false)
 					, array(4, false)
 					, array(true, false)
 					, array(array(), false)
@@ -64,11 +60,7 @@ class LanguageConfigTest extends PHPUnit_Framework_TestCase {
 
 	public function installLangsProvider() {
 		return array(array(array("de","en"), true)
-					, array(array("en","ar"), false)
-					, array(array("es","sq"), false)
-					, array(array("da","pl"), false)
-					, array(array("ar","nl"), false)
-					, array(array("el","sk"), false)
+					, array(array("sdfsdf","asd"), false)
 					, array(array(4), false)
 					, array(array(true), false)
 					, array(array(), false)

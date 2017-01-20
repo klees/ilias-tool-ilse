@@ -14,17 +14,17 @@ class DbConfigTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider	DBConfigValueProvider
 	 */
-	public function test_DBConfig($host, $database, $user, $password, $engine, $encoding, $valid) {
+	public function test_DBConfig($host, $database, $user, $password, $engine, $encoding, $create_db, $valid) {
 		if ($valid) {
-			$this->_test_valid_DBConfig($host, $database, $user, $password, $engine, $encoding, $valid);
+			$this->_test_valid_DBConfig($host, $database, $user, $password, $engine, $encoding, $create_db, $valid);
 		}
 		else {
-			$this->_test_invalid_DBConfig($host, $database, $user, $password, $engine, $encoding, $valid);
+			$this->_test_invalid_DBConfig($host, $database, $user, $password, $engine, $encoding, $create_db, $valid);
 		}
 	}
 
-	public function _test_valid_DBConfig($host, $database, $user, $password, $engine, $encoding) {
-		$config = new DB($host, $database, $user, $password, $engine, $encoding);
+	public function _test_valid_DBConfig($host, $database, $user, $password, $engine, $encoding, $create_db) {
+		$config = new DB($host, $database, $user, $password, $engine, $encoding, $create_db);
 		$this->assertEquals($host, $config->host());
 		$this->assertEquals($database, $config->database());
 		$this->assertEquals($user, $config->user());
@@ -33,9 +33,9 @@ class DbConfigTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($encoding, $config->encoding());
 	}
 
-	public function _test_invalid_DBConfig($host, $database, $user, $password, $engine, $encoding) {
+	public function _test_invalid_DBConfig($host, $database, $user, $password, $engine, $encoding, $create_db) {
 		try {
-			$config = new DB($host, $database, $user, $password, $engine, $encoding);
+			$config = new DB($host, $database, $user, $password, $engine, $encoding, $create_db);
 			$this->assertFalse("Should have raised.");
 		}
 		catch (\InvalidArgumentException $e) {}
@@ -51,13 +51,15 @@ class DbConfigTest extends PHPUnit_Framework_TestCase {
 					foreach ($this->passwordProvider() as $password) {
 						foreach ($this->engineProvider() as $engine) {
 							foreach ($this->encodingProvider() as $encoding) {
-								$take_it++;
-								if (($take_it % $take_every_Xth) != 0) {
-									continue;
+								foreach ($this->createDbProvider() as $create_db) {
+									$take_it++;
+									if (($take_it % $take_every_Xth) != 0) {
+										continue;
+									}
+									$ret[] = array
+										( $host[0], $database[0], $user[0], $password[0], $engine[0], $encoding[0], $create_db[0]
+										, $host[1] && $database[1] && $user[1] && $password[1] && $engine[1] && $encoding[1] && $create_db[1]);
 								}
-								$ret[] = array
-									( $host[0], $database[0], $user[0], $password[0], $engine[0], $encoding[0]
-									, $host[1] && $database[1] && $user[1] && $password[1] && $engine[1] && $encoding[1]);
 							}
 						}
 					}
@@ -128,6 +130,15 @@ class DbConfigTest extends PHPUnit_Framework_TestCase {
 			, array("swedish-latin", false)
 			, array("mein_eigenes", false)
 			, array(6, false)
+			);
+	}
+
+	public function createDbProvider() {
+		return array
+			( array(1, true)
+			, array(0, true)
+			, array("ja_mach", false)
+			, array(array(), false)
 			);
 	}
 }

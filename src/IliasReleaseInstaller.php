@@ -80,7 +80,10 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 	 * @inheritdoc
 	 */
 	public function installDatabase() {
-		$this->ilias_setup->createDatabase($this->general->database()->encoding());
+		if((bool)$this->general->database()->createDb()) {
+			$this->ilias_setup->createDatabase($this->general->database()->encoding());
+		}
+
 		$this->ilias_setup->installDatabase();
 	}
 
