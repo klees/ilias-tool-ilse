@@ -38,9 +38,9 @@ class Editor {
 		$object = \ilObjectFactory::getInstanceByObjId($obj_id);
 
 		if((bool)$editor->enableTinymce()) {
-			$object->_setRichTextEditor("tinymce");
+			$object->setRichTextEditor("tinymce");
 		} else {
-			$object->_setRichTextEditor("");
+			$object->setRichTextEditor("");
 		}
 
 		$object->update();
