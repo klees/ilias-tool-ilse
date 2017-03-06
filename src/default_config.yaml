@@ -309,7 +309,7 @@ soap:
     #Toggle SOAP is active or not. 1 (active) or 0 (inactive)
     enable: 1
     #Path to WSDL Files
-    wdsl_path: 
+    wdsl_path: http://localhost/webservice/soap/server.php?wsdl
     #Conenction timeout in seconds
     timeout: 10
 #Active and configure the learning progress
