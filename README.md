@@ -6,6 +6,8 @@
 # InstILIAS
 **A Command Line Installation Script for [ILIAS](https://github.com/ILIAS-eLearning/ILIAS)**
 
+**Contact:** [Stefan Hecken](https://github.com/shecken)
+
 ## Usage
 ### Software requirements
 ```
