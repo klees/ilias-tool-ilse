@@ -67,8 +67,15 @@ $_SESSION["lang"] = $lang;
 $lng = new ilLanguage($lang);
 
 // init log
-$log = new ilLog(ILIAS_ABSOLUTE_PATH,"ilias.log","SETUP",false);
-$ilLog =& $log;
+include_once './Services/Logging/classes/class.ilLoggingSetupSettings.php';
+$logging_settings = new ilLoggingSetupSettings();
+$logging_settings->init();
+
+include_once './Services/Logging/classes/public/class.ilLoggerFactory.php';
+
+$log = ilLoggerFactory::newInstance($logging_settings)->getComponentLogger('setup');
+$ilLog = $log;
+$DIC["ilLog"] = function($c) { return $GLOBALS["ilLog"]; };
 
 // init template
 $tpl = new ilTemplate("tpl.main.html", true, true, "setup");

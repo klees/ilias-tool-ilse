@@ -23,7 +23,10 @@ class GitExecuter implements \CaT\InstILIAS\interfaces\Git {
 		assert('is_string($installation_path)');
 
 		$cur_dir = getcwd();
-		chdir($installation_path);
+		if(is_dir($installation_path)) {
+			chdir($installation_path);
+		}
+
 		if(!Git::isValidRepository(strtolower($git_url))) {
 			throw new \LogicException("Did not find a repository at ".$git_url);
 		}
