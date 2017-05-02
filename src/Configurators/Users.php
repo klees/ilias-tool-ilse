@@ -34,7 +34,7 @@ class Users {
 	 */
 	protected $gDB;
 
-	public function __construct($absolute_path, \ILIAS $ilias, \ilObjUser $user, \ilRbacadmin $rbacadmin, \ilDB $db) {
+	public function __construct($absolute_path, \ILIAS $ilias, \ilObjUser $user, \ilRbacadmin $rbacadmin, $db) {
 		require_once($absolute_path."/Services/User/classes/class.ilObjUser.php");
 		require_once($absolute_path."/Services/PrivacySecurity/classes/class.ilSecuritySettings.php");
 		require_once($absolute_path."/Services/Utilities/classes/class.ilUtil.php");

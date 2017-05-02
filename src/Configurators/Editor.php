@@ -18,7 +18,7 @@ class Editor {
 	 */
 	protected $gSetting;
 
-	public function __construct($absolute_path, \ilDB $db, \ilSetting $settings) {
+	public function __construct($absolute_path, $db, \ilSetting $settings) {
 		require_once($absolute_path."/Services/Object/classes/class.ilObjectFactory.php");
 		require_once($absolute_path."/Services/COPage/classes/class.ilPageEditorSettings.php");
 		require_once($absolute_path."/Services/COPage/classes/class.ilPageContentGUI.php");
