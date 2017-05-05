@@ -218,6 +218,7 @@ class IliasReleaseInstaller implements \CaT\InstILIAS\interfaces\Installer {
 
 		$ret["datadir_path"] = $this->general->client()->dataDir();
 		$ret["log_path"] = $this->general->log()->path()."/".$this->general->log()->fileName();
+		$ret["error_log_path"] = $this->general->log()->errorLog();
 		$ret["time_zone"] = $this->general->server()->timezone();
 		$ret["convert_path"] = $this->general->tools()->convert();
 		$ret["zip_path"] = $this->general->tools()->zip();
