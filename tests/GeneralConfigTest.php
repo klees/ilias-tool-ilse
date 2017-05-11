@@ -39,6 +39,7 @@ tools:
 log:
     path: /path
     file_name: ilias.log
+    error_log: /path
 git_branch:
     url: https://github.com/ILIAS-eLearning/ILIAS.git
     branch: release_5-1
