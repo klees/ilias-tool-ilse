@@ -61,7 +61,7 @@ log:
     file_name: ilias.log
     #Name of the error log path
     #Example: /var/log/ilias/error_log/
-    error_log_path: /var/log/ilias/error_log/
+    error_log: /var/log/ilias/error_log/
 git_branch:
     #URL of your git repository you want to install ILIAS from
     url: https://github.com/ILIAS-eLearning/ILIAS.git
