@@ -70,4 +70,11 @@ interface Plugin {
 	 * @param string $plugin_name
 	 */
 	public function uninstall($plugin_name);
+
+	/**
+	 * Check wether the plugin needs an update
+	 * 
+	 * @param string $plugin_name
+	 */
+	public function needsUpdate($plugin_name);
 }
