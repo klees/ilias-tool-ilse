@@ -258,9 +258,9 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	/**
 	 * @inheritdoc
 	 */
-	public function needsUpdate($plugin_object) {
-		$last_update 	= $plugin_object->getLastUpdateVersion();
-		$curr_version 	= $plugin_object->getVersion();
+	public function needsUpdate(\ilPlugin $plugin) {
+		$last_update 	= $plugin->getLastUpdateVersion();
+		$curr_version 	= $plugin->getVersion();
 
 		return $last_update < $curr_version;
 	}

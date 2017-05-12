@@ -73,8 +73,8 @@ interface Plugin {
 
 	/**
 	 * Check wether the plugin needs an update
-	 * 
-	 * @param string $plugin_name
+	 *
+	 * @param \ilPlugin $plugin
 	 */
-	public function needsUpdate($plugin_name);
+	public function needsUpdate(\ilPlugin $plugin);
 }
