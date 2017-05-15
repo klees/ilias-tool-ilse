@@ -93,11 +93,11 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	public function update(\CaT\InstILIAS\Config\Plugin $plugin) {
 		$pl = $this->getPluginObject($plugin->name());
 
-		if($pl->needsUpdate()) {
+		if($this->needsUpdate($pl)) {
 			$pl->update();
 		}
 
-		return !$pl->needsUpdate();
+		return !$this->needsUpdate($pl);
 	}
 
 	/**
@@ -106,7 +106,7 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	public function activate(\CaT\InstILIAS\Config\Plugin $plugin) {
 		$pl = $this->getPluginObject($plugin->name());
 
-		if($pl->needsUpdate()) {
+		if($this->needsUpdate($pl)) {
 			$pl->update();
 		}
 
@@ -253,6 +253,16 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 		}
 
 		return $files[0];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function needsUpdate(\ilPlugin $plugin) {
+		$last_update 	= $plugin->getLastUpdateVersion();
+		$curr_version 	= $plugin->getVersion();
+
+		return $last_update < $curr_version;
 	}
 
 	protected function getPluginPath($temp_folder, $plugin_name) {
