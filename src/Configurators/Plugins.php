@@ -12,6 +12,7 @@ class Plugins {
 	 * @var \ilDB
 	 */
 	protected $gDB;
+
 	/**
 	 * @var string
 	 */
@@ -58,6 +59,19 @@ class Plugins {
 		foreach ($plugins->plugins() as $plugin) {
 			$plugin_installer->update($plugin);
 			$plugin_installer->updateLanguage($plugin);
+		}
+		$plugin_installer = null;
+	}
+
+	/**
+	 * Uninstalls a plugin
+	 *
+	 * @param \CaT\InstILIAS\Config\Plugins 	$plugins
+	 */
+	public function uninstallPlugins(\CaT\InstILIAS\Config\Plugins $plugins) {
+		$plugin_installer = new \CaT\InstILIAS\IliasPluginInstaller($this->absolute_path, $this->gDB);
+		foreach ($plugins->plugins() as $plugin) {
+			$plugin_installer->unistall($plugin);
 		}
 		$plugin_installer = null;
 	}
