@@ -71,7 +71,8 @@ class Plugins {
 	public function uninstallPlugins(\CaT\InstILIAS\Config\Plugins $plugins) {
 		$plugin_installer = new \CaT\InstILIAS\IliasPluginInstaller($this->absolute_path, $this->gDB);
 		foreach ($plugins->plugins() as $plugin) {
-			$plugin_installer->unistall($plugin);
+			
+			$plugin_installer->uninstall($plugin->name());
 		}
 		$plugin_installer = null;
 	}
