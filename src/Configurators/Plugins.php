@@ -70,9 +70,15 @@ class Plugins {
 	 */
 	public function uninstallPlugins(\CaT\InstILIAS\Config\Plugins $plugins) {
 		$plugin_installer = new \CaT\InstILIAS\IliasPluginInstaller($this->absolute_path, $this->gDB);
-		foreach ($plugins->plugins() as $plugin) {
-			
-			$plugin_installer->uninstall($plugin->name());
+		$config_plugin = array();
+		if($plugins !== null) {
+			$config_plugins = array_map(function($pl) { return $pl->name(); }, $plugins->plugins());
+		}
+		foreach ($plugin_installer->getInstalledPluginNames() as $installed_pl) {
+			if(in_array($installed_pl, $config_plugins)) {
+				continue;
+			}
+			$plugin_installer->uninstall($installed_pl);
 		}
 		$plugin_installer = null;
 	}

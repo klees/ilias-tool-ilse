@@ -71,6 +71,10 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 		return true;
 	}
 
+	public function getInstalledPluginNames() {
+		return array_keys($this->installed_plugins);
+	}
+
 	public function updateBranch(\CaT\InstILIAS\Config\Plugin $plugin) {
 		$pl = $this->getPluginObject($plugin->name());
 		$plugin_path = $pl->getDirectory();
