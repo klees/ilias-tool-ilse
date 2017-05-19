@@ -147,7 +147,6 @@ try {
 }
 
 chmod($absolute_path, 0777);
-system("/bin/chown -R www-data:www-data " . $absolute_path . "/..");
 
 chdir($absolute_path);
 if(file_exists($absolute_path.'/libs/composer/vendor/autoload.php')) {
