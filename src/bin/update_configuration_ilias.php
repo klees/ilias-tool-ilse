@@ -25,6 +25,7 @@ if($general_config->plugin() !== null) {
 	$plugin_configurator->activatePlugins($general_config->plugin());
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
+
 echo "\nUninstalling plugins...";
 $plugin_configurator->uninstallPlugins($general_config->plugin());
-echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n"; 
+echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";

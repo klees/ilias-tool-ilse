@@ -75,7 +75,7 @@ class Plugins {
 			$config_plugins = array_map(function($pl) { return $pl->name(); }, $plugins->plugins());
 		}
 		foreach ($plugin_installer->getInstalledPluginNames() as $installed_pl) {
-			if(in_array($installed_pl, $config_plugins)) {
+			if(in_array($installed_pl, $config_plugins) or !$plugin_installer->getPluginObject($installed_pl)->isActive()) {
 				continue;
 			}
 			$plugin_installer->uninstall($installed_pl);
