@@ -76,8 +76,7 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	}
 
 	public function updateBranch(\CaT\InstILIAS\Config\Plugin $plugin) {
-		$pl = $this->getPluginObject($plugin->name());
-		$plugin_path = $pl->getDirectory();
+		$plugin_path = $this->installed_plugins[$plugin->name()];
 		$this->checkout($plugin->git()->url(), $plugin->git()->branch(), $plugin_path);
 	}
 
@@ -150,7 +149,7 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 		$full_class_name = self::PLUGIN_CLASS_PREFIX_IL.$plugin_name.self::PLUGIN_CLASS_SUFFIX;
 
 		if(!class_exists($full_class_name)) {
-			require_once($this->getInstalledPluginPath($plugin_name)."/".$plugin_name."/".self::CLASSES_FOLDER."/".self::PLUGIN_CLASS_PREFIX_CLASS.$full_class_name.".php");
+			require_once($this->getInstalledPluginPath($plugin_name)."/".self::CLASSES_FOLDER."/".self::PLUGIN_CLASS_PREFIX_CLASS.$full_class_name.".php");
 		}
 		$class = new \ReflectionClass(self::PLUGIN_CLASS_PREFIX_IL.$plugin_name.self::PLUGIN_CLASS_SUFFIX);
 
@@ -318,7 +317,7 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 	protected function readPlugins($path) {
 		$plugins = array_diff(scandir($path), array('.','..'));
 		foreach ($plugins as $key => $plugin) {
-			$this->installed_plugins[$plugin] = $path;
+			$this->installed_plugins[$plugin] = $path."/".$plugin;
 		}
 	}
 
