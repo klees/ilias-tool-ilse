@@ -47,7 +47,7 @@ For new installation of ILIAS you need these configuration entries.
 ```
 
 ### Re- / Installation of ILIAS
-With InstILIAS it is possible to install a new ILIAS or drop your old an install in one step.
+With InstILIAS it´s possible to install a new ILIAS or drop your old an install in one step.
 For both it is possible to run the installation in a non interactiv mode.
 If you would use this, just add the second optional parameter. Value of the parameter is "non_interactiv".
 
