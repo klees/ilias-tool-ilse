@@ -321,10 +321,28 @@ class IliasPluginInstaller implements \CaT\InstILIAS\interfaces\Plugin {
 		}
 	}
 
-	protected function createPluginRecord($plugin_name) {
+	public function createPluginRecord($plugin_name) {
 		$pl = $this->getPluginObject($plugin_name, false);
 
 		require_once($this->absolute_path."/Services/Component/classes/class.ilPlugin.php");
 		\ilPlugin::createPluginRecord($pl->getComponentType(), $pl->getComponentName(), $pl->getSlotId(), $plugin_name);
+	}
+
+	public function removeFiles($plugin_name) {
+		$path = $this->installed_plugins[$plugin_name];
+		$this->clearDirectory($path);
+	}
+
+	protected function clearDirectory($dir) {
+		$files = array_diff(scandir($dir), array('.','..'));
+
+		foreach ($files as $file) {
+			if(is_dir("$dir/$file")) {
+				$this->clearDirectory("$dir/$file");
+			} else {
+				unlink("$dir/$file");
+			}
+		}
+		rmdir($dir);
 	}
 }
