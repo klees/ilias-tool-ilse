@@ -14,12 +14,18 @@ $general_config = $parser->read_config($yaml_string, "\\CaT\\InstILIAS\\Config\\
 $absolute_path = $general_config->server()->absolutePath();
 $client_id = $general_config->client()->name();
 
-echo "\n\nConfigure ILIAS.";
+
 $ilias_configurator = new \CaT\InstILIAS\IliasReleaseConfigurator($absolute_path, $client_id);
+echo "\n\nConfigure ILIAS.";
+$plugin_configurator = $ilias_configurator->getPluginsConfigurator();
 
 if($general_config->plugin() !== null) {
 	echo "\nUpdating plugins...";
-	$ilias_configurator->installPlugins($general_config->plugin());
-	$ilias_configurator->activatePlugins($general_config->plugin());
+	$plugin_configurator->installPlugins($general_config->plugin());
+	$plugin_configurator->activatePlugins($general_config->plugin());
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
+
+echo "\nUninstalling plugins...";
+$plugin_configurator->uninstallPlugins($general_config->plugin());
+echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
