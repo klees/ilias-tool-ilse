@@ -51,11 +51,11 @@ if(!$skip && !$check) {
 	}
 
 	echo "Creating data directory...";
-	mkdir($data_path, 0755, true);
+	mkdir($data_path, 0777, true);
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 } else if($skip && !$check) {
 	echo "Creating data directory...";
-	mkdir($data_path, 0755, true);
+	mkdir($data_path, 0777, true);
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
@@ -69,11 +69,11 @@ if(!$skip && !$check) {
 	}
 
 	echo "Setting permission to required...";
-	chmod($data_path, 0755);
+	chmod($data_path, 0777);
 	echo "\t\t\t\t\t\tDone!\n";
 } else if($skip && !$check) {
 	echo "Setting permission to required...";
-	chmod($data_path, 0755);
+	chmod($data_path, 0777);
 	echo "\t\t\t\t\t\tDone!\n";
 }
 
