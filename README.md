@@ -24,14 +24,14 @@ $ composer install
 ```
 
 ### Configuration
-Create a copy of the default_config.yaml.
-```
-$ cp src/default_config.yaml src/config.yaml
-```
-Open the config.yaml and fill in all Values.
-```
-$ vi src/config.yaml
-```
+Ilias-installer get the config file from the github repo `https://github.com/conceptsandtraining/ilias-configs.git`  
+The name of the config file is always `ii\_config.yaml`.  
+Each config file is inside a directory that represents the customomer name.  
+
+* Edit the file src/default.yaml
+* Save the file as ii\_config.yaml
+* Push the file into the destination folder of the repo named above.
+
 
 ### Required configuration entries
 For new installation of ILIAS you need these configuration entries.
