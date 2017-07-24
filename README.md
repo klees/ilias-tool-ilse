@@ -14,6 +14,7 @@
 * Zip and Unzip
 * ImageMagick
 * Composer
+* git 2.1.4 or higher
 ```
 ### Installation
 ```
