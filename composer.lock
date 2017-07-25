@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3a8e5481a335ee5156af9d9782aa73c4",
-    "content-hash": "3e0bf8c85a150407e0018f75928d6ea6",
+    "hash": "5e127e60606ffa6e72ee85c1a4adde38",
+    "content-hash": "6f2355f65ee696a1745b21cf2cbd7651",
     "packages": [
         {
             "name": "gitonomy/gitlib",
-            "version": "v1.0.2",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gitonomy/gitlib.git",
-                "reference": "b4b916423a2e2da631cf3b3787beb9386a7b253c"
+                "reference": "f575b8f7da917ade7890c6aa705fa22545690389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gitonomy/gitlib/zipball/b4b916423a2e2da631cf3b3787beb9386a7b253c",
-                "reference": "b4b916423a2e2da631cf3b3787beb9386a7b253c",
+                "url": "https://api.github.com/repos/gitonomy/gitlib/zipball/f575b8f7da917ade7890c6aa705fa22545690389",
+                "reference": "f575b8f7da917ade7890c6aa705fa22545690389",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
             ],
             "description": "Library for accessing git",
             "homepage": "http://gitonomy.com",
-            "time": "2016-05-11T08:25:40+00:00"
+            "time": "2015-12-01 22:25:57"
         },
         {
             "name": "symfony/process",
@@ -106,7 +106,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2014-09-23T05:24:59+00:00"
+            "time": "2014-09-23 05:24:59"
         },
         {
             "name": "symfony/yaml",
@@ -155,7 +155,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-30T12:35:10+00:00"
+            "time": "2015-11-30 12:35:10"
         }
     ],
     "packages-dev": [],
