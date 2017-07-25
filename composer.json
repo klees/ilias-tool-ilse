@@ -11,12 +11,12 @@
     ],
     "autoload" : {
         "psr-4" : {
-            "CaT\\InstILIAS\\" : "./src"
+            "CaT\\ilse\\" : "./src"
         }
     },
     "require": {
         "symfony/yaml" : "2.8",
-        "gitonomy/gitlib": "1.0.*",
+        "gitonomy/gitlib": "1.0.0",
         "symfony/process": "2.4.*"
     }
 }
