@@ -24,12 +24,12 @@ class ReinstallCommand extends BaseCommand
 			->setName("reinstall")
 			->setDescription("Reinstall the Ilias-Environment.")
 			->addArgument("config_name", InputArgument::REQUIRED, "Name of the Ilias Config File.")
-			->addOption("interactiv", "i", InputOption::VALUE_NONE, "Set i to start the setup in interatciv mode.");
+			->addOption("interactiv", "i", InputOption::VALUE_NONE, "Set i to start the setup in interactiv mode.");
 			;
 	}
 
 	/**
-	 * Exexutes the command
+	 * Executes the command
 	 *
 	 * @param InputInterface 	$in
 	 * @param OutputInterface 	$out
@@ -55,7 +55,7 @@ class ReinstallCommand extends BaseCommand
 		$this->process->setWorkingDirectory($this->path->getCWD() . "/" . "src/bin");
 		$this->process->setCommandLine("php install_ilias.php "
 									 . $this->getConfigPathByName($args['config_name']) . " "
-									 . "non_interactiv");//$args['interactiv']);
+									 . "non_interactiv");
 		$this->process->setTty(true);
 		$this->process->run();
 	}
@@ -65,7 +65,7 @@ class ReinstallCommand extends BaseCommand
 	 */
 	protected function delete(array $args)
 	{
-		$ri = new deleteIlias($this->getConfigPathByName($args['config_name']));
+		$ri = new DeleteIlias($this->getConfigPathByName($args['config_name']));
 		$ri->run();
 	}
 }

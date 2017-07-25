@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__.'/../../vendor/autoload.php');
 
-class deleteIlias {
+class DeleteIlias {
 
 	protected $general_config;
 	protected $con;

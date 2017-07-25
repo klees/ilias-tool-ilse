@@ -24,7 +24,7 @@ class InstallCommand extends BaseCommand
 			->setName("install")
 			->setDescription("Start the installation.")
 			->addArgument("config_name", InputArgument::REQUIRED, "Name of the Ilias Config File.")
-			->addOption("interaction", "i", InputOption::VALUE_NONE, "Set i to start the setup with interatcion.");
+			->addOption("interactive", "i", InputOption::VALUE_NONE, "Set i to start the setup with interatcion.");
 			;
 	}
 
@@ -37,7 +37,7 @@ class InstallCommand extends BaseCommand
 	protected function execute(InputInterface $in, OutputInterface $out)
 	{
 		$args = ["config_name" => $in->getArgument("config_name"),
-				 "interaction" => $in->getOption("interaction")
+				 "interactive" => $in->getOption("interactive")
 				];
 
 		$this->start($args);
@@ -55,7 +55,7 @@ class InstallCommand extends BaseCommand
 		$this->process->setWorkingDirectory($this->path->getCWD() . "/" . "src/bin");
 		$this->process->setCommandLine("php install_ilias.php "
 									 . $this->getConfigPathByName($args['config_name']) . " "
-									 . "non_interactiv");//$args['interaction']);
+									 . "non_interactiv");
 		$this->process->setTty(true);
 		$this->process->run();
 	}

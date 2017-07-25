@@ -13,7 +13,7 @@ use CaT\Ilse\GitExecuter;
 class App extends Application
 {
 	const II_P_GLOBAL_CONFIG 	= ".ilias-installer/config";
-	const II_F_CONFIG			= "ii_config.yaml";
+	const II_F_CONFIG			= "ilse_config.yaml";
 	const II_R_CONFIG			= "https://github.com/conceptsandtraining/ilias-configs.git";
 	const II_R_BRANCH			= "master";
 
