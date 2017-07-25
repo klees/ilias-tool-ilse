@@ -36,12 +36,10 @@ class App extends Application
 	 */
 	protected function initCommands()
 	{
-		// $this->add(new Command\StatusCommand($this->getGlobalConfig()));
-		// $this->add(new Command\InfoCommand($this->getGlobalConfig()));
-		// $this->add(new Command\CreateCommand($this->getGlobalConfig()));
-		// $this->add(new Command\StopCommand($this->getGlobalConfig()));
-		// $this->add(new Command\UpCommand($this->getGlobalConfig()));
-		// $this->add(new Command\RemoveCommand($this->getGlobalConfig()));
+		$this->add(new Command\UpdateCommand());
+		$this->add(new Command\ReinstallCommand());
+		$this->add(new Command\ConfigurateCommand());
+		$this->add(new Command\DeleteCommand());
 		$this->add(new Command\InstallCommand());
 	}
 
