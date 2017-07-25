@@ -51,11 +51,11 @@ if(!$skip && !$check) {
 	}
 
 	echo "Creating data directory...";
-	mkdir($data_path, 0755, true);
+	mkdir($data_path, 0777, true);
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 } else if($skip && !$check) {
 	echo "Creating data directory...";
-	mkdir($data_path, 0755, true);
+	mkdir($data_path, 0777, true);
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
@@ -69,11 +69,11 @@ if(!$skip && !$check) {
 	}
 
 	echo "Setting permission to required...";
-	chmod($data_path, 0755);
+	chmod($data_path, 0777);
 	echo "\t\t\t\t\t\tDone!\n";
 } else if($skip && !$check) {
 	echo "Setting permission to required...";
-	chmod($data_path, 0755);
+	chmod($data_path, 0777);
 	echo "\t\t\t\t\t\tDone!\n";
 }
 
@@ -101,17 +101,17 @@ if(!$skip && !$check) {
 	}
 
 	echo "Creating log directory...";
-	mkdir($general_config->log()->path(), 0755, true);
+	mkdir($general_config->log()->path(), 0777, true);
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 } else if($skip && !$check) {
 	echo "Creating log directory...";
-	mkdir($general_config->log()->path(), 0755, true);
+	mkdir($general_config->log()->path(), 0777, true);
 	echo "\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 }
 
 if(!$requirement_checker->logFileExists($general_config->log()->path(), $general_config->log()->fileName())) {
 	touch($general_config->log()->path()."/".$general_config->log()->fileName());
-	chmod($general_config->log()->path()."/".$general_config->log()->fileName(), 0755);
+	chmod($general_config->log()->path()."/".$general_config->log()->fileName(), 0777);
 }
 
 if(!$requirement_checker->validPHPVersion(phpversion(), "5.4")) {
