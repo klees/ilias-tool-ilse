@@ -18,15 +18,17 @@ class App extends Application
 	const II_R_BRANCH			= "master";
 
 	/**
-	 * @var CaT\Ilse\interfaces\Path
+	 * @var CaT\Ilse\Interfaces\Path
 	 */
 	protected $path;
 
-	public function __construct(interfaces\CommonPathes $path)
+	public function __construct(Interfaces\CommonPathes $path,
+								Interfaces\Merger $merger)
 	{
 		parent::__construct();
 
 		$this->path = $path;
+		$this->merger = $merger;
 		$this->initConfigRepo();
 		$this->initCommands();
 	}
@@ -37,8 +39,8 @@ class App extends Application
 	protected function initCommands()
 	{
 		// $this->add(new Command\UpdateCommand());
-		$this->add(new Command\ReinstallCommand($this->path));
-		$this->add(new Command\InstallCommand($this->path));
+		$this->add(new Command\ReinstallCommand($this->path, $this->merger));
+		$this->add(new Command\InstallCommand($this->path, $this->merger));
 	}
 
 	/**

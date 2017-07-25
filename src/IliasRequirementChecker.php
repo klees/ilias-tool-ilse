@@ -7,7 +7,7 @@ namespace CaT\Ilse;
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  */
-class IliasRequirementChecker implements \CaT\Ilse\interfaces\RequirementChecker {
+class IliasRequirementChecker implements \CaT\Ilse\Interfaces\RequirementChecker {
 	/**
 	 * @inheritdocs
 	 */

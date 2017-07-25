@@ -1,13 +1,13 @@
 <?php
 /* Copyright (c) 2017 Daniel Weise <daniel.weise@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-namespace CaT\InstILIAS;
+namespace CaT\Ilse;
 
-use CaT\InstILIAS\interfaces;
+use CaT\Ilse\Interfaces;
 /**
  * Serves common pathes
  */
-class CommonPathes implements interfaces\CommonPathes
+class CommonPathes implements Interfaces\CommonPathes
 {
 	/**
 	 * @inheritdoc

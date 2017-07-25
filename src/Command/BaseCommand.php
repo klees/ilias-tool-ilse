@@ -19,15 +19,22 @@ abstract class BaseCommand extends Command
 	protected $process;
 
 	/**
-	 * @var CaT\Ilse\interfaces\Path
+	 * @var CaT\Ilse\Interfaces\Path
 	 */
 	protected $path;
 
-	public function __construct(\CaT\Ilse\interfaces\CommonPathes $path)
+	/**
+	 * @var CaT\Ilse\Interfaces\Merge
+	 */
+	protected $merge;
+
+	public function __construct(\CaT\Ilse\Interfaces\CommonPathes $path,
+								\CaT\Ilse\Interfaces\Merger $merger)
 	{
 		parent::__construct();
 		$this->process = new Process("");
 		$this->path = $path;
+		$this->merger = $merger;
 	}
 
 	/**
@@ -40,6 +47,19 @@ abstract class BaseCommand extends Command
 	{
 		assert('is_string($name)');
 		return $this->path->getHomeDir() . "/" . App::II_P_GLOBAL_CONFIG . "/" . $name . "/" . App::II_F_CONFIG;
+	}
+
+	/**
+	 * Merge all given configs
+	 *
+	 * @param string
+	 */
+	protected function merge(array $configs)
+	{
+		$arr = array_map(function ($s) {
+			return $this->getConfigPathByName($s);
+		}, $configs);
+		return $this->merger->mergeConfigs($arr);
 	}
 
 }

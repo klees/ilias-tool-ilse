@@ -1,7 +1,7 @@
 <?php
 /* Copyright (c) 2017 Daniel Weise <daniel.weise@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-namespace CaT\InstILIAS\interfaces;
+namespace CaT\Ilse\Interfaces;
 
 interface CommonPathes
 {

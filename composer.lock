@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba5b89b58613b4c7eff73b436ad1f694",
+    "content-hash": "cb742ff4184110ece1c37d1db62fda2a",
     "packages": [
         {
             "name": "gitonomy/gitlib",
@@ -58,7 +58,7 @@
             ],
             "description": "Library for accessing git",
             "homepage": "http://gitonomy.com",
-            "time": "2015-12-01 22:25:57"
+            "time": "2015-12-01T22:25:57+00:00"
         },
         {
             "name": "psr/log",
@@ -330,7 +330,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2014-09-23 05:24:59"
+            "time": "2014-09-23T05:24:59+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -379,7 +379,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-30 12:35:10"
+            "time": "2015-11-30T12:35:10+00:00"
         }
     ],
     "packages-dev": [],
