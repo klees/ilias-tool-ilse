@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+
 /**
  * Implementation of the install command
  *
@@ -21,8 +22,9 @@ class InstallCommand extends BaseCommand
 	{
 		$this
 			->setName("install")
-			->setDescription("install the ilias-installer.")
-			->addArgument("ilias_config", InputArgument::REQUIRED, "Name of the Ilias Config File.")
+			->setDescription("Start the installation.")
+			->addArgument("config_name", InputArgument::REQUIRED, "Name of the Ilias Config File.")
+			->addOption("interaction", "i", InputOption::VALUE_NONE, "Set i to start the setup with interatcion.");
 			;
 	}
 
@@ -34,10 +36,42 @@ class InstallCommand extends BaseCommand
 	 */
 	protected function execute(InputInterface $in, OutputInterface $out)
 	{
-		$args = ["ilias_config" => $in->getArgument('ilias_config')
+		$args = ["config_name" => $in->getArgument("config_name"),
+				 "interaction" => $in->getOption("interaction")
 				];
 
-		var_dump($args);
+		$this->start($args);
+		$this->config($args);
 		$out->writeln("\t\t\t\tDone!");
+	}
+
+	/**
+	 * Start the installation process
+	 *
+	 * @param ["param_name" => param_value] 	$args
+	 */
+	protected function start(array $args)
+	{
+		$this->process->setWorkingDirectory($this->path->getCWD() . "/" . "src/bin");
+		$this->process->setCommandLine("php install_ilias.php "
+									 . $this->getConfigPathByName($args['config_name']) . " "
+									 . "non_interactiv");//$args['interaction']);
+		$this->process->setTty(true);
+		$this->process->run();
+	}
+
+	/**
+	 * Start the configuration process of ILIAS
+	 *
+	 * @param ["param_name" => param_value] 	$args
+	 */
+	protected function config(array $args)
+	{
+		$this->process->setWorkingDirectory($this->path->getCWD() . "/" . "src/bin");
+		$this->process->setCommandLine("php configurate_ilias.php "
+									  . $this->getConfigPathByName($args['config_name'])
+									  );
+		$this->process->setTty(true);
+		$this->process->run();
 	}
 }

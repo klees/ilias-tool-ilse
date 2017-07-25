@@ -18,15 +18,15 @@ class App extends Application
 	const II_R_BRANCH			= "master";
 
 	/**
-	 * @var string
+	 * @var CaT\InstILIAS\interfaces\Path
 	 */
-	protected $home;
+	protected $path;
 
-	public function __construct()
+	public function __construct(interfaces\CommonPathes $path)
 	{
 		parent::__construct();
 
-		$this->home = getenv("HOME");
+		$this->path = $path;
 		$this->initConfigRepo();
 		$this->initCommands();
 	}
@@ -36,11 +36,9 @@ class App extends Application
 	 */
 	protected function initCommands()
 	{
-		$this->add(new Command\UpdateCommand());
-		$this->add(new Command\ReinstallCommand());
-		$this->add(new Command\ConfigurateCommand());
-		$this->add(new Command\DeleteCommand());
-		$this->add(new Command\InstallCommand());
+		// $this->add(new Command\UpdateCommand());
+		$this->add(new Command\ReinstallCommand($this->path));
+		$this->add(new Command\InstallCommand($this->path));
 	}
 
 	/**
@@ -50,11 +48,11 @@ class App extends Application
 	{
 		$ge = new GitExecuter();
 
-		if(!is_dir($this->home . "/" . self::II_P_GLOBAL_CONFIG))
+		if(!is_dir($this->path->getHomeDir() . "/" . self::II_P_GLOBAL_CONFIG))
 		{
 			$ge->cloneGitTo(self::II_R_CONFIG,
 							self::II_R_BRANCH,
-							$this->home . "/" . self::II_P_GLOBAL_CONFIG
+							$this->path->getHomeDir() . "/" . self::II_P_GLOBAL_CONFIG
 							);
 		}
 	}

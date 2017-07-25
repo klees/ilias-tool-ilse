@@ -76,6 +76,3 @@ class deleteIlias {
 		return $res->num_rows > 0;
 	}
 }
-
-$ri = new deleteIlias($argv[1]);
-$ri->run();

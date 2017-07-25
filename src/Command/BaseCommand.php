@@ -4,16 +4,42 @@
 namespace CaT\InstILIAS\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use CaT\InstILIAS\App;
 
 /**
  * Base class for all commands
  */
-class BaseCommand extends Command
+abstract class BaseCommand extends Command
 {
+	/**
+	 * @var Symfony\Component\Process\Process
+	 */
+	protected $process;
 
-	public function __construct()
+	/**
+	 * @var CaT\InstILIAS\interfaces\Path
+	 */
+	protected $path;
+
+	public function __construct(\CaT\InstILIAS\interfaces\CommonPathes $path)
 	{
 		parent::__construct();
+		$this->process = new Process("");
+		$this->path = $path;
+	}
+
+	/**
+	 * Get the configfile path for a given name
+	 * 
+	 * @param string 	$name
+	 * 
+	 */
+	protected function getConfigPathByName($name)
+	{
+		assert('is_string($name)');
+		return $this->path->getHomeDir() . "/" . App::II_P_GLOBAL_CONFIG . "/" . $name . "/" . App::II_F_CONFIG;
 	}
 
 }
