@@ -1,7 +1,7 @@
 <?php
 /* Copyright (c) 2016 Stefan Hecken <stefan.hecken@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-namespace CaT\ilse;
+namespace CaT\Ilse;
 
 /**
 * implementation of an ilias installer
@@ -9,13 +9,13 @@ namespace CaT\ilse;
 * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
 */
 
-class IliasReleaseInstaller implements \CaT\ilse\interfaces\Installer {
+class IliasReleaseInstaller implements \CaT\Ilse\interfaces\Installer {
 	protected $ilias_setup;
 	protected $general;
 
 	const SESSION_EXPIRE_VALUE = 7200;
 
-	public function __construct(\ilSetup $ilias_setup, \CaT\ilse\Config\General $general) {
+	public function __construct(\ilSetup $ilias_setup, \CaT\Ilse\Config\General $general) {
 		$this->ilias_setup = $ilias_setup;
 		$this->general = $general;
 	}

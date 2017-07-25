@@ -1,13 +1,13 @@
 <?php
 /* Copyright (c) 2016 Stefan Hecken <stefan.hecken@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-namespace CaT\ilse;
+namespace CaT\Ilse;
 /**
  * checks requirements for ILIAS installation
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  */
-class IliasRequirementChecker implements \CaT\ilse\interfaces\RequirementChecker {
+class IliasRequirementChecker implements \CaT\Ilse\interfaces\RequirementChecker {
 	/**
 	 * @inheritdocs
 	 */

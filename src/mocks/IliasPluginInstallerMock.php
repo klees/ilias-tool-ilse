@@ -1,52 +1,52 @@
 <?php
 /* Copyright (c) 2016 Stefan Hecken <stefan.hecken@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-namespace CaT\ilse\mocks;
+namespace CaT\Ilse\mocks;
 /**
  * implementation of plugin interface to install plugins
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  */
-class IliasPluginInstallerMock implements \CaT\ilse\interfaces\Plugin {
+class IliasPluginInstallerMock implements \CaT\Ilse\interfaces\Plugin {
 	/**
 	 * @inheritdoc
 	 */
-	public function install(\CaT\ilse\Config\Plugin $plugin) {
+	public function install(\CaT\Ilse\Config\Plugin $plugin) {
 		return true;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function isInstalled(\CaT\ilse\Config\Plugin $plugin) {
+	public function isInstalled(\CaT\Ilse\Config\Plugin $plugin) {
 		return true;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function update(\CaT\ilse\Config\Plugin $plugin) {
+	public function update(\CaT\Ilse\Config\Plugin $plugin) {
 		return true;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function activate(\CaT\ilse\Config\Plugin $plugin) {
+	public function activate(\CaT\Ilse\Config\Plugin $plugin) {
 		return true;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function deactivate(\CaT\ilse\Config\Plugin $plugin) {
+	public function deactivate(\CaT\Ilse\Config\Plugin $plugin) {
 		return true;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function updateLanguage(\CaT\ilse\Config\Plugin $plugin) {
+	public function updateLanguage(\CaT\Ilse\Config\Plugin $plugin) {
 		return;
 	}
 

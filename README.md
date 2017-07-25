@@ -16,7 +16,7 @@
 ### Installation
 ```
 $ cd DESTINATION_FOLDER
-$ git clone https://github.com/conceptsandtraining/ilias-tool-ilse
+$ git clone https://github.com/conceptsandtraining/ilias-tool-ilse.git ilse
 $ cd ilse
 $ composer install
 ```

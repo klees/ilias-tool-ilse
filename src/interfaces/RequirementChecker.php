@@ -1,7 +1,7 @@
 <?php
 /* Copyright (c) 2016 Stefan Hecken <stefan.hecken@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-namespace CaT\ilse\interfaces;
+namespace CaT\Ilse\interfaces;
 
 /**
  * Interface for requirement checker.

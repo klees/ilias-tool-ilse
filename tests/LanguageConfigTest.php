@@ -1,6 +1,6 @@
 <?php
 
-use \CaT\ilse\Config\Language;
+use \CaT\Ilse\Config\Language;
 
 class LanguageConfigTest extends PHPUnit_Framework_TestCase {
 	public function test_not_enough_params() {

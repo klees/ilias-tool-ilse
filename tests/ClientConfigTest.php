@@ -1,6 +1,6 @@
 <?php
 
-use \CaT\ilse\Config\Client;
+use \CaT\Ilse\Config\Client;
 
 class ClientConfigTest extends PHPUnit_Framework_TestCase {
 	public function test_not_enough_params() {

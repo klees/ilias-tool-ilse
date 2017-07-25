@@ -1,6 +1,6 @@
 <?php
 
-namespace CaT\ilse\Configurators;
+namespace CaT\Ilse\Configurators;
 
 /**
  * Configurate ILIAS org unit part
@@ -23,9 +23,9 @@ class OrgUnits {
 	 * creates organisational units according to defined structur
 	 * recursive
 	 *
-	 * @param \CaT\ilse\Config\OrgUnits $install_orgunits
+	 * @param \CaT\Ilse\Config\OrgUnits $install_orgunits
 	 */
-	public function createOrgUnits(\CaT\ilse\Config\OrgUnits $install_orgunits) {
+	public function createOrgUnits(\CaT\Ilse\Config\OrgUnits $install_orgunits) {
 		
 		foreach ($install_orgunits->orgunits() as $key => $value) {
 			$this->createOrgunit($value, \ilObjOrgUnit::getRootOrgRefId());
@@ -57,9 +57,9 @@ class OrgUnits {
 	/**
 	 *
 	 *
-	 * @param \CaT\ilse\Config\OrgunitTypes $orgunit_types
+	 * @param \CaT\Ilse\Config\OrgunitTypes $orgunit_types
 	 */
-	public function createOrgunitTypes(\CaT\ilse\Config\OrgunitTypes $orgunit_types) {
+	public function createOrgunitTypes(\CaT\Ilse\Config\OrgunitTypes $orgunit_types) {
 		foreach ($orgunit_types->orgunitTypes() as $orgunit_type) {
 			$this->createOrgunitType($orgunit_type);
 		}
@@ -67,9 +67,9 @@ class OrgUnits {
 
 	/**
 	 *
-	 * @param \CaT\ilse\Config\OrgunitType $orgunit_type
+	 * @param \CaT\Ilse\Config\OrgunitType $orgunit_type
 	 */
-	protected function createOrgunitType(\CaT\ilse\Config\OrgunitType $orgunit_type) {
+	protected function createOrgunitType(\CaT\Ilse\Config\OrgunitType $orgunit_type) {
 		$type = new \ilOrgUnitType();
 
 		$type->setDefaultLang($orgunit_type->defaultLanguage());
@@ -87,9 +87,9 @@ class OrgUnits {
 	/**
 	 *
 	 *
-	 * @param \CaT\ilse\Config\OrgunitTypeAssignment $orgunit_type_assignments
+	 * @param \CaT\Ilse\Config\OrgunitTypeAssignment $orgunit_type_assignments
 	 */
-	public function assignOrgunitTypesToOrgunits(\CaT\ilse\Config\OrgunitTypeAssignments $orgunit_type_assignments) {
+	public function assignOrgunitTypesToOrgunits(\CaT\Ilse\Config\OrgunitTypeAssignments $orgunit_type_assignments) {
 		foreach ($orgunit_type_assignments->orgunitTypeAssignments() as $orgunit_type_assignment) {
 			$this->orgunitTypeAssignment($orgunit_type_assignment);
 		}
@@ -98,9 +98,9 @@ class OrgUnits {
 	/**
 	 *
 	 *
-	 * @param \CaT\ilse\Config\OrgunitTypeAssignment $orgunit_type_assignment
+	 * @param \CaT\Ilse\Config\OrgunitTypeAssignment $orgunit_type_assignment
 	 */
-	protected function orgunitTypeAssignment(\CaT\ilse\Config\OrgunitTypeAssignment $orgunit_type_assignment) {
+	protected function orgunitTypeAssignment(\CaT\Ilse\Config\OrgunitTypeAssignment $orgunit_type_assignment) {
 		$orgunit_id = $this->getOrgunitId($orgunit_type_assignment->orgunitTitle());
 		$orgunit_type_id = $this->getOrgunitTypeId($orgunit_type_assignment->orgunitTypeTitle(),$orgunit_type_assignment->orgunitTypeDefaultLanguage());
 

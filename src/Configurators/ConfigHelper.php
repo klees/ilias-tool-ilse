@@ -1,6 +1,6 @@
 <?php
 
-namespace CaT\ilse\Configurators;
+namespace CaT\Ilse\Configurators;
 
 /**
  * Helper class for shared configuration functions

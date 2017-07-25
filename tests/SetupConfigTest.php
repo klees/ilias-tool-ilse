@@ -1,6 +1,6 @@
 <?php
 
-use \CaT\ilse\Config\Setup;
+use \CaT\Ilse\Config\Setup;
 
 class SetupConfigTest extends PHPUnit_Framework_TestCase{
 	public function test_not_enough_params() {

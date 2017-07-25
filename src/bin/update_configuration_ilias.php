@@ -8,14 +8,14 @@ require __DIR__ . '/../../vendor/autoload.php';
 error_reporting(E_ALL & ~E_STRICT & ~E_DEPRECATED);
 
 $yaml_string = file_get_contents($config_path);
-$parser = new \CaT\ilse\YamlParser();
-$general_config = $parser->read_config($yaml_string, "\\CaT\\ilse\\Config\\General");
+$parser = new \CaT\Ilse\YamlParser();
+$general_config = $parser->read_config($yaml_string, "\\CaT\\Ilse\\Config\\General");
 
 $absolute_path = $general_config->server()->absolutePath();
 $client_id = $general_config->client()->name();
 
 
-$ilias_configurator = new \CaT\ilse\IliasReleaseConfigurator($absolute_path, $client_id);
+$ilias_configurator = new \CaT\Ilse\IliasReleaseConfigurator($absolute_path, $client_id);
 echo "\n\nConfigure ILIAS.";
 $plugin_configurator = $ilias_configurator->getPluginsConfigurator();
 
