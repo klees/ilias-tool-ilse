@@ -1,7 +1,7 @@
 <?php
 /* Copyright (c) 2016 Stefan Hecken <stefan.hecken@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-namespace CaT\InstILIAS\interfaces;
+namespace CaT\ilse\interfaces;
 
 /**
  * Inteface for installing, updating, activate or deactivate an ILIAS Plugin
@@ -11,51 +11,51 @@ namespace CaT\InstILIAS\interfaces;
 interface Plugin {
 	/**
 	 *
-	 * @param \CaT\InstILIAS\Config\Plugin $plugin
+	 * @param \CaT\ilse\Config\Plugin $plugin
 	 *
 	 * @throws RuntimeException
 	 *
 	 * @return boolean
 	 */
-	public function install(\CaT\InstILIAS\Config\Plugin $plugin);
+	public function install(\CaT\ilse\Config\Plugin $plugin);
 
 	/**
 	 *
-	 * @param \CaT\InstILIAS\Config\Plugin $plugin
+	 * @param \CaT\ilse\Config\Plugin $plugin
 	 *
 	 * @return boolean
 	 */
-	public function isInstalled(\CaT\InstILIAS\Config\Plugin $plugin);
+	public function isInstalled(\CaT\ilse\Config\Plugin $plugin);
 
 	/**
 	 *
-	 * @param \CaT\InstILIAS\Config\Plugin $plugin
+	 * @param \CaT\ilse\Config\Plugin $plugin
 	 *
 	 * @return boolean
 	 */
-	public function update(\CaT\InstILIAS\Config\Plugin $plugin);
+	public function update(\CaT\ilse\Config\Plugin $plugin);
 
 	/**
 	 *
-	 * @param \CaT\InstILIAS\Config\Plugin $plugin
+	 * @param \CaT\ilse\Config\Plugin $plugin
 	 *
 	 * @return boolean
 	 */
-	public function activate(\CaT\InstILIAS\Config\Plugin $plugin);
+	public function activate(\CaT\ilse\Config\Plugin $plugin);
 
 	/**
 	 *
-	 * @param \CaT\InstILIAS\Config\Plugin $plugin
+	 * @param \CaT\ilse\Config\Plugin $plugin
 	 *
 	 * @return boolean
 	 */
-	public function deactivate(\CaT\InstILIAS\Config\Plugin $plugin);
+	public function deactivate(\CaT\ilse\Config\Plugin $plugin);
 
 	/**
 	 *
-	 * @param \CaT\InstILIAS\Config\Plugin $plugin
+	 * @param \CaT\ilse\Config\Plugin $plugin
 	 */
-	public function updateLanguage(\CaT\InstILIAS\Config\Plugin $plugin);
+	public function updateLanguage(\CaT\ilse\Config\Plugin $plugin);
 
 	/**
 	 * get an instance of installed plugin

@@ -1,6 +1,6 @@
 <?php
 
-namespace CaT\InstILIAS\Configurators;
+namespace CaT\ilse\Configurators;
 
 /**
  * Configurate ILIAS learning progress part
@@ -20,9 +20,9 @@ class LearningProgress {
 	/**
 	 * Configure LP
 	 *
-	 * @param \CaT\InstILIAS\Config\LearningProgress $lp
+	 * @param \CaT\ilse\Config\LearningProgress $lp
 	 */
-	public function learningProgress(\CaT\InstILIAS\Config\LearningProgress $lp) {
+	public function learningProgress(\CaT\ilse\Config\LearningProgress $lp) {
 		$this->gSetting->set("enable_tracking", $lp->enabled());
 		$this->gSetting->set("save_user_related_data", !$lp->anonym());
 		$this->gSetting->set("tracking_time_span",$lp->timeSpan());

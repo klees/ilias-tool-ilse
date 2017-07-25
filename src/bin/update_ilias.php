@@ -5,8 +5,8 @@ $config_path = $argv[1];
 require __DIR__ . '/../../vendor/autoload.php';
 
 $yaml_string = file_get_contents($config_path);
-$parser = new \CaT\InstILIAS\YamlParser();
-$general_config = $parser->read_config($yaml_string, "\\CaT\\InstILIAS\\Config\\General");
+$parser = new \CaT\ilse\YamlParser();
+$general_config = $parser->read_config($yaml_string, "\\CaT\\ilse\\Config\\General");
 $http_path = $general_config->server()->httpPath();
 $absolute_path = $general_config->server()->absolutePath();
 $data_path = $general_config->client()->dataDir();
@@ -24,12 +24,12 @@ require_once("my_setup_header.php");
 echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 $setup = new \ilSetup(true,"admin");
-$iinst = new \CaT\InstILIAS\IliasReleaseInstaller($setup, $general_config);
+$iinst = new \CaT\ilse\IliasReleaseInstaller($setup, $general_config);
 
 $iinst->newClient($client_id);
 $iinst->connectDatabase();
 
-$git = new \CaT\InstILIAS\GitExecuter;
+$git = new \CaT\ilse\GitExecuter;
 try {
 	echo "Updating ILIAS Code from ".$git_url;
 	echo " (This could take a few minutes)...";

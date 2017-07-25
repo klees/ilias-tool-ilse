@@ -1,6 +1,6 @@
 <?php
 
-namespace CaT\InstILIAS\Configurators;
+namespace CaT\ilse\Configurators;
 
 /**
  * Configurate ILIAS user part
@@ -48,9 +48,9 @@ class Users {
 	/**
 	 * Configurate the type of self registration
 	 *
-	 * @param \CaT\InstILIAS\Config\Users $users
+	 * @param \CaT\ilse\Config\Users $users
 	 */
-	public function registration(\CaT\InstILIAS\Config\Users $users) {
+	public function registration(\CaT\ilse\Config\Users $users) {
 		require_once './Services/Registration/classes/class.ilRegistrationSettings.php';
 		$this->registration_settings = new \ilRegistrationSettings();
 
@@ -63,9 +63,9 @@ class Users {
 	/**
 	 *
 	 *
-	 * @param \CaT\InstILIAS\Config\Users $users
+	 * @param \CaT\ilse\Config\Users $users
 	 */
-	public function createUserAccounts(\CaT\InstILIAS\Config\Users $users) {
+	public function createUserAccounts(\CaT\ilse\Config\Users $users) {
 		foreach ($users->users() as $user) {
 			echo "\nCreating user account for :".$user->email()."...";
 			$password = $this->createUser($user);
@@ -73,7 +73,7 @@ class Users {
 		}
 	}
 
-	protected function createUser(\CaT\InstILIAS\Config\User $user) {
+	protected function createUser(\CaT\ilse\Config\User $user) {
 
 		if(!\ilObjUser::_lookupId($user->login())) {
 			$new_user = new \ilObjUser();
@@ -112,9 +112,9 @@ class Users {
 	/**
 	 * Change the settings of required basic user fields.
 	 *
-	 * @param \CaT\InstILIAS\Config\User $user
+	 * @param \CaT\ilse\Config\User $user
 	 */
-	public function changeRequirementSettings(\CaT\InstILIAS\Config\Users $user) {
+	public function changeRequirementSettings(\CaT\ilse\Config\Users $user) {
 		$required_fields = $user->requiredFields();
 
 		foreach ($user->getBasicFields() as $field) {
@@ -134,9 +134,9 @@ class Users {
 	/**
 	 * Configurate the passwort settings
 	 *
-	 * @param \CaT\InstILIAS\Config\PasswordSettings $password_settings
+	 * @param \CaT\ilse\Config\PasswordSettings $password_settings
 	 */
-	public function passwordSettings(\CaT\InstILIAS\Config\PasswordSettings $password_settings) {
+	public function passwordSettings(\CaT\ilse\Config\PasswordSettings $password_settings) {
 			$security = \ilSecuritySettings::_getInstance();
 
 			// account security settings

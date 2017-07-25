@@ -1,6 +1,6 @@
 <?php
 
-use \CaT\InstILIAS\Config\LDAP;
+use \CaT\ilse\Config\LDAP;
 
 class LDAPConfigTest extends PHPUnit_Framework_TestCase{
 	public function test_not_enough_params() {

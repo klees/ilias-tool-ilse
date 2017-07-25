@@ -1,8 +1,8 @@
 <?php
 
-use \CaT\InstILIAS\Config\Plugins;
-use \CaT\InstILIAS\YamlParser;
-use \CaT\InstILIAS\mocks\IliasPluginInstallerMock;
+use \CaT\ilse\Config\Plugins;
+use \CaT\ilse\YamlParser;
+use \CaT\ilse\mocks\IliasPluginInstallerMock;
 
 class PluginInstallerBaseTest extends PHPUnit_Framework_TestCase {
 	public function setUp() {
@@ -18,7 +18,7 @@ plugins:
             url: Bernd
             branch: master";
 
-        $this->config = $this->parser->read_config($this->yaml_string, "\\CaT\\InstILIAS\\Config\\Plugins");
+        $this->config = $this->parser->read_config($this->yaml_string, "\\CaT\\ilse\\Config\\Plugins");
         $this->plugin_installer = new IliasPluginInstallerMock();
 	}
 

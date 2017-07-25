@@ -1,7 +1,7 @@
 <?php
 
-use \CaT\InstILIAS\Config\OrgunitTypes;
-use \CaT\InstILIAS\YamlParser;
+use \CaT\ilse\Config\OrgunitTypes;
+use \CaT\ilse\YamlParser;
 
 class OrgunitTypesConfigTest extends PHPUnit_Framework_TestCase {
 	public function setUp() {
@@ -26,8 +26,8 @@ orgunit_types:
 	}
 
 	public function test_orgunitTypesConfig() {
-		$config = $this->parser->read_config($this->yaml_string, "\\CaT\\InstILIAS\\Config\\OrgunitTypes");
+		$config = $this->parser->read_config($this->yaml_string, "\\CaT\\ilse\\Config\\OrgunitTypes");
 
-		$this->assertInstanceOf("\\CaT\\InstILIAS\\Config\\OrgunitTypes", $config);
+		$this->assertInstanceOf("\\CaT\\ilse\\Config\\OrgunitTypes", $config);
 	}
 }

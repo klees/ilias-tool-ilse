@@ -1,7 +1,7 @@
 <?php
 /* Copyright (c) 2016 Stefan Hecken <stefan.hecken@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-namespace CaT\InstILIAS\Config;
+namespace CaT\ilse\Config;
 
 /**
  * Configuration for OrgUnits.
@@ -16,7 +16,7 @@ class Categories extends Base {
 	 */
 	public static function fields() {
 		return array
-			( "categories" => array(array("\\CaT\\InstILIAS\\Config\\Category"), false)
+			( "categories" => array(array("\\CaT\\ilse\\Config\\Category"), false)
 			);
 	}
 }

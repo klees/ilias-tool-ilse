@@ -1,6 +1,6 @@
 <?php
 
-use \CaT\InstILIAS\Config\Server;
+use \CaT\ilse\Config\Server;
 
 class ServerConfigTest extends PHPUnit_Framework_TestCase{
 	public function test_not_enough_params() {

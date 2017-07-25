@@ -1,14 +1,14 @@
 <?php
 /* Copyright (c) 2016 Stefan Hecken <stefan.hecken@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-namespace CaT\InstILIAS;
+namespace CaT\ilse;
 /**
  * implementation of an ilias configurator
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
  */
 
-class IliasReleaseConfigurator implements \CaT\InstILIAS\interfaces\Configurator {
+class IliasReleaseConfigurator implements \CaT\ilse\interfaces\Configurator {
 
 	/**
 	 * @var string

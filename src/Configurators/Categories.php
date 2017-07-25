@@ -1,6 +1,6 @@
 <?php
 
-namespace CaT\InstILIAS\Configurators;
+namespace CaT\ilse\Configurators;
 
 /**
  * Configurate ILIAS categories part
@@ -22,9 +22,9 @@ class Categories {
 	 * creates categories units according to defined structur
 	 * recursive
 	 *
-	 * @param \CaT\InstILIAS\Config\OrgUnits $install_categories
+	 * @param \CaT\ilse\Config\OrgUnits $install_categories
 	 */
-	public function createCategories(\CaT\InstILIAS\Config\Categories $install_categories) {
+	public function createCategories(\CaT\ilse\Config\Categories $install_categories) {
 		foreach ($install_categories->categories() as $key => $value) {
 			$this->createCategory($value, $this->gTree->getRootId());
 		}
