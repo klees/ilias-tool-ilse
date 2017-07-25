@@ -57,7 +57,17 @@ class IliasPluginInstallerMock implements \CaT\ilse\interfaces\Plugin {
 		return null;
 	}
 
+		/**
+	 * @inheritdoc
+	 */
 	public function uninstall($plugin_name) {
 		return null;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function needsUpdate(\ilPlugin $plugin) {
+		return true;
 	}
 }
