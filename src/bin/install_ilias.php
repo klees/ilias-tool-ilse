@@ -27,8 +27,8 @@ function clearDirectory($dir) {
 require __DIR__ . '/../../vendor/autoload.php';
 
 $yaml_string = file_get_contents($config_path);
-$parser = new \CaT\InstILIAS\YamlParser();
-$general_config = $parser->read_config($yaml_string, "\\CaT\\InstILIAS\\Config\\General");
+$parser = new \CaT\Ilse\YamlParser();
+$general_config = $parser->read_config($yaml_string, "\\CaT\\Ilse\\Config\\General");
 
 $http_path = $general_config->server()->httpPath();
 $absolute_path = $general_config->server()->absolutePath();
@@ -40,7 +40,7 @@ $web_dir = "data";
 
 echo "\n";
 
-$requirement_checker = new \CaT\InstILIAS\IliasRequirementChecker;
+$requirement_checker = new \CaT\Ilse\IliasRequirementChecker;
 $check = $requirement_checker->dataDirectoryExists($data_path);
 if(!$skip && !$check) {
 	echo "Data directory does not exist. Create the directory (yes|no)? ";
@@ -135,7 +135,7 @@ if(!$requirement_checker->phpVersionILIASBranchCompatible(phpversion(), $git_bra
 	die(1);
 }
 
-$git = new \CaT\InstILIAS\GitExecuter;
+$git = new \CaT\Ilse\GitExecuter;
 try {
 	echo "Clone repository from ".$git_url;
 	echo " (This could take a few minutes)...";
@@ -164,7 +164,7 @@ echo "\t\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 $setup = new \ilSetup(true,"admin");
 echo "Initializing installer...";
-$iinst = new \CaT\InstILIAS\IliasReleaseInstaller($setup, $general_config);
+$iinst = new \CaT\Ilse\IliasReleaseInstaller($setup, $general_config);
 echo "\t\t\t\t\t\t\t\t\t\t\t\tDone!\n";
 
 echo "\nStart installing ILIAS\n";

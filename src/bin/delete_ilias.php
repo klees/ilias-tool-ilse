@@ -14,8 +14,8 @@ class deleteIlias {
 		}
 
 		$yaml_string = file_get_contents($config_path);
-		$parser = new \CaT\InstILIAS\YamlParser();
-		$this->general_config = $parser->read_config($yaml_string, "\\CaT\\InstILIAS\\Config\\General");
+		$parser = new \CaT\Ilse\YamlParser();
+		$this->general_config = $parser->read_config($yaml_string, "\\CaT\\Ilse\\Config\\General");
 	}
 
 	public function run() {
