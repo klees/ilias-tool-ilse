@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/conceptsandtraining/ilse.svg?branch=trunk)](https://travis-ci.org/conceptsandtraining/InstILIAS)
-[![Scrutinizer](https://scrutinizer-ci.com/g/conceptsandtraining/ilse/badges/quality-score.png?b=trunk)](https://scrutinizer-ci.com/g/conceptsandtraining/InstILIAS)
-[![Coverage](https://scrutinizer-ci.com/g/conceptsandtraining/ilse/badges/coverage.png?b=trunk)](https://scrutinizer-ci.com/g/conceptsandtraining/InstILIAS)
 [![Software License](https://img.shields.io/aur/license/yaourt.svg?style=round-square)](LICENSE.md)
 
 # ilse
