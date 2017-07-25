@@ -1,10 +1,10 @@
 <?php
 /* Copyright (c) 2017 Daniel Weise <daniel.weise@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-namespace CaT\InstILIAS;
+namespace CaT\Ilse;
 
 use Symfony\Component\Console\Application;
-use CaT\InstILIAS\GitExecuter;
+use CaT\Ilse\GitExecuter;
 
 
 /**
@@ -18,7 +18,7 @@ class App extends Application
 	const II_R_BRANCH			= "master";
 
 	/**
-	 * @var CaT\InstILIAS\interfaces\Path
+	 * @var CaT\Ilse\interfaces\Path
 	 */
 	protected $path;
 

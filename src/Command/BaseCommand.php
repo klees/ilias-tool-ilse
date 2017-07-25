@@ -1,12 +1,12 @@
 <?php
 /* Copyright (c) 2017 Daniel Weise <daniel.weise@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-namespace CaT\InstILIAS\Command;
+namespace CaT\Ilse\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
-use CaT\InstILIAS\App;
+use CaT\Ilse\App;
 
 /**
  * Base class for all commands
@@ -19,11 +19,11 @@ abstract class BaseCommand extends Command
 	protected $process;
 
 	/**
-	 * @var CaT\InstILIAS\interfaces\Path
+	 * @var CaT\Ilse\interfaces\Path
 	 */
 	protected $path;
 
-	public function __construct(\CaT\InstILIAS\interfaces\CommonPathes $path)
+	public function __construct(\CaT\Ilse\interfaces\CommonPathes $path)
 	{
 		parent::__construct();
 		$this->process = new Process("");
