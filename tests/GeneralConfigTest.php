@@ -18,7 +18,7 @@ database:
     user: user
     password: passwd
     engine: innodb
-    encoding: utf8mb_general_ci
+    encoding: utf8_unicode_ci
     create_db: 1
 language:
     default: de
