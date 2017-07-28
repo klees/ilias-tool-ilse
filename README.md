@@ -25,7 +25,7 @@ $ composer install
 
 ### Configuration
 Ilias-installer get the config file from the github repo `https://github.com/conceptsandtraining/ilias-configs.git`  
-The name of the config file is always `ii\_config.yaml`.  
+The name of the config file is always `ilse_config.yaml`.  
 Each config file is inside a directory that represents the customomer name.  
 
 * Edit the file src/default.yaml
