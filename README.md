@@ -29,7 +29,7 @@ The name of the config file is always `ilse_config.yaml`.
 Each config file is inside a directory that represents the customomer name.  
 
 * Edit the file src/default.yaml
-* Save the file as ii\_config.yaml
+* Save the file as ilse_config.yaml
 * Push the file into the destination folder of the repo named above.
 
 
