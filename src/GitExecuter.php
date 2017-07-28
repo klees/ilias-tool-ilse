@@ -4,64 +4,50 @@
 namespace CaT\InstILIAS;
 use Gitonomy\Git\Admin as Git;
 use Gitonomy\Git\Repository;
-
+use CaT\Ilse\Git\GitWrapper;
 /**
  * Implementation of the git interface.
  *
  * @author Stefan Hecken <stefan.hecken@concepts-and-training.de>
+ * @author Daniel Weise <daniel.weise@concepts-and-training.de>
  */
-class GitExecuter implements \CaT\InstILIAS\interfaces\Git {
-
+class GitExecuter implements \CaT\InstILIAS\interfaces\Git
+{
 	const URL_REG_EX = "/^(https:\/\/github\.com)/";
 
 	/**
 	 * @inhertidoc
 	 */
-	public function cloneGitTo($git_url, $git_branch, $installation_path) {
+	public function cloneGitTo($git_url, $git_branch, $installation_path)
+	{
 		assert('is_string($git_url)');
 		assert('is_string($git_branch)');
 		assert('is_string($installation_path)');
 
-		$cur_dir = getcwd();
-		if(is_dir($installation_path)) {
-			chdir($installation_path);
-		}
-
-		if(!Git::isValidRepository(strtolower($git_url))) {
-			throw new \LogicException("Did not find a repository at ".$git_url);
-		}
-
-		if(is_dir($installation_path)) {
-			$repository = new Repository($installation_path);
-			if($repository->isBare()) {
-				$this->cloneRepository($installation_path, $git_url, $git_branch);
-				return;
-			}
-
-			$this->fetch($repository);
-			$this->checkoutBranch($repository, $git_branch);
-			$this->pullBranch($repository, $git_branch);
-		} else {
-			$this->cloneRepository($installation_path, $git_url, $git_branch);
-		}
-		chdir($cur_dir);
+		$git = new GitWrapper($installation_path, $git_url);
+		$git->gitClone();
+		$git->gitCheckout($git_branch);
 	}
 
-	protected function fetch($repository) {
+	protected function fetch($repository)
+	{
 		$repository->run("fetch");
 	}
 
-	protected function checkoutBranch($repository, $git_branch) {
+	protected function checkoutBranch($repository, $git_branch)
+	{
 		$args = array($git_branch);
 		$repository->run("checkout", $args);
 	}
 
-	protected function pullBranch($repository, $git_branch) {
+	protected function pullBranch($repository, $git_branch)
+	{
 		$args = array("origin", $git_branch);
 		$repository->run("pull", $args);
 	}
 
-	protected function cloneRepository($installation_path, $git_url, $git_branch) {
+	protected function cloneRepository($installation_path, $git_url, $git_branch)
+	{
 		$args = array("--branch", $git_branch);
 		Git::cloneRepository($installation_path, $git_url, $args);
 	}
