@@ -87,7 +87,7 @@ class CoreInstaller52 implements CoreInstaller {
 	/**
 	 * @return \ilLanguage
 	 */
-	protected function getLanguage() { 
+	protected function getLanguage() {
 		$this->initEnvironment();
 		global $lng;
 		$lng->setDbHandler($this->getDatabaseHandle());
@@ -97,7 +97,7 @@ class CoreInstaller52 implements CoreInstaller {
 	/**
 	 * @return \ilCtrlStructureReader
 	 */
-	protected function getCtrlStructureReader() { 
+	protected function getCtrlStructureReader() {
 		$this->initEnvironment();
 		global $ilCtrlStructureReader;
 		return $ilCtrlStructureReader;
@@ -160,7 +160,7 @@ class CoreInstaller52 implements CoreInstaller {
 		$client->setDbPass($client_ini_data["db_pass"]);
 		$client->setDbType($client_ini_data["db_type"]);
 		$client->setDSN();
-		$client->ini->setVariable("session", "expire", ($ret["session_expire"] * 60));
+		$client->ini->setVariable("session", "expire", ($client_ini_data["session_expire"] * 60));
 
 		define("SYSTEM_FOLDER_ID", $client->ini->readVariable('system', 'SYSTEM_FOLDER_ID'));
 
@@ -234,7 +234,7 @@ class CoreInstaller52 implements CoreInstaller {
 
 		$lng = $this->getLanguage();
 		$done = $lng->installLanguages($this->config->language()->available(), array());
-		
+
 		if($done !== true) {
 			throw new \Exception("Error installing languages");
 		}
