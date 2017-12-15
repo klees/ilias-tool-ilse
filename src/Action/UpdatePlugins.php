@@ -8,16 +8,18 @@ use CaT\Ilse\Aux\UpdatePluginsHelper;
 
 /**
  * Install or update plugins from a list.
- * It also delete plugins that are installed and now absence on the list.
- * Then it activate the plugins and updates the language.
+ * It also deletes plugins that are installed and now absent from the list.
+ * Then it activates the plugins and updates the language.
  *
  * @author Daniel Weise <daniel.weise@concepts-and-training.de>
  * @copyright Extended GPL, see LICENSE
  */
 class UpdatePlugins implements Action
 {
+	use Plugin;
+
 	/**
-	 * @var PluginAdministration
+	 * @var PluginAdministration | null
 	 */
 	protected $plugin_admin;
 
@@ -32,11 +34,6 @@ class UpdatePlugins implements Action
 	protected $plugin_admin_factory;
 
 	/**
-	 * @var UpdatePluginsDirectory
-	 */
-	protected $update_plugins_helper;
-
-	/**
 	 * @var TaskLogger
 	 */
 	protected $logger;
@@ -47,12 +44,10 @@ class UpdatePlugins implements Action
 	public function __construct(
 		General $config,
 		PluginAdministrationFactory $factory,
-		UpdatePluginsHelper $update_plugins_helper,
 		TaskLogger $logger
 	) {
 		$this->config = $config;
 		$this->plugin_admin_factory = $factory;
-		$this->update_plugins_helper = $update_plugins_helper;
 		$this->logger = $logger;
 	}
 
@@ -61,7 +56,7 @@ class UpdatePlugins implements Action
 	 */
 	public function perform()
 	{
-		$urls = $this->update_plugins_helper->getRepoUrls();
+		$urls = $this->getRepoUrls();
 
 		$this->install($urls);
 		$this->update($urls);
@@ -81,8 +76,7 @@ class UpdatePlugins implements Action
 			$this->plugin_admin = $this->plugin_admin_factory->getPluginAdministrationForRelease(
 				"5.2",
 				$this->config,
-				$this->logger,
-				$this->update_plugins_helper
+				$this->logger
 				);
 		}
 		return $this->plugin_admin;
@@ -96,7 +90,7 @@ class UpdatePlugins implements Action
 	 */
 	protected function install(array $urls)
 	{
-		$this->logger->eventually("Install plugin", function() use($urls) {
+		$this->logger->eventually("Install plugins", function() use($urls) {
 			foreach ($urls as $url) {
 				$name = substr($url, strrpos($url, "-")+1);
 				$this->logger->always("install plugin ".$name, function() use($name) {
