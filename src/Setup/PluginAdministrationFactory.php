@@ -24,7 +24,7 @@ class PluginAdministrationFactory {
 		assert('is_string($version)');
 
 		if (substr($version, 0, 3) == "5.2") {
-			return new PluginAdministration52($config, $logger, $update_plugin_helper);
+			return new PluginAdministration52($config, $logger);
 		}
 		throw new \InvalidArgumentException("There is no core installer for version '$version'");
 	}
