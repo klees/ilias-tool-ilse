@@ -97,7 +97,6 @@ class App extends Application
 						( $c["aux.filesystem"]
 						, $c["aux.gitFactory"]
 						, $c["aux.taskLogger"]
-						, $c["aux.updatePluginsHelper"]
 						, $c["action.updatePlugins"]
 						);
 		};
@@ -105,7 +104,6 @@ class App extends Application
 			return new Action\UpdatePlugins
 						( $c["config.ilias"]
 						, $c["setup.pluginAdministrationFactory"]
-						, $c["aux.updatePluginsHelper"]
 						, $c["aux.taskLogger"]
 						);
 		};
