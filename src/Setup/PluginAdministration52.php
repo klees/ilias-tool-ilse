@@ -3,8 +3,8 @@ namespace CaT\Ilse\Setup;
 
 use CaT\Ilse\Config;
 use CaT\Ilse\Aux\TaskLogger;
-use CaT\Ilse\Aux\UpdatePluginsHelper;
 use CaT\Ilse\Setup\InitILIAS;
+use CaT\Ilse\Action\Plugin;
 
 /**
  * Delegates calls to plugins in ilias
@@ -14,6 +14,8 @@ use CaT\Ilse\Setup\InitILIAS;
  */
 class PluginAdministration52 implements PluginAdministration, InitILIAS
 {
+	use Plugin;
+
 	const PLUGIN_CLASS_PREFIX_IL 	= "il";
 	const PLUGIN_CLASS_PREFIX_CLASS = "class.";
 	const PLUGIN_CLASS_SUFFIX 		= "Plugin";
@@ -32,14 +34,9 @@ class PluginAdministration52 implements PluginAdministration, InitILIAS
 	protected $logger;
 
 	/**
-	 * @var UpdatePluginsHelper
-	 */
-	protected $update_plugin_helper;
-
-	/**
 	 * Constructor of the class PluginAdministration52
 	 */
-	public function __construct(Config\General $config, TaskLogger $logger, UpdatePluginsHelper $update_plugin_helper)
+	public function __construct(Config\General $config, TaskLogger $logger)
 	{
 		$this->config = $config;
 		$this->logger = $logger;
@@ -137,7 +134,7 @@ class PluginAdministration52 implements PluginAdministration, InitILIAS
 		$cur = getcwd();
 		chdir($this->config->server()->absolutePath());
 		if(!class_exists($full_class_name)) {
-			$link = $this->update_plugin_helper->getPluginLinkPath(self::PLUGIN_PREFIX.$plugin_name);
+			$link = $this->getPluginLinkPath(self::PLUGIN_PREFIX.$plugin_name);
 			require_once($link["path"]."/".$link["name"]."/".self::CLASSES_FOLDER."/".self::PLUGIN_CLASS_PREFIX_CLASS.$full_class_name.".php");
 		}
 		$class = new \ReflectionClass(self::PLUGIN_CLASS_PREFIX_IL.$plugin_name.self::PLUGIN_CLASS_SUFFIX);
