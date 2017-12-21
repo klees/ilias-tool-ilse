@@ -30,7 +30,13 @@ class PluginInfo implements PluginInfoReader
 	protected $plugin_name;
 
 	/**
-	 * Constructor of the class PluginInfo
+	 * Constructor of the class PluginInfo.
+	 *
+	 * @param 	string 	$component_type
+	 * @param 	string 	$component_name
+	 * @param 	string 	$slot
+	 * @param 	string 	$plugin_name
+	 * @return 	void
 	 */
 	public function __construct(
 		$component_type,
@@ -38,6 +44,11 @@ class PluginInfo implements PluginInfoReader
 		$slot,
 		$plugin_name
 	) {
+		assert('is_string($commponent_type)');
+		assert('is_string($commponent_name)');
+		assert('is_string($slot)');
+		assert('is_string($plugin_name)');
+
 		$this->component_type = $component_type;
 		$this->component_name = $component_name;
 		$this->slot = $slot;
@@ -57,7 +68,8 @@ class PluginInfo implements PluginInfoReader
 	/**
 	 * Set commponent_type with $value
 	 *
-	 * @param string		$value
+	 * @param 	string		$value
+	 * @return 	self
 	 */
 	public function withComponentType($value)
 	{
@@ -80,7 +92,8 @@ class PluginInfo implements PluginInfoReader
 	/**
 	 * Set component_name with $value
 	 *
-	 * @param string		$value
+	 * @param 	string		$value
+	 * @return 	self
 	 */
 	public function withComponentName($value)
 	{
@@ -103,7 +116,8 @@ class PluginInfo implements PluginInfoReader
 	/**
 	 * Set slot with $value
 	 *
-	 * @param string		$value
+	 * @param 	string		$value
+	 * @return 	self
 	 */
 	public function withSlot($value)
 	{
@@ -126,7 +140,8 @@ class PluginInfo implements PluginInfoReader
 	/**
 	 * Set plugin_name with $value
 	 *
-	 * @param string		$value
+	 * @param 	string		$value
+	 * @return 	self
 	 */
 	public function withPluginName($value)
 	{
