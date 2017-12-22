@@ -73,6 +73,14 @@ interface Filesystem {
 	public function getSubdirectories($path);
 
 	/**
+	 * Get filenames in given path.
+	 *
+	 * @param 	string 	$path
+	 * @return 	string[]
+	 */
+	public function getFilesInFolder($path);
+
+	/**
 	 * Change access permissions.
 	 *
 	 * ATTENTION: second parameter is an integer, i.e. use 0755 e.g.
