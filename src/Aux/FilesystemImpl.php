@@ -103,6 +103,22 @@ class FilesystemImpl implements Filesystem {
 	/**
 	 * @inheritdoc
 	 */
+	protected function getFilesInFolder($path)
+	{
+		if($path == "") {
+			return array();
+		}
+		$list = array();
+		$list = scandir($path."/".self::CLASS_FOLDER);
+		$list = array_filter($list, function($d) {
+			return $d != ".." && $d != ".";
+		});
+		return $list;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	public function chmod($path, $perms) {
 		assert('is_string($path)');
 		assert('is_int($perms)');
