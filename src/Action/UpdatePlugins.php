@@ -120,16 +120,15 @@ class UpdatePlugins implements Action
 	/**
 	 * Install plugins
 	 *
-	 * @param 	string[]	$urls
+	 * @param 	PluginInfo[]	$pis
 	 * @return 	void
 	 */
-	protected function install(array $urls)
+	protected function install(array $pis)
 	{
-		$this->logger->eventually("Install plugins", function() use($urls) {
-			foreach ($urls as $url) {
-				$name = substr($url, strrpos($url, "-")+1);
-				$this->logger->always("install plugin ".$name, function() use($name) {
-					$this->getPluginAdmin()->install($name);
+		$this->logger->eventually("Install plugins", function() use($pis) {
+			foreach ($pis as $pi) {
+				$this->logger->always("install plugin ".$pi->getPluginName(), function() use($pi) {
+					$this->getPluginAdmin()->install($pi);
 				});
 			}
 		});
@@ -138,17 +137,16 @@ class UpdatePlugins implements Action
 	/**
 	 * Update plugins
 	 *
-	 * @param 	string[]	$urls
+	 * @param 	PluginInfo[]	$pis
 	 * @return 	void
 	 */
-	protected function update(array $urls)
+	protected function update(array $pis)
 	{
-		$this->logger->eventually("Update plugin", function() use($urls) {
-			foreach ($urls as $url) {
-				$name = substr($url, strrpos($url, "-")+1);
-				$this->logger->always("update plugin ".$name, function() use($name) {
-					if($this->getPluginAdmin()->needsUpdate($name)) {
-						$this->getPluginAdmin()->update($name);
+		$this->logger->eventually("Update plugin", function() use($pis) {
+			foreach ($pis as $pi) {
+				$this->logger->always("update plugin ".$pi->getPluginName(), function() use($pi) {
+					if($this->getPluginAdmin()->needsUpdate($pi->getPluginName())) {
+						$this->getPluginAdmin()->update($pi->getPluginName());
 					}
 				});
 			}
@@ -158,16 +156,15 @@ class UpdatePlugins implements Action
 	/**
 	 * Activate plugins
 	 *
-	 * @param 	string[]	$urls
+	 * @param 	PluginInfo[]	$pis
 	 * @return 	void
 	 */
-	protected function activate(array $urls)
+	protected function activate(array $pis)
 	{
-		$this->logger->eventually("Activate plugin", function() use($urls) {
-			foreach ($urls as $url) {
-				$name = substr($url, strrpos($url, "-")+1);
-				$this->logger->always("activate plugin ".$name, function() use($name) {
-					$this->getPluginAdmin()->activate($name);
+		$this->logger->eventually("Activate plugin", function() use($pis) {
+			foreach ($pis as $pi) {
+				$this->logger->always("activate plugin ".$pi->getPluginName(), function() use($pi) {
+					$this->getPluginAdmin()->activate($pi->getPluginName());
 				});
 			}
 		});
@@ -176,16 +173,15 @@ class UpdatePlugins implements Action
 	/**
 	 * Update language
 	 *
-	 * @param 	string[]	$urls
+	 * @param 	PluginInfo[]	$pis
 	 * @return 	void
 	 */
-	protected function updateLanguage(array $urls)
+	protected function updateLanguage(array $pis)
 	{
-		$this->logger->eventually("Update plugin language", function() use($urls) {
-			foreach ($urls as $url) {
-				$name = substr($url, strrpos($url, "-")+1);
-				$this->logger->always("update language for plugin ".$name, function() use($name) {
-					$this->getPluginAdmin()->updateLanguage($name);
+		$this->logger->eventually("Update plugin language", function() use($pis) {
+			foreach ($pis as $pi) {
+				$this->logger->always("update language for plugin ".$pi->getPluginName(), function() use($pi) {
+					$this->getPluginAdmin()->updateLanguage($pi->getPluginName());
 				});
 			}
 		});
