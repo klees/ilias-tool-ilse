@@ -1,10 +1,10 @@
 <?php
 namespace CaT\Ilse\Action;
 
-use CaT\Ilse\Config\General;
 use CaT\Ilse\Setup\PluginAdministrationFactory;
+use CaT\Ilse\Config\General;
+use CaT\Ilse\Aux\ILIAS;
 use CaT\Ilse\Aux\TaskLogger;
-use CaT\Ilse\Aux\UpdatePluginsHelper;
 
 /**
  * Install or update plugins from a list.
@@ -24,14 +24,24 @@ class UpdatePlugins implements Action
 	protected $plugin_admin;
 
 	/**
+	 * @var PluginInfoReader | null
+	 */
+	protected $plugin_info_reader;
+
+	/**
 	 * @var General
 	 */
 	protected $config;
 
 	/**
-	 * @var PluginAdministrationFactory
+	 * @var PluginAdminFactory
 	 */
-	protected $plugin_admin_factory;
+	protected $admin_factory;
+
+	/**
+	 * @var PluginInfoReaderFactory
+	 */
+	protected $reader_factory;
 
 	/**
 	 * @var TaskLogger
@@ -43,12 +53,14 @@ class UpdatePlugins implements Action
 	 */
 	public function __construct(
 		General $config,
-		PluginAdministrationFactory $factory,
-		TaskLogger $logger
+		PluginAdministrationFactory $admin_factory,
+		TaskLogger $logger,
+		ILIAS\PluginInfoReaderFactory $reader_factory
 	) {
 		$this->config = $config;
-		$this->plugin_admin_factory = $factory;
+		$this->admin_factory = $admin_factory;
 		$this->logger = $logger;
+		$this->reader_factory = $reader_factory;
 	}
 
 	/**
@@ -76,7 +88,8 @@ class UpdatePlugins implements Action
 			$this->plugin_admin = $this->plugin_admin_factory->getPluginAdministrationForRelease(
 				"5.2",
 				$this->config,
-				$this->logger
+				$this->logger,
+				$this->getPluginInfoReader()
 				);
 		}
 		return $this->plugin_admin;
@@ -167,5 +180,18 @@ class UpdatePlugins implements Action
 		assert('is_string($name)');
 
 		$this->getPluginAdmin()->uninstall($name);
+	}
+
+	/**
+	 * Get an instance of PluginInfoReader for ILIAS 5.2
+	 *
+	 * @return 	ILIAS\PluginInfoReader
+	 */
+	protected function getPluginInfoReader()
+	{
+		if($this->plugin_info_reader == null) {
+			$this->plugin_info_reader = $this->reader_factory->getPluginInfoReader("5.2", $this->server, $this->filesystem);
+		}
+		return $this->plugin_info_reader;
 	}
 }
