@@ -111,9 +111,7 @@ class UpdatePlugins implements Action
 		{
 			$this->plugin_admin = $this->plugin_admin_factory->getPluginAdministrationForRelease(
 				"5.2",
-				$this->config,
-				$this->logger,
-				$this->getPluginInfoReader()
+				$this->config
 				);
 		}
 		return $this->plugin_admin;
