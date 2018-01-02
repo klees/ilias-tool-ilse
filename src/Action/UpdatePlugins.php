@@ -93,12 +93,11 @@ class UpdatePlugins implements Action
 	 */
 	public function perform()
 	{
-		$urls = $this->getRepoUrls();
-
-		$this->install($urls);
-		$this->update($urls);
-		$this->activate($urls);
-		$this->updateLanguage($urls);
+		$pis = $this->getPluginInfoObjects();
+		$this->install($pis);
+		$this->update($pis);
+		$this->activate($pis);
+		$this->updateLanguage($pis);
 	}
 
 	/**
