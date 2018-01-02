@@ -1,9 +1,13 @@
 <?php
 namespace CaT\Ilse\Action;
 
+use CaT\Ilse\Config\Server;
+use CaT\Ilse\Config\Plugins;
 use CaT\Ilse\Aux\Filesystem;
 use CaT\Ilse\Aux\Git\GitFactory;
 use CaT\Ilse\Aux\TaskLogger;
+use CaT\Ilse\Aux\ILIAS\PluginInfoReaderFactory;
+use CaT\Ilse\Aux\ILIAS\PluginInfo;
 
 /**
  * Class UpdatePluginsDirectory
@@ -13,7 +17,19 @@ use CaT\Ilse\Aux\TaskLogger;
  */
 class UpdatePluginsDirectory implements Action
 {
+	use Plugin;
+
 	const BRANCH = "master";
+
+	/**
+	 * @var Server
+	 */
+	protected $server;
+
+	/**
+	 * @var Plugins
+	 */
+	protected $plugins;
 
 	/**
 	 * @var Filesystem
@@ -23,7 +39,7 @@ class UpdatePluginsDirectory implements Action
 	/**
 	 * @var GitFactory
 	 */
-	protected $factory;
+	protected $git_factory;
 
 	/**
 	 * @var TaskLogger
@@ -31,9 +47,14 @@ class UpdatePluginsDirectory implements Action
 	protected $task_logger;
 
 	/**
-	 * @var UpdatePlugins
+	 * @var PluginInfoReaderFactory
 	 */
-	protected $update_plugins_helper;
+	protected $reader_factory;
+
+	/**
+	 * @var ILIAS\PluginInfoReader
+	 */
+	protected $plugin_info_reader;
 
 	/**
 	 * @var UpdatePlugins
@@ -50,14 +71,20 @@ class UpdatePluginsDirectory implements Action
 	 * Constructor of the class UpdatePluginsDirectory
 	 */
 	public function __construct(
+		Server $server,
+		Plugins $plugins,
 		Filesystem $filesystem,
-		GitFactory $factory,
+		GitFactory $git_factory,
 		TaskLogger $task_logger,
+		PluginInfoReaderFactory $reader_factory,
 		UpdatePlugins $update_plugins
 	) {
+		$this->server = $server;
+		$this->plugins = $plugins;
 		$this->filesystem = $filesystem;
-		$this->factory = $factory;
+		$this->git_factory = $git_factory;
 		$this->task_logger = $task_logger;
+		$this->reader_factory = $reader_factory;
 		$this->update_plugins = $update_plugins;
 	}
 
