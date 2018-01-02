@@ -1,10 +1,14 @@
 <?php
 namespace CaT\Ilse\Action;
 
+use CaT\Ilse\Config\Server;
+use CaT\Ilse\Config\Plugins;
 use CaT\Ilse\Setup\PluginAdministrationFactory;
 use CaT\Ilse\Config\General;
 use CaT\Ilse\Aux\ILIAS;
 use CaT\Ilse\Aux\TaskLogger;
+use CaT\Ilse\Aux\Filesystem;
+use CaT\Ilse\Aux\ILIAS\PluginInfo;
 
 /**
  * Install or update plugins from a list.
@@ -17,6 +21,21 @@ use CaT\Ilse\Aux\TaskLogger;
 class UpdatePlugins implements Action
 {
 	use Plugin;
+
+	/**
+	 * @var Server
+	 */
+	protected $server;
+
+	/**
+	 * @var Plugins
+	 */
+	protected $plugins;
+
+	/**
+	 * @var Filesystem
+	 */
+	protected $filesystem;
 
 	/**
 	 * @var PluginAdministration | null
@@ -36,7 +55,7 @@ class UpdatePlugins implements Action
 	/**
 	 * @var PluginAdminFactory
 	 */
-	protected $admin_factory;
+	protected $plugin_admin_factory;
 
 	/**
 	 * @var PluginInfoReaderFactory
@@ -52,13 +71,19 @@ class UpdatePlugins implements Action
 	 * Constructor of the class UpdatePlugins
 	 */
 	public function __construct(
+		Server $server,
+		Plugins $plugins,
+		Filesystem $filesystem,
 		General $config,
-		PluginAdministrationFactory $admin_factory,
+		PluginAdministrationFactory $plugin_admin_factory,
 		TaskLogger $logger,
 		ILIAS\PluginInfoReaderFactory $reader_factory
 	) {
+		$this->server = $server;
+		$this->plugins = $plugins;
+		$this->filesystem = $filesystem;
 		$this->config = $config;
-		$this->admin_factory = $admin_factory;
+		$this->plugin_admin_factory = $plugin_admin_factory;
 		$this->logger = $logger;
 		$this->reader_factory = $reader_factory;
 	}
