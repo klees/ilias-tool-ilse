@@ -16,7 +16,7 @@ interface PluginInfoReader
 	 *  - Slot
 	 *  - PluginName
 	 *
-	 * @param 	string 	$path
+	 * @param 	string 	$path 	path to the plugin folder
 	 * @return 	PluginInfo
 	 */
 	public function readInfo($path);
