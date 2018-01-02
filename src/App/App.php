@@ -94,17 +94,25 @@ class App extends Application
 		$container["action.updatePluginsDirectory"] = function($c) {
 			$config = $c["config.ilias"];
 			return new Action\UpdatePluginsDirectory
-						( $c["aux.filesystem"]
+						( $config->server()
+						, $config->plugin()
+						, $c["aux.filesystem"]
 						, $c["aux.gitFactory"]
 						, $c["aux.taskLogger"]
+						, $c["aux.PluginInfoReaderFactory"]
 						, $c["action.updatePlugins"]
 						);
 		};
 		$container["action.updatePlugins"] = function($c) {
+			$config = $c["config.ilias"];
 			return new Action\UpdatePlugins
-						( $c["config.ilias"]
+						( $config->server()
+						, $config->plugin()
+						, $c["aux.filesystem"]
+						, $c["config.ilias"]
 						, $c["setup.pluginAdministrationFactory"]
 						, $c["aux.taskLogger"]
+						, $c['aux.PluginInfoReaderFactory']
 						);
 		};
 
@@ -159,14 +167,8 @@ class App extends Application
 		$container["aux.yaml"] = function($c) {
 			return new Aux\YamlParser();
 		};
-		$container["aux.updatePluginsHelper"] = function($c) {
-			$config = $c["config.ilias"];
-			return new Aux\UpdatePluginsHelper
-						( $config->server()
-						, $config->plugin()
-						, $c["aux.filesystem"]
-						, $c["aux.yaml"]
-						);
+		$container["aux.PluginInfoReaderFactory"] = function($c) {
+			return new Aux\ILIAS\PluginInfoReaderFactory();
 		};
 
 		// Setup
