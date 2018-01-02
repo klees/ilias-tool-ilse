@@ -108,13 +108,13 @@ class UpdatePluginsDirectory implements Action
 	 */
 	protected function initPluginDir()
 	{
-		if(!$this->filesystem->exists($this->update_plugins_helper->dir())) {
+		if(!$this->filesystem->exists($this->plugins->dir())) {
 			$this->task_logger->always("Make plugin directory", function () {
-				$this->filesystem->makeDirectory($this->update_plugins_helper->dir());
+				$this->filesystem->makeDirectory($this->plugins->dir());
 			});
 		}
 		$this->task_logger->always("Check write permissions", function() {
-			if(!$this->filesystem->isWriteable($this->update_plugins_helper->dir())) {
+			if(!$this->filesystem->isWriteable($this->plugins->dir())) {
 					throw new \Exception("No write permissions");
 			}
 		});
@@ -127,16 +127,16 @@ class UpdatePluginsDirectory implements Action
 	 */
 	protected function clonePlugins()
 	{
-		$installed_plugins = $this->update_plugins_helper->getInstalledPlugins();
-		$urls = $this->update_plugins_helper->getRepoUrls();
+		$installed_plugins = $this->getInstalledPlugins();
+		$urls = $this->getRepoUrls();
 		$this->task_logger->eventually("Clone new plugins", function () use($urls, $installed_plugins) {
 			foreach ($urls as $url) {
-				$name = $this->update_plugins_helper->getRepoNameFromUrl($url);
+				$name = $this->getRepoNameFromUrl($url);
 				if(in_array($name, $installed_plugins)) {
 					continue;
 				}
-				$this->filesystem->makeDirectory($this->update_plugins_helper->dir()."/".$name);
-				$git = $this->factory->getRepo($this->update_plugins_helper->dir()."/".$name, $url);
+				$this->filesystem->makeDirectory($this->plugins->dir()."/".$name);
+				$git = $this->git_factory->getRepo($this->plugins->dir()."/".$name, $url);
 				$this->task_logger->always("clone plugin $name", [$git, "gitClone"]);
 			}
 		});
@@ -149,11 +149,11 @@ class UpdatePluginsDirectory implements Action
 	 */
 	protected function updatePlugins()
 	{
-		$urls = $this->update_plugins_helper->getRepoUrls();
+		$urls = $this->getRepoUrls();
 		$this->task_logger->eventually("Pull plugins", function () use($urls) {
 			foreach ($urls as $url) {
-				$name = $this->update_plugins_helper->getRepoNameFromUrl($url);
-				$git = $this->factory->getRepo($this->update_plugins_helper->dir().'/'.$name, $url);
+				$name = $this->getRepoNameFromUrl($url);
+				$git = $this->git_factory->getRepo($this->plugins->dir().'/'.$name, $url);
 				$this->task_logger->always("pull plugin $name", function() use($git) {
 					$git->gitPull(self::BRANCH);
 				});
@@ -168,17 +168,18 @@ class UpdatePluginsDirectory implements Action
 	 */
 	protected function deleteUnlistedPlugins()
 	{
-		$urls = $this->update_plugins_helper->getRepoUrls();
-		$installed_plugins = $this->update_plugins_helper->getInstalledPlugins();
-		$marked_plugins = $this->update_plugins_helper->getUnlistedPlugins($installed_plugins, $urls);
+		$urls = $this->getRepoUrls();
+		$installed_plugins = $this->getInstalledPlugins();
+		$marked_plugins = $this->getUnlistedPlugins($installed_plugins, $urls);
 
 		$this->task_logger->eventually("Delete plugins", function () use($marked_plugins) {
 			foreach($marked_plugins as $marked_plugin) {
 				$this->task_logger->always("delete plugin $marked_plugin", function() use($marked_plugin) {
-					$link = $this->update_plugins_helper->getPluginLinkPath($marked_plugin);
-					$this->update_plugins->uninstall($link['name']);
-					$this->filesystem->remove($link['path']."/".$link['name']);
-					$this->filesystem->remove($this->update_plugins_helper->dir()."/".$marked_plugin);
+					$pi = $this->getPluginInfo($this->plugins->dir().'/'.$marked_plugin);
+					$link = $this->getPluginLinkPath($pi);
+					$this->update_plugins->uninstall($pi->getPluginName());
+					$this->filesystem->remove($link['path'].'/'.$link['name']);
+					$this->filesystem->remove($this->plugins->dir()."/".$marked_plugin);
 				});
 			}
 		});
