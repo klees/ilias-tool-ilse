@@ -7,7 +7,7 @@ namespace CaT\Ilse\Aux\ILIAS;
  * @author Daniel Weise <daniel.weise@concepts-and-training.de>
  * @copyright Extended GPL, see LICENSE
  */
-class PluginInfo implements PluginInfoReader
+class PluginInfo
 {
 	/**
 	 * @var string
@@ -27,6 +27,11 @@ class PluginInfo implements PluginInfoReader
 	/**
 	 * @var string
 	 */
+	protected $slot_id;
+
+	/**
+	 * @var string
+	 */
 	protected $plugin_name;
 
 	/**
@@ -35,6 +40,7 @@ class PluginInfo implements PluginInfoReader
 	 * @param 	string 	$component_type
 	 * @param 	string 	$component_name
 	 * @param 	string 	$slot
+	 * @param 	string 	$slot_id;
 	 * @param 	string 	$plugin_name
 	 * @return 	void
 	 */
@@ -42,31 +48,34 @@ class PluginInfo implements PluginInfoReader
 		$component_type,
 		$component_name,
 		$slot,
+		$slot_id,
 		$plugin_name
 	) {
-		assert('is_string($commponent_type)');
-		assert('is_string($commponent_name)');
+		assert('is_string($component_type)');
+		assert('is_string($component_name)');
 		assert('is_string($slot)');
+		assert('is_string($slot_id)');
 		assert('is_string($plugin_name)');
 
 		$this->component_type = $component_type;
 		$this->component_name = $component_name;
 		$this->slot = $slot;
+		$this->slot_id = $slot_id;
 		$this->plugin_name = $plugin_name;
 	}
 
 	/**
-	 * Get commponent_type
+	 * Get component_type
 	 *
 	 * @return string
 	 */
 	public function getComponentType()
 	{
-		return $this->commponent_type;
+		return $this->component_type;
 	}
 
 	/**
-	 * Set commponent_type with $value
+	 * Set component_type with $value
 	 *
 	 * @param 	string		$value
 	 * @return 	self
@@ -75,7 +84,7 @@ class PluginInfo implements PluginInfoReader
 	{
 		assert('is_string($value)');
 		$clone = clone $this;
-		$clone->commponent_type = $value;
+		$clone->component_type = $value;
 		return $clone;
 	}
 
@@ -124,6 +133,30 @@ class PluginInfo implements PluginInfoReader
 		assert('is_string($value)');
 		$clone = clone $this;
 		$clone->slot = $value;
+		return $clone;
+	}
+
+	/**
+	 * Get slot_id
+	 *
+	 * @return string
+	 */
+	public function getSlotId()
+	{
+		return $this->slot_id;
+	}
+
+	/**
+	 * Set slot_id with $value
+	 *
+	 * @param 	string		$value
+	 * @return 	self
+	 */
+	public function withSlotId($value)
+	{
+		assert('is_string($value)');
+		$clone = clone $this;
+		$clone->slot_id = $value;
 		return $clone;
 	}
 
