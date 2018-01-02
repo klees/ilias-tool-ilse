@@ -201,15 +201,18 @@ class UpdatePlugins implements Action
 	}
 
 	/**
-	 * Get an instance of PluginInfoReader for ILIAS 5.2
+	 * Get a PluginInfo object foreach installed plugin.
 	 *
-	 * @return 	ILIAS\PluginInfoReader
+	 * @return PluginInfo[]
 	 */
-	protected function getPluginInfoReader()
+	protected function getPluginInfoObjects()
 	{
-		if($this->plugin_info_reader == null) {
-			$this->plugin_info_reader = $this->reader_factory->getPluginInfoReader("5.2", $this->server, $this->filesystem);
+		$pis = array();
+		$plugins = $this->getInstalledPlugins();
+
+		foreach ($plugins as $plugin) {
+			$pis[] = $this->getPluginInfo($this->plugins->dir().'/'.$plugin);
 		}
-		return $this->plugin_info_reader;
+		return $pis;
 	}
 }
