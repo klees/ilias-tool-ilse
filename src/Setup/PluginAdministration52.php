@@ -2,9 +2,8 @@
 namespace CaT\Ilse\Setup;
 
 use CaT\Ilse\Config;
-use CaT\Ilse\Aux\TaskLogger;
 use CaT\Ilse\Setup\InitILIAS;
-use CaT\Ilse\Action\Plugin;
+use CaT\Ilse\Aux\ILIAS\PluginInfo;
 
 /**
  * Delegates calls to plugins in ilias
@@ -14,8 +13,6 @@ use CaT\Ilse\Action\Plugin;
  */
 class PluginAdministration52 implements PluginAdministration, InitILIAS
 {
-	use Plugin;
-
 	const PLUGIN_CLASS_PREFIX_IL 	= "il";
 	const PLUGIN_CLASS_PREFIX_CLASS = "class.";
 	const PLUGIN_CLASS_SUFFIX 		= "Plugin";
@@ -29,35 +26,25 @@ class PluginAdministration52 implements PluginAdministration, InitILIAS
 	protected $config;
 
 	/**
-	 * @var TaskLogger
-	 */
-	protected $logger;
-
-	/**
 	 * Constructor of the class PluginAdministration52
 	 */
-	public function __construct(Config\General $config, TaskLogger $logger)
+	public function __construct(Config\General $config)
 	{
 		$this->config = $config;
-		$this->logger = $logger;
-		$this->update_plugin_helper = $update_plugin_helper;
 		$this->initILIASIsNotInitialized();
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function install($name)
+	public function install(PluginInfo $pi)
 	{
-		assert('is_string($name)');
-
-		$plugin = $this->getPluginObject($name, false);
-
 		\ilPlugin::createPluginRecord(
-			$plugin->getComponentType(),
-			$plugin->getComponentName(),
-			$plugin->getSlotId(),
-			$name);
+			$pi->getComponentType(),
+			$pi->getComponentName(),
+			$pi->getSlotId(),
+			$pi->getPluginName()
+		);
 	}
 
 	/**
@@ -118,7 +105,6 @@ class PluginAdministration52 implements PluginAdministration, InitILIAS
 	public function needsUpdate($name)
 	{
 		assert('is_string($name)');
-
 		return $this->getPluginObject($name)->needsUpdate();
 	}
 
