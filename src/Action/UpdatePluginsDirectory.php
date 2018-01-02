@@ -13,8 +13,6 @@ use CaT\Ilse\Aux\TaskLogger;
  */
 class UpdatePluginsDirectory implements Action
 {
-	use Plugin;
-
 	const BRANCH = "master";
 
 	/**
