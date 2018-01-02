@@ -194,26 +194,77 @@ class UpdatePluginsDirectory implements Action
 	protected function linkPluginsToIlias()
 	{
 		$this->task_logger->eventually("Link plugins", function () {
-			$installed_plugins = $this->update_plugins_helper->getInstalledPlugins();
+			$installed_plugins = $this->getInstalledPlugins();
 			foreach($installed_plugins as $plugin) {
-				$link = $this->update_plugins_helper->getPluginLinkPath($plugin);
+				$pi = $this->getPluginInfo($this->plugins->dir().'/'.$plugin);
+				$link = $this->getPluginLinkPath($pi);
 				if(!$this->filesystem->exists($link['path'])) {
 					$this->filesystem->makeDirectory($link['path']);
 				}
 				if(!$this->filesystem->isWriteable($link['path'])) {
 					throw new \Exception("No write acces to ".$link['path'].".");
 				}
-				$this->task_logger->always("link plugin ".$link['name'], function() use($plugin, $link) {
-					if($this->filesystem->isLink($link['path']."/".$link['name'])) {
-						return true;
-					}
-					$this->filesystem->symlink(
-						$this->update_plugins_helper->dir()."/".
-						$plugin, $link['path']."/".
-						$link['name']
-					);
-				});
+				if(!$this->filesystem->isLink($link['path'].'/'.$link['name'])) {
+					$this->task_logger->always("link plugin ".$pi->getPluginName(), function() use($plugin, $link) {
+						$this->filesystem->symlink($this->plugins->dir()."/".$plugin, $link['path'].'/'.$link['name']);
+					});
+				}
 			}
 		});
+	}
+
+	/**
+	 * Get the repo name
+	 *
+	 * @param 	string 	$url
+	 * @return 	string
+	 */
+	public function getRepoNameFromUrl($url)
+	{
+		assert('is_string($url)');
+
+		$lastslash = strrpos($url, '/');
+		$result = substr($url, $lastslash+1);
+		$git = strpos($result, ".git");
+		if($git) {
+			$result = substr($result, 0, $git);
+		}
+		return $result;
+	}
+
+	/**
+	 * Get unlisted plugins
+	 *
+	 * @param 	array 	$installed
+	 * @param 	array 	$listed
+	 * @return 	string[]
+	 */
+	public function getUnlistedPlugins(array $installed, array $listed)
+	{
+		$listed = array_map(function($url) { return $this->getRepoNameFromUrl($url); }, $listed);
+		return array_diff($installed, $listed);
+	}
+
+	/**
+	 * Get an array with the ilias path for a plugin and its name
+	 *
+	 * @param 	PluginInfo 	$info
+	 * @return 	string[]
+	 */
+	public function getPluginLinkPath(PluginInfo $info)
+	{
+		$link = array();
+		$absolute_path = $this->server->absolute_path();
+		$plugin_default_path = "Customizing/global/plugins";
+
+		$link['path'] =
+			$absolute_path."/".
+			$plugin_default_path."/".
+			$info->getComponentType()."/".
+			$info->getComponentName()."/".
+			$info->getSlot();
+		$link['name'] = $info->getPluginName();
+
+		return $link;
 	}
 }
