@@ -1,6 +1,8 @@
 <?php
 namespace CaT\Ilse\Setup;
 
+use CaT\Ilse\Aux\ILIAS\PluginInfo;
+
 /**
  * Interface Plugin
  *
@@ -12,10 +14,10 @@ interface PluginAdministration
 	/**
 	 * Creates a record in db for the specified plugin
 	 *
-	 * @param 	string 		$name
+	 * @param 	PluginInfo 		$pi
 	 * @return 	void
 	 */
-	public function install($name);
+	public function install(PluginInfo $pi);
 
 	/**
 	 * Update plugins
