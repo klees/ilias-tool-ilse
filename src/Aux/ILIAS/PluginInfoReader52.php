@@ -68,7 +68,7 @@ class PluginInfoReader52 implements PluginInfoReader
 		assert('is_string($path)');
 		assert('is_string($plugin_name)');
 
-		chdir($this->server->absolute_path());
+		$this->filesystem->changeDir($this->server->absolute_path());
 		require_once(
 			$path.
 			"/".
