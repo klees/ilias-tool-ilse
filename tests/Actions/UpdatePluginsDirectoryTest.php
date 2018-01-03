@@ -11,103 +11,158 @@ use \CaT\Ilse\Aux\TaskLogger;
 use CaT\Ilse\Aux\Git;
 use CaT\Ilse\Aux\ILIAS;
 use CaT\Ilse\Aux;
+use \CaT\Ilse\Aux\ILIAS\PluginInfo;
 
 use CaT\Ilse\Action\UpdatePlugin;
 
 // If database had it own interface like filesystem, we could
 // drop this and write a proper test instead.
 class UpdatePluginsDirectoryForTest extends UpdatePluginsDirectory{
+	public function getPluginInfo($path)
+	{
+		return new PluginInfo("Service", "Repository", "RepositoryObject", "robj", "test");
+	}
 }
 
 class UpdatePluginsDirectoryTest extends PHPUnit_Framework_TestCase
 {
+	protected $path;
+	protected $url;
+	protected $url2;
+	protected $expected;
+	protected $git_factory;
+	protected $git_wrapper;
+	protected $filesystem;
+	protected $task_logger;
+	protected $update_plugins;
+	protected $plugin_info_reader_factory;
+	protected $git;
+	protected $server;
+	protected $plugin;
+	protected $plugins;
+
+	public function setUp()
+	{
+		$this->path = "/var/www/html/ilias/Customizing/global/plugins/Service/Repository/RepositoryObject";
+		$this->url = "https://github.com/conceptsandtraining/ilias-tool-ilse.git";
+		$this->url2 = "https://github.com/conceptsandtraining/ilias-tool-ilse";
+		$this->expected = "ilias-tool-ilse";
+
+		$this->git_factory = $this->createMock(Git\GitFactory::class);
+		$this->git_wrapper = $this->createMock(Git\GitWrapper::class);
+		$this->filesystem = $this->createMock("CaT\Ilse\Aux\Filesystem");
+		$this->task_logger = $this->createMock(TaskLogger::class);
+		$this->update_plugins = $this->createMock(UpdatePlugins::class);
+		$this->plugin_info_reader_factory = $this->createMock(ILIAS\PluginInfoReaderFactory::class);
+
+		$this->git = new Config\Git($this->url, "master", "5355");
+		$this->server = new Config\Server("http://ilias.de", "/var/www/html/ilias", "Europe/Berlin");
+		$this->plugin = new Config\Plugin($this->path, $this->git);
+		$this->plugins = new Config\Plugins($this->path, array($this->plugin));
+
+		$this->object = new UpdatePluginsDirectoryForTest(
+			$this->server,
+			$this->plugins,
+			$this->filesystem,
+			$this->git_factory,
+			$this->task_logger,
+			$this->plugin_info_reader_factory,
+			$this->update_plugins
+		);
+	}
 	public function test_perform()
 	{
-		$url = "https://my_plugin";
-		$path = "/home/vagrant/dummy";
-		$name = "my_plugin";
+		$name = "ilias-tool-ilse";
 		$yaml = "---
 ComponentType: Services
 ComponentName: EventHandling
 Slot: EventHook
 SlotId: evhk";
 
-		$git_factory = $this->createMock(Git\GitFactory::class);
-		$git_wrapper = $this->createMock(Git\GitWrapper::class);
-		$filesystem = $this->createMock("CaT\Ilse\Aux\Filesystem");
-		$task_logger = $this->createMock(TaskLogger::class);
-		$update_plugins = $this->createMock(UpdatePlugins::class);
-		$plugin_info_reader_factory = $this->createMock(ILIAS\PluginInfoReaderFactory::class);
-
-		$git = new Config\Git($url, "master", "5355");
-		$server = new Config\Server("http://ilias.de", "/var/www/html/ilias", "Europe/Berlin");
-		$plugin = new Config\Plugin($path, $git);
-		$plugins = new Config\Plugins($path, array($plugin));
-
-		$action = new UpdatePluginsDirectoryForTest(
-			$server,
-			$plugins,
-			$filesystem,
-			$git_factory,
-			$task_logger,
-			$plugin_info_reader_factory,
-			$update_plugins
-			);
-
-		$filesystem
+		$this->filesystem
 			->expects($this->any())
 			->method("makeDirectory")
 			->will($this->onConsecutiveCalls(
 				array(
-					$path,
-					$path.'/'.$name,
-					$path
+					$this->path,
+					$this->path.'/'.$name,
+					$this->path
 				)));
-
-		// $filesystem
-		// 	->expects($this->any())
-		// 	->method("exists")
-		// 	->willReturn(true);
-		$filesystem
+		$this->filesystem
 			->expects($this->any())
-			->method("isWriteable")
+			->method("exists")
 			->willReturn(true);
-		// $filesystem
-		// 	->expects($this->any())
-		// 	->method("getSubdirectories")
-		// 	->willReturn(array("test", "test2"));
-		// $filesystem
-		// 	->expects($this->any())
-		// 	->method("read")
-		// 	->willReturn($yaml);
+		$this->filesystem
+			->expects($this->any())
+			->method("isEmpty")
+			->willReturn(false);
+		$this->filesystem
+			->expects($this->any())
+			->method("isDirectory")
+			->will($this->onConsecutiveCalls(
+				array(
+					$this->path.$name
+				)))
+			->willReturn(true);
+		$this->filesystem
+			->expects($this->atLeast(1))
+			->method("isWriteable")
+			->with($this->path)
+			->willReturn(true);
+		$this->filesystem
+			->expects($this->exactly(3))
+			->method("getSubdirectories")
+			->with($this->path)
+			->willReturn(array($name));
 
-		$git_factory
+		$this->git_factory
 			->expects($this->any())
 			->method("getRepo")
-			->with($path."/".$name, $url, false)
-			->willReturn($git_wrapper);
+			->with($this->path."/".$name, $this->url, false)
+			->willReturn($this->git_wrapper);
 
-		$task_logger
+		$this->task_logger
 			->expects($this->any())
 			->method("eventually")
 			->will($this->returnCallback(function($s, $c) {
 				$c();
 			}));
-		$task_logger
+		$this->task_logger
 			->expects($this->any())
 			->method("always")
 			->will($this->returnCallback(function($s, $c) {
 				$c();
 			}));
 
-		// $git_wrapper
-		// 	->expects($this->any())
-		// 	->method("gitClone");
+		$this->object->perform();
+	}
 
-		// $update_plugins
-		// 	->expects($this->any())
-		// 	->method("uninstall");
+	public function test_getRepoNameFromUrl()
+	{
+		$result = $this->object->getRepoNameFromUrl($this->url);
+		$this->assertEquals($result, $this->expected);
 
-		$action->perform();
+		$result = $this->object->getRepoNameFromUrl($this->url2);
+		$this->assertEquals($result, $this->expected);
+	}
+
+	public function test_getUnlistedPlugins()
+	{
+		$installed = [
+			"Apfel",
+			"Birne",
+			"Banane"
+			];
+
+		$listed = [
+			"/Apfel",
+			"/Birne",
+			"/Erdbeere"
+			];
+
+		$result = $this->object->getUnlistedPlugins($installed, $listed);
+
+		$this->assertContains("Banane", $result);
+		$this->assertNotContains("Erdbeere", $result);
 	}
 }
