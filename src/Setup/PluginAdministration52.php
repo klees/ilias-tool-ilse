@@ -53,8 +53,6 @@ class PluginAdministration52 implements PluginAdministration
 	 */
 	public function update(PluginInfo $pi)
 	{
-		assert('is_string($name)');
-
 		$plugin = $this->getPluginObject($pi);
 		$plugin->update();
 	}
@@ -64,8 +62,6 @@ class PluginAdministration52 implements PluginAdministration
 	 */
 	public function activate(PluginInfo $pi)
 	{
-		assert('is_string($name)');
-
 		$plugin = $this->getPluginObject($pi);
 		$plugin->activate();
 	}
@@ -75,8 +71,6 @@ class PluginAdministration52 implements PluginAdministration
 	 */
 	public function updateLanguage(PluginInfo $pi)
 	{
-		assert('is_string($name)');
-
 		$plugin = $this->getPluginObject($pi);
 		$plugin->updateLanguages();
 	}
@@ -86,8 +80,6 @@ class PluginAdministration52 implements PluginAdministration
 	 */
 	public function uninstall(PluginInfo $pi)
 	{
-		assert('is_string($name)');
-
 		// necessary for plugins that not installed via ilse
 		try{
 			$plugin = $this->getPluginObject($pi);
@@ -105,7 +97,6 @@ class PluginAdministration52 implements PluginAdministration
 	 */
 	public function needsUpdate(PluginInfo $pi)
 	{
-		assert('is_string($name)');
 		return $this->getPluginObject($pi)->needsUpdate();
 	}
 
