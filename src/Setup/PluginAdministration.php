@@ -58,13 +58,4 @@ interface PluginAdministration
 	 * @return 	bool
 	 */
 	public function needsUpdate($name);
-
-	/**
-	 * Get an instance of installed plugin
-	 *
-	 * @param  	string 		$name
-	 * @return 	object
-	 */
-	public function getPluginObject($name);
-
 }
