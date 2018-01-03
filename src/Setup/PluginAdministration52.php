@@ -51,49 +51,49 @@ class PluginAdministration52 implements PluginAdministration
 	/**
 	 * @inheritdoc
 	 */
-	public function update($name)
+	public function update(PluginInfo $pi)
 	{
 		assert('is_string($name)');
 
-		$plugin = $this->getPluginObject($name);
+		$plugin = $this->getPluginObject($pi);
 		$plugin->update();
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function activate($name)
+	public function activate(PluginInfo $pi)
 	{
 		assert('is_string($name)');
 
-		$plugin = $this->getPluginObject($name);
+		$plugin = $this->getPluginObject($pi);
 		$plugin->activate();
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function updateLanguage($name)
+	public function updateLanguage(PluginInfo $pi)
 	{
 		assert('is_string($name)');
 
-		$plugin = $this->getPluginObject($name);
+		$plugin = $this->getPluginObject($pi);
 		$plugin->updateLanguages();
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function uninstall($name)
+	public function uninstall(PluginInfo $pi)
 	{
 		assert('is_string($name)');
 
 		// necessary for plugins that not installed via ilse
 		try{
-			$plugin = $this->getPluginObject($name);
+			$plugin = $this->getPluginObject($pi);
 		} catch (\Exception $e) {
 			$this->install($name);
-			$plugin = $this->getPluginObject($name);
+			$plugin = $this->getPluginObject($pi);
 		}
 
 		$plugin->deactivate();
@@ -103,28 +103,26 @@ class PluginAdministration52 implements PluginAdministration
 	/**
 	 * @inheritdoc
 	 */
-	public function needsUpdate($name)
+	public function needsUpdate(PluginInfo $pi)
 	{
 		assert('is_string($name)');
-		return $this->getPluginObject($name)->needsUpdate();
+		return $this->getPluginObject($pi)->needsUpdate();
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function getPluginObject($plugin_name, $call_construct = true)
+	public function getPluginObject(PluginInfo $pi, $call_construct = true)
 	{
-		assert('is_string($plugin_name)');
-
-		$full_class_name = self::PLUGIN_CLASS_PREFIX_IL.$plugin_name.self::PLUGIN_CLASS_SUFFIX;
+		$full_class_name = self::PLUGIN_CLASS_PREFIX_IL.$pi->getPluginName().self::PLUGIN_CLASS_SUFFIX;
 
 		$cur = getcwd();
 		chdir($this->config->server()->absolutePath());
 		if(!class_exists($full_class_name)) {
-			$link = $this->getPluginLinkPath(self::PLUGIN_PREFIX.$plugin_name);
+			$link = $this->createPluginMetaData($pi);
 			require_once($link["path"]."/".$link["name"]."/".self::CLASSES_FOLDER."/".self::PLUGIN_CLASS_PREFIX_CLASS.$full_class_name.".php");
 		}
-		$class = new \ReflectionClass(self::PLUGIN_CLASS_PREFIX_IL.$plugin_name.self::PLUGIN_CLASS_SUFFIX);
+		$class = new \ReflectionClass(self::PLUGIN_CLASS_PREFIX_IL.$pi->getPluginName().self::PLUGIN_CLASS_SUFFIX);
 
 		if($call_construct) {
 			return $class->newInstance();
