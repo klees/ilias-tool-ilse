@@ -145,8 +145,8 @@ class UpdatePlugins implements Action
 		$this->logger->eventually("Update plugin", function() use($pis) {
 			foreach ($pis as $pi) {
 				$this->logger->always("update plugin ".$pi->getPluginName(), function() use($pi) {
-					if($this->getPluginAdmin()->needsUpdate($pi->getPluginName())) {
-						$this->getPluginAdmin()->update($pi->getPluginName());
+					if($this->getPluginAdmin()->needsUpdate($pi)) {
+						$this->getPluginAdmin()->update($pi);
 					}
 				});
 			}
@@ -164,7 +164,7 @@ class UpdatePlugins implements Action
 		$this->logger->eventually("Activate plugin", function() use($pis) {
 			foreach ($pis as $pi) {
 				$this->logger->always("activate plugin ".$pi->getPluginName(), function() use($pi) {
-					$this->getPluginAdmin()->activate($pi->getPluginName());
+					$this->getPluginAdmin()->activate($pi);
 				});
 			}
 		});
@@ -181,7 +181,7 @@ class UpdatePlugins implements Action
 		$this->logger->eventually("Update plugin language", function() use($pis) {
 			foreach ($pis as $pi) {
 				$this->logger->always("update language for plugin ".$pi->getPluginName(), function() use($pi) {
-					$this->getPluginAdmin()->updateLanguage($pi->getPluginName());
+					$this->getPluginAdmin()->updateLanguage($pi);
 				});
 			}
 		});
