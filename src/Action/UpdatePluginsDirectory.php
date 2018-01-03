@@ -137,7 +137,9 @@ class UpdatePluginsDirectory implements Action
 				}
 				$this->filesystem->makeDirectory($this->plugins->dir()."/".$name);
 				$git = $this->git_factory->getRepo($this->plugins->dir()."/".$name, $url);
-				$this->task_logger->always("clone plugin $name", [$git, "gitClone"]);
+				$this->task_logger->always("clone plugin $name", function() use($git) {
+					$git->gitClone();
+				});
 			}
 		});
 	}
