@@ -25,7 +25,7 @@ interface PluginAdministration
 	 * @param 	PluginInfo 		$pi
 	 * @return 	void
 	 */
-	public function update(PluginInfo $pi));
+	public function update(PluginInfo $pi);
 
 	/**
 	 * Activate plugin
@@ -33,7 +33,7 @@ interface PluginAdministration
 	 * @param 	$name
 	 * @return 	void
 	 */
-	public function activate(PluginInfo $pi));
+	public function activate(PluginInfo $pi);
 
 	/**
 	 * Update language for a plugin
@@ -41,7 +41,7 @@ interface PluginAdministration
 	 * @param 	PluginInfo 		$pi
 	 * @return 	void
 	 */
-	public function updateLanguage(PluginInfo $pi));
+	public function updateLanguage(PluginInfo $pi);
 
 	/**
 	 * Uninstall plugin
@@ -49,7 +49,7 @@ interface PluginAdministration
 	 * @param 	PluginInfo 		$pi
 	 * @return 	void
 	 */
-	public function uninstall(PluginInfo $pi));
+	public function uninstall(PluginInfo $pi);
 
 	/**
 	 * Checks whether a plugin needs an update
@@ -57,5 +57,5 @@ interface PluginAdministration
 	 * @param 	PluginInfo 		$pi
 	 * @return 	bool
 	 */
-	public function needsUpdate(PluginInfo $pi));
+	public function needsUpdate(PluginInfo $pi);
 }
