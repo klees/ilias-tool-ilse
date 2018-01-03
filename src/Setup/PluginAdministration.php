@@ -58,4 +58,12 @@ interface PluginAdministration
 	 * @return 	bool
 	 */
 	public function needsUpdate(PluginInfo $pi);
+
+	/**
+	 * Checks whether a plugin is active
+	 *
+	 * @param 	PluginInfo 		$pi
+	 * @return 	bool
+	 */
+	public function isActive(PluginInfo $pi);
 }
