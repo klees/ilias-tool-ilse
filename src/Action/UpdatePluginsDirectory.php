@@ -179,7 +179,7 @@ class UpdatePluginsDirectory implements Action
 				$this->task_logger->always("delete plugin $marked_plugin", function() use($marked_plugin) {
 					$pi = $this->getPluginInfo($this->plugins->dir().'/'.$marked_plugin);
 					$link = $this->createPluginMetaData($pi);
-					$this->update_plugins->uninstall($pi->getPluginName());
+					$this->update_plugins->uninstall($pi);
 					$this->filesystem->remove($link['path'].'/'.$link['name']);
 					$this->filesystem->remove($this->plugins->dir()."/".$marked_plugin);
 				});
