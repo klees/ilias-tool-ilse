@@ -118,12 +118,15 @@ class PluginAdministration52 implements PluginAdministration
 		}
 		$class = new \ReflectionClass(self::PLUGIN_CLASS_PREFIX_IL.$pi->getPluginName().self::PLUGIN_CLASS_SUFFIX);
 
-		if($call_construct) {
-			return $class->newInstance();
-		} else {
-			return $class->newInstanceWithoutConstructor();
+		try{
+			if($call_construct) {
+				return $class->newInstance();
+			} else {
+				return $class->newInstanceWithoutConstructor();
+			}
+		} finally {
+			chdir($cur);
 		}
-		chdir($cur);
 	}
 
 	/**
