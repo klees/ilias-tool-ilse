@@ -17,6 +17,13 @@ interface Filesystem {
 	public function remove($path);
 
 	/**
+	 * Change the directory to given path.
+	 *
+	 * @param 	string 	$path
+	 */
+	public function changeDir($path);
+
+	/**
 	 * Check if file or directory exists.
 	 *
 	 * @param	string	$path
