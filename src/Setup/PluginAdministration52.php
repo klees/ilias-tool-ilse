@@ -80,15 +80,10 @@ class PluginAdministration52 implements PluginAdministration
 	 */
 	public function uninstall(PluginInfo $pi)
 	{
-		// necessary for plugins that not installed via ilse
-		try{
-			$plugin = $this->getPluginObject($pi);
-		} catch (\Exception $e) {
-			$this->install($name);
-			$plugin = $this->getPluginObject($pi);
+		$plugin = $this->getPluginObject($pi);
+		if($plugin->isActive()) {
+			$plugin->deactivate();
 		}
-
-		$plugin->deactivate();
 		$plugin->uninstall();
 	}
 
