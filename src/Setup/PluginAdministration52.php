@@ -4,6 +4,7 @@ namespace CaT\Ilse\Setup;
 use CaT\Ilse\Config;
 use CaT\Ilse\Setup\InitILIAS;
 use CaT\Ilse\Aux\ILIAS\PluginInfo;
+use CaT\Ilse\Action\Plugin;
 
 /**
  * Delegates calls to plugins in ilias
