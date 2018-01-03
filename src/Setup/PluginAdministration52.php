@@ -98,6 +98,14 @@ class PluginAdministration52 implements PluginAdministration
 	/**
 	 * @inheritdoc
 	 */
+	public function isActive(PluginInfo $pi)
+	{
+		return $this->getPluginObject($pi)->isActive();
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	public function getPluginObject(PluginInfo $pi, $call_construct = true)
 	{
 		$full_class_name = self::PLUGIN_CLASS_PREFIX_IL.$pi->getPluginName().self::PLUGIN_CLASS_SUFFIX;
