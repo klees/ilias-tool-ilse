@@ -11,7 +11,7 @@ use CaT\Ilse\Aux\ILIAS\PluginInfo;
  * @author Daniel Weise <daniel.weise@concepts-and-training.de>
  * @copyright Extended GPL, see LICENSE
  */
-class PluginAdministration52 implements PluginAdministration, InitILIAS
+class PluginAdministration52 implements PluginAdministration
 {
 	const PLUGIN_CLASS_PREFIX_IL 	= "il";
 	const PLUGIN_CLASS_PREFIX_CLASS = "class.";
