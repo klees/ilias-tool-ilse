@@ -1,6 +1,7 @@
 <?php
 namespace CaT\Ilse\Action;
 
+use CaT\Ilse\Aux\ILIAS\PluginInfo;
 /**
  * Trait Plugin
  *
