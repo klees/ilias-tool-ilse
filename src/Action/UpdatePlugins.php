@@ -195,14 +195,12 @@ class UpdatePlugins implements Action
 	/**
 	 * Delete plugin
 	 *
-	 * @param 	string 		$name
+	 * @param 	PluginInfo 		$pi
 	 * @return 	void
 	 */
-	public function uninstall($name)
+	public function uninstall(PluginInfo $pi)
 	{
-		assert('is_string($name)');
-
-		$this->getPluginAdmin()->uninstall($name);
+		$this->getPluginAdmin()->uninstall($pi);
 	}
 
 	/**
