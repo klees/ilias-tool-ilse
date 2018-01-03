@@ -84,11 +84,12 @@ plugin:
 		$filesystem = $this->createMock("CaT\Ilse\Aux\Filesystem");
 		$plugin_info_reader_factory = $this->createMock(ILIAS\PluginInfoReaderFactory::class);
 
+		$pi = new PluginInfo("Service", "Repository", "RepositoryObject", "robj", "test");
 		$git = new Config\Git($url, "master", "5355");
 		$server = new Config\Server("http://ilias.de", "/var/www/html/ilias", "Europe/Berlin");
 		$plugin = new Config\Plugin($path, $git);
 		$plugins = new Config\Plugins($path, array($plugin));
-		$info = new PluginInfo("Service", "Repository", "RepositoryObject", "robj", $name);
+
 		$action = new UpdatePluginsForTest(
 			$server,
 			$plugins,
@@ -113,9 +114,9 @@ plugin:
 			}));
 
 		$plugin_admin_factory
-			->expects($this->once())
+			->expects($this->any())
 			->method("getPluginAdministrationForRelease")
-			->with("5.2", $config, $task_logger)
+			->with("5.2", $config)
 			->willReturn($plugin_admin);
 
 		$plugin_admin
@@ -125,15 +126,15 @@ plugin:
 		$plugin_admin
 			->expects($this->once())
 			->method("update")
-			->with($name);
+			->with($pi);
 		$plugin_admin
 			->expects($this->once())
 			->method("activate")
-			->with($name);
+			->with($pi);
 		$plugin_admin
 			->expects($this->once())
 			->method("updateLanguage")
-			->with($name);
+			->with($pi);
 
 		$action->perform();
 	}
