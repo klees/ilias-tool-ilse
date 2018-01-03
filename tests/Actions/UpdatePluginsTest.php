@@ -14,7 +14,10 @@ use \CaT\Ilse\Setup\PluginAdministration52;
 // If database had it own interface like filesystem, we could
 // drop this and write a proper test instead.
 class UpdatePluginsForTest extends UpdatePlugins {
-
+	public function getPluginInfoObjects()
+	{
+		return array(new PluginInfo("Service", "Repository", "RepositoryObject", "robj", "test"));
+	}
 }
 
 class UpdatePluginsTest extends PHPUnit_Framework_TestCase
