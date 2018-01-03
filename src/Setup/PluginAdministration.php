@@ -22,10 +22,10 @@ interface PluginAdministration
 	/**
 	 * Update plugins
 	 *
-	 * @param 	string 		$name
+	 * @param 	PluginInfo 		$pi
 	 * @return 	void
 	 */
-	public function update($name);
+	public function update(PluginInfo $pi));
 
 	/**
 	 * Activate plugin
@@ -33,29 +33,29 @@ interface PluginAdministration
 	 * @param 	$name
 	 * @return 	void
 	 */
-	public function activate($name);
+	public function activate(PluginInfo $pi));
 
 	/**
 	 * Update language for a plugin
 	 *
-	 * @param 	string 		$name
+	 * @param 	PluginInfo 		$pi
 	 * @return 	void
 	 */
-	public function updateLanguage($name);
+	public function updateLanguage(PluginInfo $pi));
 
 	/**
 	 * Uninstall plugin
 	 *
-	 * @param 	string 		$name
+	 * @param 	PluginInfo 		$pi
 	 * @return 	void
 	 */
-	public function uninstall($name);
+	public function uninstall(PluginInfo $pi));
 
 	/**
 	 * Checks whether a plugin needs an update
 	 *
-	 * @param 	string 		$name
+	 * @param 	PluginInfo 		$pi
 	 * @return 	bool
 	 */
-	public function needsUpdate($name);
+	public function needsUpdate(PluginInfo $pi));
 }
