@@ -119,7 +119,7 @@ interface Filesystem {
 	 * Link a file or folder
 	 *
 	 * @param 	string 	$target 	existing file or folder
-	 * @param 	string 	$link 		paht + name of the link
+	 * @param 	string 	$link 		path + name of the link
 	 * @return 	bool
 	 */
 	public function symlink($target, $link);
