@@ -2,13 +2,14 @@
 
 /* Copyright (c) 2017 Richard Klees <richard.klees@concepts-and-training.de>, Extended GPL, see LICENSE */
 
-use \CaT\Ilse\Action\UpdatePlugins;
+use CaT\Ilse\Config;
+use CaT\Ilse\Aux\ILIAS;
 use CaT\Ilse\Aux\TaskLogger;
-use CaT\Ilse\Aux\UpdatePluginsHelper;
+use \CaT\Ilse\Aux\YamlConfigParser;
+use \CaT\Ilse\Aux\ILIAS\PluginInfo;
+use \CaT\Ilse\Action\UpdatePlugins;
 use \CaT\Ilse\Setup\PluginAdministrationFactory;
 use \CaT\Ilse\Setup\PluginAdministration52;
-use \CaT\Ilse\Configurators\Plugins;
-use \CaT\Ilse\Aux\YamlConfigParser;
 
 // If database had it own interface like filesystem, we could
 // drop this and write a proper test instead.
@@ -70,16 +71,30 @@ plugin:
 	public function test_perform()
 	{
 		$url = "https://-my_plugin";
-		$path = "test/dummy";
+		$path = "/home/vagrant/dummy";
 		$name = "my_plugin";
 
 		$config = $this->parser->read_config($this->yaml_string, "\\CaT\\Ilse\\Config\\General");
 		$plugin_admin_factory = $this->createMock(PluginAdministrationFactory::class);
-		$update_plugins_helper = $this->createMock(UpdatePluginsHelper::class);
 		$task_logger = $this->createMock(TaskLogger::class);
 		$plugin_admin = $this->createMock(PluginAdministration52::class);
+		$filesystem = $this->createMock("CaT\Ilse\Aux\Filesystem");
+		$plugin_info_reader_factory = $this->createMock(ILIAS\PluginInfoReaderFactory::class);
 
-		$action = new UpdatePluginsForTest($config, $plugin_admin_factory, $update_plugins_helper, $task_logger);
+		$git = new Config\Git($url, "master", "5355");
+		$server = new Config\Server("http://ilias.de", "/var/www/html/ilias", "Europe/Berlin");
+		$plugin = new Config\Plugin($path, $git);
+		$plugins = new Config\Plugins($path, array($plugin));
+		$info = new PluginInfo("Service", "Repository", "RepositoryObject", "robj", $name);
+		$action = new UpdatePluginsForTest(
+			$server,
+			$plugins,
+			$filesystem,
+			$config,
+			$plugin_admin_factory,
+			$task_logger,
+			$plugin_info_reader_factory
+		);
 
 		$task_logger
 			->expects($this->any())
@@ -99,11 +114,6 @@ plugin:
 			->method("getPluginAdministrationForRelease")
 			->with("5.2", $config, $task_logger)
 			->willReturn($plugin_admin);
-
-		$update_plugins_helper
-			->expects($this->once())
-			->method("getRepoUrls")
-			->willReturn(array($url));
 
 		$plugin_admin
 			->expects($this->once())
