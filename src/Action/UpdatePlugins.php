@@ -128,11 +128,10 @@ class UpdatePlugins implements Action
 		$this->logger->eventually("Install plugins", function() use($pis) {
 			foreach ($pis as $pi) {
 				$link = $this->createPluginMetaData($pi);
-				if(!$this->filesystem->isLink($link["path"].'/'.$link['name'])) {
-					$this->logger->always("install plugin ".$pi->getPluginName(), function() use($pi) {
-						$this->getPluginAdmin()->install($pi);
-					});
-				}
+				// TODO: check for installed plugins and ignore them
+				$this->logger->always("install plugin ".$pi->getPluginName(), function() use($pi) {
+					$this->getPluginAdmin()->install($pi);
+				});
 			}
 		});
 	}
