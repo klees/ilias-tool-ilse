@@ -176,7 +176,7 @@ class UpdatePluginsDirectory implements Action
 			foreach($marked_plugins as $marked_plugin) {
 				$this->task_logger->always("delete plugin $marked_plugin", function() use($marked_plugin) {
 					$pi = $this->getPluginInfo($this->plugins->dir().'/'.$marked_plugin);
-					$link = $this->getPluginLinkPath($pi);
+					$link = $this->createPluginMetaData($pi);
 					$this->update_plugins->uninstall($pi->getPluginName());
 					$this->filesystem->remove($link['path'].'/'.$link['name']);
 					$this->filesystem->remove($this->plugins->dir()."/".$marked_plugin);
@@ -197,7 +197,7 @@ class UpdatePluginsDirectory implements Action
 			$installed_plugins = $this->getInstalledPlugins();
 			foreach($installed_plugins as $plugin) {
 				$pi = $this->getPluginInfo($this->plugins->dir().'/'.$plugin);
-				$link = $this->getPluginLinkPath($pi);
+				$link = $this->createPluginMetaData($pi);
 				if(!$this->filesystem->exists($link['path'])) {
 					$this->filesystem->makeDirectory($link['path']);
 				}
@@ -251,7 +251,7 @@ class UpdatePluginsDirectory implements Action
 	 * @param 	PluginInfo 	$info
 	 * @return 	string[]
 	 */
-	public function getPluginLinkPath(PluginInfo $info)
+	public function createPluginMetaData(PluginInfo $info)
 	{
 		$link = array();
 		$absolute_path = $this->server->absolute_path();
