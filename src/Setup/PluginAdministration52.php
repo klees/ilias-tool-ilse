@@ -142,8 +142,12 @@ class PluginAdministration52 implements PluginAdministration
 		require_once("./Services/Init/classes/class.ilInitialisation.php");
 		define("CLIENT_ID", $this->config->client()->name());
 
-		\ilContext::init(\ilContext::CONTEXT_UNITTEST);
-		\ilInitialisation::initILIAS();
-		chdir($cur);
+		try {
+			\ilContext::init(\ilContext::CONTEXT_UNITTEST);
+			\ilInitialisation::initILIAS();
+		}
+		finally{
+			chdir($cur);
+		}
 	}
 }
