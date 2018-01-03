@@ -21,7 +21,6 @@ class App extends Application
 	const ILSE_CONFIG		= "config.yaml";
 	const ILSE_DIR			= ".ilse";
 	const I_F_CONFIG		= "ilse_config.yaml";
-	const I_R_BRANCH		= "master";
 
 	public function __construct() {
 		parent::__construct("ilse - automatically sets ILIAS up");
