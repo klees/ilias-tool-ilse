@@ -127,9 +127,12 @@ class UpdatePlugins implements Action
 	{
 		$this->logger->eventually("Install plugins", function() use($pis) {
 			foreach ($pis as $pi) {
-				$this->logger->always("install plugin ".$pi->getPluginName(), function() use($pi) {
-					$this->getPluginAdmin()->install($pi);
-				});
+				$link = $this->createPluginMetaData($pi);
+				if(!$this->filesystem->isLink($link["path"].'/'.$link['name'])) {
+					$this->logger->always("install plugin ".$pi->getPluginName(), function() use($pi) {
+						$this->getPluginAdmin()->install($pi);
+					});
+				}
 			}
 		});
 	}
@@ -144,11 +147,11 @@ class UpdatePlugins implements Action
 	{
 		$this->logger->eventually("Update plugin", function() use($pis) {
 			foreach ($pis as $pi) {
-				$this->logger->always("update plugin ".$pi->getPluginName(), function() use($pi) {
-					if($this->getPluginAdmin()->needsUpdate($pi)) {
+				if($this->getPluginAdmin()->needsUpdate($pi)) {
+					$this->logger->always("update plugin ".$pi->getPluginName(), function() use($pi) {
 						$this->getPluginAdmin()->update($pi);
-					}
-				});
+					});
+				}
 			}
 		});
 	}
@@ -163,9 +166,11 @@ class UpdatePlugins implements Action
 	{
 		$this->logger->eventually("Activate plugin", function() use($pis) {
 			foreach ($pis as $pi) {
-				$this->logger->always("activate plugin ".$pi->getPluginName(), function() use($pi) {
-					$this->getPluginAdmin()->activate($pi);
-				});
+				if(!$this->getPluginAdmin()->isActive($pi)) {
+					$this->logger->always("activate plugin ".$pi->getPluginName(), function() use($pi) {
+						$this->getPluginAdmin()->activate($pi);
+					});
+				}
 			}
 		});
 	}
