@@ -11,21 +11,6 @@ use CaT\Ilse\Aux\ILIAS\PluginInfo;
 trait Plugin
 {
 	/**
-	 * Get repo urls from config file
-	 *
-	 * @return string[]
-	 */
-	protected function getRepoUrls()
-	{
-		$ret = array_map(function($plugin)
-			{
-				return $plugin->git()->url();
-			}
-			, $this->plugins->plugins());
-		return $ret;
-	}
-
-	/**
 	 * Get a PluginInfo object.
 	 *
 	 * @param 	string 	$dir

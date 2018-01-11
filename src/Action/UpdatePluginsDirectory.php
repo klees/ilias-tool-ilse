@@ -128,7 +128,7 @@ class UpdatePluginsDirectory implements Action
 	protected function clonePlugins()
 	{
 		$installed_plugins = $this->getInstalledPlugins();
-		$urls = $this->getRepoUrls();
+		$urls = $this->plugins->getRepoUrls();
 		$this->task_logger->eventually("Clone new plugins", function () use($urls, $installed_plugins) {
 			foreach ($urls as $url) {
 				$name = $this->getRepoNameFromUrl($url);
@@ -151,7 +151,7 @@ class UpdatePluginsDirectory implements Action
 	 */
 	protected function updatePlugins()
 	{
-		$urls = $this->getRepoUrls();
+		$urls = $this->plugins->getRepoUrls();
 		$this->task_logger->eventually("Pull plugins", function () use($urls) {
 			foreach ($urls as $url) {
 				$name = $this->getRepoNameFromUrl($url);
@@ -170,7 +170,7 @@ class UpdatePluginsDirectory implements Action
 	 */
 	protected function deleteUnlistedPlugins()
 	{
-		$urls = $this->getRepoUrls();
+		$urls = $this->plugins->getRepoUrls();
 		$installed_plugins = $this->getInstalledPlugins();
 		$marked_plugins = $this->getUnlistedPlugins($installed_plugins, $urls);
 
