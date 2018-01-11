@@ -15,7 +15,7 @@ trait Plugin
 	 *
 	 * @return string[]
 	 */
-	public function getRepoUrls()
+	protected function getRepoUrls()
 	{
 		$ret = array_map(function($plugin)
 			{
@@ -75,7 +75,7 @@ trait Plugin
 	 * @param 	PluginInfo 	$info
 	 * @return 	string[]
 	 */
-	public function createPluginMetaData(PluginInfo $info)
+	protected function createPluginMetaData(PluginInfo $info)
 	{
 		$link = array();
 		$absolute_path = $this->server->absolute_path();
