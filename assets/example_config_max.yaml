@@ -163,7 +163,7 @@ ldap:
 plugin:
     plugins:
         # Add the directory, where the plugins should be installed to.
-        # The plugins will be link to their specific plugin slots
+        # The plugins will be linked to their specific plugin slots.
         dir:
         #Single plugin entry.
         0:
