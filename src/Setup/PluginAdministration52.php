@@ -111,21 +111,24 @@ class PluginAdministration52 implements PluginAdministration
 		$full_class_name = self::PLUGIN_CLASS_PREFIX_IL.$pi->getPluginName().self::PLUGIN_CLASS_SUFFIX;
 
 		$cur = getcwd();
-		chdir($this->config->server()->absolutePath());
-		if(!class_exists($full_class_name)) {
-			$name = $pi->getPluginName();
-			$path = $this->server->absolute_path()."/".$pi->getRelativePluginPath();
-			require_once($path."/".$name."/".self::CLASSES_FOLDER."/".self::PLUGIN_CLASS_PREFIX_CLASS.$full_class_name.".php");
-		}
-		$class = new \ReflectionClass(self::PLUGIN_CLASS_PREFIX_IL.$pi->getPluginName().self::PLUGIN_CLASS_SUFFIX);
+		try {
+			chdir($this->config->server()->absolutePath());
 
-		try{
+			if(!class_exists($full_class_name)) {
+				$name = $pi->getPluginName();
+				$path = $this->server->absolute_path()."/".$pi->getRelativePluginPath();
+				require_once($path."/".$name."/".self::CLASSES_FOLDER."/".self::PLUGIN_CLASS_PREFIX_CLASS.$full_class_name.".php");
+			}
+			$class = new \ReflectionClass(self::PLUGIN_CLASS_PREFIX_IL.$pi->getPluginName().self::PLUGIN_CLASS_SUFFIX);
+
 			if($call_construct) {
 				return $class->newInstance();
-			} else {
+			}
+			else {
 				return $class->newInstanceWithoutConstructor();
 			}
-		} finally {
+		}
+		finally {
 			chdir($cur);
 		}
 	}
