@@ -17,8 +17,6 @@ use CaT\Ilse\Aux\ILIAS\PluginInfo;
  */
 class UpdatePluginsDirectory implements Action
 {
-	use Plugin;
-
 	const BRANCH = "master";
 
 	/**
@@ -180,9 +178,10 @@ class UpdatePluginsDirectory implements Action
 			foreach($marked_plugins as $marked_plugin) {
 				$this->task_logger->always("delete plugin $marked_plugin", function() use($marked_plugin) {
 					$pi = $reader->readInfo($this->plugins->dir().'/'.$marked_plugin);
-					$link = $this->createPluginMetaData($pi);
+					$name = $pi->getPluginName();
+					$path = $this->server->absolute_path()."/".$pi->getRelativePluginPath();
 					$this->update_plugins->uninstall($pi);
-					$this->filesystem->remove($link['path'].'/'.$link['name']);
+					$this->filesystem->remove($path.'/'.$name);
 					$this->filesystem->remove($this->plugins->dir()."/".$marked_plugin);
 				});
 			}
@@ -202,16 +201,17 @@ class UpdatePluginsDirectory implements Action
 			$installed_plugins = $this->filesystem->getSubdirectories($this->plugins->dir());
 			foreach($installed_plugins as $plugin) {
 				$pi = $reader->readInfo($this->plugins->dir().'/'.$plugin);
-				$link = $this->createPluginMetaData($pi);
-				if(!$this->filesystem->exists($link['path'])) {
-					$this->filesystem->makeDirectory($link['path']);
+				$name = $pi->getPluginName();
+				$path = $this->server->absolute_path()."/".$pi->getRelativePluginPath();
+				if(!$this->filesystem->exists($path)) {
+					$this->filesystem->makeDirectory($path);
 				}
-				if(!$this->filesystem->isWriteable($link['path'])) {
-					throw new \Exception("No write acces to ".$link['path'].".");
+				if(!$this->filesystem->isWriteable($path)) {
+					throw new \Exception("No write acces to '$path'");
 				}
-				if(!$this->filesystem->isLink($link['path'].'/'.$link['name'])) {
-					$this->task_logger->always("link plugin ".$pi->getPluginName(), function() use($plugin, $link) {
-						$this->filesystem->symlink($this->plugins->dir()."/".$plugin, $link['path'].'/'.$link['name']);
+				if(!$this->filesystem->isLink("$path/$name")) {
+					$this->task_logger->always("link plugin ".$pi->getPluginName(), function() use($plugin, $path, $name) {
+						$this->filesystem->symlink($this->plugins->dir()."/".$plugin, "$path/$name");
 					});
 				}
 			}

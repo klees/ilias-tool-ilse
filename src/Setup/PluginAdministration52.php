@@ -14,8 +14,6 @@ use CaT\Ilse\Action\Plugin;
  */
 class PluginAdministration52 implements PluginAdministration
 {
-	use Plugin;
-
 	const PLUGIN_CLASS_PREFIX_IL 	= "il";
 	const PLUGIN_CLASS_PREFIX_CLASS = "class.";
 	const PLUGIN_CLASS_SUFFIX 		= "Plugin";

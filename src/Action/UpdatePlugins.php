@@ -20,8 +20,6 @@ use CaT\Ilse\Aux\ILIAS\PluginInfo;
  */
 class UpdatePlugins implements Action
 {
-	use Plugin;
-
 	/**
 	 * @var Server
 	 */
@@ -127,7 +125,6 @@ class UpdatePlugins implements Action
 	{
 		$this->logger->eventually("Install plugins", function() use($pis) {
 			foreach ($pis as $pi) {
-				$link = $this->createPluginMetaData($pi);
 				// TODO: check for installed plugins and ignore them
 				$this->logger->always("install plugin ".$pi->getPluginName(), function() use($pi) {
 					$this->getPluginAdmin()->install($pi);

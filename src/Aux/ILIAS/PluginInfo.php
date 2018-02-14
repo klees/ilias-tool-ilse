@@ -9,6 +9,8 @@ namespace CaT\Ilse\Aux\ILIAS;
  */
 class PluginInfo
 {
+	const PLUGIN_BASE_PATH = "Customizing/global/plugins";
+
 	/**
 	 * @var string
 	 */
@@ -158,6 +160,20 @@ class PluginInfo
 		$clone = clone $this;
 		$clone->slot_id = $value;
 		return $clone;
+	}
+
+	 /**
+	 * Get the path for the plugin relative to the ILIAS base folder excluding
+	 * the name of the plugin it self.
+	 *
+	 * @return string
+	 */
+	public function getRelativePluginPath() {
+		return
+			self::PLUGIN_BASE_PATH."/".
+			$this->getComponentType()."/".
+			$this->getComponentName()."/".
+			$this->getSlot();
 	}
 
 	/**
