@@ -97,6 +97,7 @@ class FilesystemImpl implements Filesystem {
 	 */
 	public function getSubdirectories($path)
 	{
+		assert('is_dir($path)');
 		$subdirs = array();
 		$entries = array_diff(scandir($path), array('.', '..'));
 		foreach ($entries as $entry)
