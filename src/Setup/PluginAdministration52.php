@@ -4,7 +4,6 @@ namespace CaT\Ilse\Setup;
 use CaT\Ilse\Config;
 use CaT\Ilse\Setup\InitILIAS;
 use CaT\Ilse\Aux\ILIAS\PluginInfo;
-use CaT\Ilse\Action\Plugin;
 
 /**
  * Delegates calls to plugins in ilias
@@ -14,8 +13,6 @@ use CaT\Ilse\Action\Plugin;
  */
 class PluginAdministration52 implements PluginAdministration
 {
-	use Plugin;
-
 	const PLUGIN_CLASS_PREFIX_IL 	= "il";
 	const PLUGIN_CLASS_PREFIX_CLASS = "class.";
 	const PLUGIN_CLASS_SUFFIX 		= "Plugin";
