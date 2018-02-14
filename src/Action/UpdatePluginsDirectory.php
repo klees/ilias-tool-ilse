@@ -17,8 +17,6 @@ use CaT\Ilse\Aux\ILIAS\PluginInfo;
  */
 class UpdatePluginsDirectory implements Action
 {
-	const BRANCH = "master";
-
 	/**
 	 * @var Server
 	 */
@@ -157,6 +155,7 @@ class UpdatePluginsDirectory implements Action
 				$name = $this->getRepoNameFromUrl($url);
 				$git = $this->git_factory->getRepo($this->plugins->dir().'/'.$name, $url);
 				$this->task_logger->always("pull plugin $name", function() use ($git, $branch) {
+					$git->gitCheckOut($branch);
 					$git->gitPull($branch);
 				});
 			}

@@ -119,6 +119,12 @@ class UpdatePluginsDirectoryTest extends PHPUnit_Framework_TestCase
 			->with($this->path."/".$name, $this->url, false)
 			->willReturn($this->git_wrapper);
 
+
+		$this->git_wrapper
+			->expects($this->atLeastOnce())
+			->method("gitCheckOut")
+			->with($this->branch);
+
 		$this->git_wrapper
 			->expects($this->atLeastOnce())
 			->method("gitPull")
