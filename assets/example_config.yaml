@@ -22,7 +22,7 @@ database:
     #ILIAS supports three database engines. InnoDB, MyISAM, .....
     engine: innodb
     #Encoding for database
-    encoding: utf8_unicode_ci
+    encoding: utf8_general_ci
     #Should a database be created. Possible option are 1 = create and 0 = no create
     create_db: 1
 language:
@@ -74,3 +74,14 @@ https_auto_detect:
     header_name: X-FORWARDED-SCHEME
     #default https header value
     header_value: https
+plugin:
+	# ilse installs all plugins to one directory and then links
+	# them to ILIAS for easier maintenance
+	dir:
+	# install no plugins
+	plugins:
+        0:
+            name: TestRepositoryObject
+            git:
+				url: https://github.com/ILIAS-eLearning/TestRepositoryObject
+				branch: master
