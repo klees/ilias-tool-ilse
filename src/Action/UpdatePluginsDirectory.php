@@ -128,7 +128,7 @@ class UpdatePluginsDirectory implements Action
 	 */
 	protected function clonePlugins()
 	{
-		$installed_plugins = $this->getInstalledPlugins();
+		$installed_plugins = $this->filesystem->getSubdirectories($this->plugins->dir());
 		$urls = $this->plugins->getRepoUrls();
 		$this->task_logger->eventually("Clone new plugins", function () use($urls, $installed_plugins) {
 			foreach ($urls as $url) {
@@ -172,7 +172,7 @@ class UpdatePluginsDirectory implements Action
 	protected function deleteUnlistedPlugins()
 	{
 		$urls = $this->plugins->getRepoUrls();
-		$installed_plugins = $this->getInstalledPlugins();
+		$installed_plugins = $this->filesystem->getSubdirectories($this->plugins->dir());
 		$marked_plugins = $this->getUnlistedPlugins($installed_plugins, $urls);
 		$reader = $this->getPluginInfoReader();
 
@@ -199,7 +199,7 @@ class UpdatePluginsDirectory implements Action
 	{
 		$reader = $this->getPluginInfoReader();
 		$this->task_logger->eventually("Link plugins", function () use ($reader) {
-			$installed_plugins = $this->getInstalledPlugins();
+			$installed_plugins = $this->filesystem->getSubdirectories($this->plugins->dir());
 			foreach($installed_plugins as $plugin) {
 				$pi = $reader->readInfo($this->plugins->dir().'/'.$plugin);
 				$link = $this->createPluginMetaData($pi);

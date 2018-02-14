@@ -209,8 +209,12 @@ class UpdatePlugins implements Action
 	 */
 	protected function getPluginInfoObjects()
 	{
+		if (!$this->filesystem->exists($this->plugins->dir())) {
+			return [];
+		}
+
 		$pis = array();
-		$plugins = $this->getInstalledPlugins();
+		$plugins = $this->filesystem->getSubdirectories($this->plugins->dir());
 		$reader = $this->getPluginInfoReader();
 
 		foreach ($plugins as $plugin) {

@@ -11,20 +11,6 @@ use CaT\Ilse\Aux\ILIAS\PluginInfo;
 trait Plugin
 {
 	/**
-	 * Get an array of installed plugins with their repo-names.
-	 *
-	 * @return string[] | []
-	 */
-	public function getInstalledPlugins()
-	{
-		if($this->filesystem->exists($this->plugins->dir()) && !$this->filesystem->isEmpty($this->plugins->dir()))
-		{
-			return $this->filesystem->getSubdirectories($this->plugins->dir());
-		}
-		return array();
-	}
-
-	/**
 	 * Get an array with the ilias path for a plugin and its name
 	 *
 	 * @param 	PluginInfo 	$info
