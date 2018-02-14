@@ -85,6 +85,7 @@ class UpdatePluginsDirectory implements Action
 		$this->git_factory = $git_factory;
 		$this->task_logger = $task_logger;
 		$this->reader_factory = $reader_factory;
+		$this->plugin_info_reader = null;
 		$this->update_plugins = $update_plugins;
 	}
 
@@ -173,11 +174,12 @@ class UpdatePluginsDirectory implements Action
 		$urls = $this->plugins->getRepoUrls();
 		$installed_plugins = $this->getInstalledPlugins();
 		$marked_plugins = $this->getUnlistedPlugins($installed_plugins, $urls);
+		$reader = $this->getPluginInfoReader();
 
-		$this->task_logger->eventually("Delete plugins", function () use($marked_plugins) {
+		$this->task_logger->eventually("Delete plugins", function () use($marked_plugins, $reader) {
 			foreach($marked_plugins as $marked_plugin) {
 				$this->task_logger->always("delete plugin $marked_plugin", function() use($marked_plugin) {
-					$pi = $this->getPluginInfo($this->plugins->dir().'/'.$marked_plugin);
+					$pi = $reader->readInfo($this->plugins->dir().'/'.$marked_plugin);
 					$link = $this->createPluginMetaData($pi);
 					$this->update_plugins->uninstall($pi);
 					$this->filesystem->remove($link['path'].'/'.$link['name']);
@@ -195,10 +197,11 @@ class UpdatePluginsDirectory implements Action
 	 */
 	protected function linkPluginsToIlias()
 	{
-		$this->task_logger->eventually("Link plugins", function () {
+		$reader = $this->getPluginInfoReader();
+		$this->task_logger->eventually("Link plugins", function () use ($reader) {
 			$installed_plugins = $this->getInstalledPlugins();
 			foreach($installed_plugins as $plugin) {
-				$pi = $this->getPluginInfo($this->plugins->dir().'/'.$plugin);
+				$pi = $reader->readInfo($this->plugins->dir().'/'.$plugin);
 				$link = $this->createPluginMetaData($pi);
 				if(!$this->filesystem->exists($link['path'])) {
 					$this->filesystem->makeDirectory($link['path']);
@@ -245,5 +248,19 @@ class UpdatePluginsDirectory implements Action
 	{
 		$listed = array_map(function($url) { return $this->getRepoNameFromUrl($url); }, $listed);
 		return array_diff($installed, $listed);
+	}
+
+
+	/**
+	 * Get an instance of PluginInfoReader for ILIAS 5.2
+	 *
+	 * @return 	ILIAS\PluginInfoReader
+	 */
+	protected function getPluginInfoReader()
+	{
+		if($this->plugin_info_reader === null) {
+			$this->plugin_info_reader = $this->reader_factory->getPluginInfoReader("5.2", $this->server, $this->filesystem);
+		}
+		return $this->plugin_info_reader;
 	}
 }

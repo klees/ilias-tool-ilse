@@ -11,23 +11,6 @@ use CaT\Ilse\Aux\ILIAS\PluginInfo;
 trait Plugin
 {
 	/**
-	 * Get a PluginInfo object.
-	 *
-	 * @param 	string 	$dir
-	 * @return 	PluginInfo
-	 */
-	protected function getPluginInfo($dir)
-	{
-		assert('is_string($dir)');
-
-		if(!$this->filesystem->isDirectory($dir)) {
-			throw new \Exception("Plugin Directory ".$dir." doesn't exist!");
-		}
-
-		return $this->getPluginInfoReader()->readInfo($dir);
-	}
-
-	/**
 	 * Get an array of installed plugins with their repo-names.
 	 *
 	 * @return string[] | []
@@ -39,19 +22,6 @@ trait Plugin
 			return $this->filesystem->getSubdirectories($this->plugins->dir());
 		}
 		return array();
-	}
-
-	/**
-	 * Get an instance of PluginInfoReader for ILIAS 5.2
-	 *
-	 * @return 	ILIAS\PluginInfoReader
-	 */
-	protected function getPluginInfoReader()
-	{
-		if($this->plugin_info_reader == null) {
-			$this->plugin_info_reader = $this->reader_factory->getPluginInfoReader("5.2", $this->server, $this->filesystem);
-		}
-		return $this->plugin_info_reader;
 	}
 
 	/**

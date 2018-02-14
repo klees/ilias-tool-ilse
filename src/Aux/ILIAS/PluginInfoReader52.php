@@ -42,6 +42,11 @@ class PluginInfoReader52 implements PluginInfoReader
 	{
 		assert('is_string($path)');
 
+		if (!$this->filesystem->isDirectory($path)) {
+			throw new \RuntimeException(
+				"Cannot read plugin info from inexisting directory '$path'");
+		}
+
 		$filelist = $this->filesystem->getFilesInFolder($path."/".self::CLASS_FOLDER);
 		$plugin_name = $this->getPluginName($filelist);
 

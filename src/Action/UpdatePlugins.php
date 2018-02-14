@@ -43,11 +43,6 @@ class UpdatePlugins implements Action
 	protected $plugin_admin;
 
 	/**
-	 * @var PluginInfoReader | null
-	 */
-	protected $plugin_info_reader;
-
-	/**
 	 * @var General
 	 */
 	protected $config;
@@ -61,6 +56,11 @@ class UpdatePlugins implements Action
 	 * @var PluginInfoReaderFactory
 	 */
 	protected $reader_factory;
+
+	/**
+	 * @var PluginInfoReader | null
+	 */
+	protected $plugin_info_reader;
 
 	/**
 	 * @var TaskLogger
@@ -211,10 +211,24 @@ class UpdatePlugins implements Action
 	{
 		$pis = array();
 		$plugins = $this->getInstalledPlugins();
+		$reader = $this->getPluginInfoReader();
 
 		foreach ($plugins as $plugin) {
-			$pis[] = $this->getPluginInfo($this->plugins->dir().'/'.$plugin);
+			$pis[] = $reader->readInfo($this->plugins->dir().'/'.$plugin);
 		}
 		return $pis;
+	}
+
+	/**
+	 * Get an instance of PluginInfoReader for ILIAS 5.2
+	 *
+	 * @return 	ILIAS\PluginInfoReader
+	 */
+	protected function getPluginInfoReader()
+	{
+		if($this->plugin_info_reader == null) {
+			$this->plugin_info_reader = $this->reader_factory->getPluginInfoReader("5.2", $this->server, $this->filesystem);
+		}
+		return $this->plugin_info_reader;
 	}
 }

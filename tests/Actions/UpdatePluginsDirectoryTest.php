@@ -12,17 +12,9 @@ use CaT\Ilse\Aux\Git;
 use CaT\Ilse\Aux\ILIAS;
 use CaT\Ilse\Aux;
 use \CaT\Ilse\Aux\ILIAS\PluginInfo;
+use \CaT\Ilse\Aux\ILIAS\PluginInfoReader;
 
 use CaT\Ilse\Action\UpdatePlugin;
-
-// If database had it own interface like filesystem, we could
-// drop this and write a proper test instead.
-class UpdatePluginsDirectoryForTest extends UpdatePluginsDirectory{
-	public function getPluginInfo($path)
-	{
-		return new PluginInfo("Service", "Repository", "RepositoryObject", "robj", "test");
-	}
-}
 
 class UpdatePluginsDirectoryTest extends PHPUnit_Framework_TestCase
 {
@@ -60,7 +52,7 @@ class UpdatePluginsDirectoryTest extends PHPUnit_Framework_TestCase
 		$this->plugin = new Config\Plugin($this->path, $this->git);
 		$this->plugins = new Config\Plugins($this->path, array($this->plugin));
 
-		$this->object = new UpdatePluginsDirectoryForTest(
+		$this->object = new UpdatePluginsDirectory(
 			$this->server,
 			$this->plugins,
 			$this->filesystem,
@@ -73,11 +65,6 @@ class UpdatePluginsDirectoryTest extends PHPUnit_Framework_TestCase
 	public function test_perform()
 	{
 		$name = "ilias-tool-ilse";
-		$yaml = "---
-ComponentType: Services
-ComponentName: EventHandling
-Slot: EventHook
-SlotId: evhk";
 
 		$this->filesystem
 			->expects($this->any())
@@ -133,6 +120,26 @@ SlotId: evhk";
 			->will($this->returnCallback(function($s, $c) {
 				$c();
 			}));
+
+		$plugin_info = new PluginInfo
+			( "Service"
+			, "Repository"
+			, "RepositoryObject"
+			, "robj"
+			, "test"
+			);
+		$plugin_info_reader = $this->createMock(PluginInfoReader::class);
+		$plugin_info_reader
+			->expects($this->once())
+			->method("readInfo")
+			->with($this->path."/".$name)
+			->willReturn($plugin_info);
+
+		$this->plugin_info_reader_factory
+			->expects($this->once())
+			->method("getPluginInfoReader")
+			->with("5.2", $this->server, $this->filesystem)
+			->willReturn($plugin_info_reader);
 
 		$this->object->perform();
 	}

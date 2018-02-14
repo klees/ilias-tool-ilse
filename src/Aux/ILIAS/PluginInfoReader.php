@@ -17,6 +17,7 @@ interface PluginInfoReader
 	 *  - PluginName
 	 *
 	 * @param 	string 	$path 	path to the plugin folder
+	 * @throws	\RuntimeException if path does not exist
 	 * @return 	PluginInfo
 	 */
 	public function readInfo($path);
