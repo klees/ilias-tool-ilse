@@ -14,6 +14,8 @@ use CaT\Ilse\Action\Plugin;
  */
 class PluginAdministration52 implements PluginAdministration
 {
+	use Plugin;
+
 	const PLUGIN_CLASS_PREFIX_IL 	= "il";
 	const PLUGIN_CLASS_PREFIX_CLASS = "class.";
 	const PLUGIN_CLASS_SUFFIX 		= "Plugin";
@@ -111,8 +113,9 @@ class PluginAdministration52 implements PluginAdministration
 		$cur = getcwd();
 		chdir($this->config->server()->absolutePath());
 		if(!class_exists($full_class_name)) {
-			$link = $this->createPluginMetaData($pi);
-			require_once($link["path"]."/".$link["name"]."/".self::CLASSES_FOLDER."/".self::PLUGIN_CLASS_PREFIX_CLASS.$full_class_name.".php");
+			$name = $pi->getPluginName();
+			$path = $this->server->absolute_path()."/".$pi->getRelativePluginPath();
+			require_once($path."/".$name."/".self::CLASSES_FOLDER."/".self::PLUGIN_CLASS_PREFIX_CLASS.$full_class_name.".php");
 		}
 		$class = new \ReflectionClass(self::PLUGIN_CLASS_PREFIX_IL.$pi->getPluginName().self::PLUGIN_CLASS_SUFFIX);
 
