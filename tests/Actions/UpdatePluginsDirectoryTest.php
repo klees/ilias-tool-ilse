@@ -16,6 +16,15 @@ use \CaT\Ilse\Aux\ILIAS\PluginInfoReader;
 
 use CaT\Ilse\Action\UpdatePlugin;
 
+class UpdatePluginsDirectoryForTest extends UpdatePluginsDirectory {
+	public function __construct($plugins) {
+		$this->plugins = $plugins;
+	}
+	public function _getRepoInfo() {
+		return $this->getRepoInfo();
+	}
+}
+
 class UpdatePluginsDirectoryTest extends PHPUnit_Framework_TestCase
 {
 	protected $path;
@@ -47,7 +56,8 @@ class UpdatePluginsDirectoryTest extends PHPUnit_Framework_TestCase
 		$this->update_plugins = $this->createMock(UpdatePlugins::class);
 		$this->plugin_info_reader_factory = $this->createMock(ILIAS\PluginInfoReaderFactory::class);
 
-		$this->git = new Config\Git($this->url, "master", "5355");
+		$this->branch = "some_git_branch";
+		$this->git = new Config\Git($this->url, $this->branch, "5355");
 		$this->server = new Config\Server("http://ilias.de", "/var/www/html/ilias", "Europe/Berlin");
 		$this->plugin = new Config\Plugin($this->path, $this->git);
 		$this->plugins = new Config\Plugins($this->path, array($this->plugin));
@@ -62,7 +72,8 @@ class UpdatePluginsDirectoryTest extends PHPUnit_Framework_TestCase
 			$this->update_plugins
 		);
 	}
-	public function test_perform()
+
+	public function test_perform_update_only()
 	{
 		$name = "ilias-tool-ilse";
 
@@ -103,10 +114,15 @@ class UpdatePluginsDirectoryTest extends PHPUnit_Framework_TestCase
 			->willReturn(array($name));
 
 		$this->git_factory
-			->expects($this->any())
+			->expects($this->atLeastOnce())
 			->method("getRepo")
 			->with($this->path."/".$name, $this->url, false)
 			->willReturn($this->git_wrapper);
+
+		$this->git_wrapper
+			->expects($this->atLeastOnce())
+			->method("gitPull")
+			->with($this->branch);
 
 		$this->task_logger
 			->expects($this->any())
@@ -144,6 +160,98 @@ class UpdatePluginsDirectoryTest extends PHPUnit_Framework_TestCase
 		$this->object->perform();
 	}
 
+	public function test_perform_install_only()
+	{
+		$name = "ilias-tool-ilse";
+
+		$this->filesystem
+			->expects($this->any())
+			->method("makeDirectory")
+			->will($this->onConsecutiveCalls(
+				array(
+					$this->path,
+					$this->path.'/'.$name,
+					$this->path
+				)));
+		$this->filesystem
+			->expects($this->any())
+			->method("exists")
+			->willReturn(true);
+		$this->filesystem
+			->expects($this->any())
+			->method("isEmpty")
+			->willReturn(false);
+		$this->filesystem
+			->expects($this->any())
+			->method("isDirectory")
+			->will($this->onConsecutiveCalls(
+				array(
+					$this->path.$name
+				)))
+			->willReturn(true);
+		$this->filesystem
+			->expects($this->atLeast(1))
+			->method("isWriteable")
+			->with($this->path)
+			->willReturn(true);
+		$this->filesystem
+			->expects($this->exactly(3))
+			->method("getSubdirectories")
+			->with($this->path)
+			->will($this->onConsecutiveCalls([],[$name],[$name]));
+
+		$this->git_factory
+			->expects($this->atLeastOnce())
+			->method("getRepo")
+			->with($this->path."/".$name, $this->url, false)
+			->willReturn($this->git_wrapper);
+
+		$this->git_wrapper
+			->expects($this->atLeastOnce())
+			->method("gitClone");
+
+		$this->git_wrapper
+			->expects($this->atLeastOnce())
+			->method("gitCheckOut")
+			->with($this->branch);
+
+		$this->task_logger
+			->expects($this->any())
+			->method("eventually")
+			->will($this->returnCallback(function($s, $c) {
+				$c();
+			}));
+		$this->task_logger
+			->expects($this->any())
+			->method("always")
+			->will($this->returnCallback(function($s, $c) {
+				$c();
+			}));
+
+		$plugin_info = new PluginInfo
+			( "Service"
+			, "Repository"
+			, "RepositoryObject"
+			, "robj"
+			, "test"
+			);
+		$plugin_info_reader = $this->createMock(PluginInfoReader::class);
+		$plugin_info_reader
+			->expects($this->once())
+			->method("readInfo")
+			->with($this->path."/".$name)
+			->willReturn($plugin_info);
+
+		$this->plugin_info_reader_factory
+			->expects($this->once())
+			->method("getPluginInfoReader")
+			->with("5.2", $this->server, $this->filesystem)
+			->willReturn($plugin_info_reader);
+
+		$this->object->perform();
+	}
+
+
 	public function test_getRepoNameFromUrl()
 	{
 		$result = $this->object->getRepoNameFromUrl($this->url);
@@ -172,4 +280,24 @@ class UpdatePluginsDirectoryTest extends PHPUnit_Framework_TestCase
 		$this->assertContains("Banane", $result);
 		$this->assertNotContains("Erdbeere", $result);
 	}
+
+	public function test_getRepoInfo() {
+		$plugins = new Config\Plugins("/",
+			[ new Config\Plugin
+				( "name1"
+				, new Config\Git("repo1", "branch1", "hash1")
+				)
+			, new Config\Plugin
+				( "name2"
+				, new Config\Git("repo2", "branch2", "hash2")
+				)
+			]);
+
+		$object = new UpdatePluginsDirectoryForTest($plugins);
+
+		$repos = $object->_getRepoInfo();
+
+		$this->assertEquals([["repo1", "branch1"], ["repo2", "branch2"]], $repos);
+	}
+
 }

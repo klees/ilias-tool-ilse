@@ -20,15 +20,4 @@ class Plugins extends Base {
 			,"plugins" 	=> array(array("\\CaT\\Ilse\\Config\\Plugin"), false)
 			);
 	}
-
-	/**
-	 * Get urls of plugin-repos.
-	 *
-	 * @return string[]
-	 */
-	public function getRepoUrls() {
-		return array_map(function($plugin) {
-			return $plugin->git()->url();
-		}, $this->plugins);
-	}
 }

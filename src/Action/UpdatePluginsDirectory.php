@@ -127,17 +127,18 @@ class UpdatePluginsDirectory implements Action
 	protected function clonePlugins()
 	{
 		$installed_plugins = $this->filesystem->getSubdirectories($this->plugins->dir());
-		$urls = $this->plugins->getRepoUrls();
-		$this->task_logger->eventually("Clone new plugins", function () use($urls, $installed_plugins) {
-			foreach ($urls as $url) {
+		$repos = $this->getRepoInfo();
+		$this->task_logger->eventually("Clone new plugins", function () use ($repos, $installed_plugins) {
+			foreach ($repos as list($url, $branch)) {
 				$name = $this->getRepoNameFromUrl($url);
 				if(in_array($name, $installed_plugins)) {
 					continue;
 				}
 				$this->filesystem->makeDirectory($this->plugins->dir()."/".$name);
 				$git = $this->git_factory->getRepo($this->plugins->dir()."/".$name, $url);
-				$this->task_logger->always("clone plugin $name", function() use($git) {
+				$this->task_logger->always("clone plugin $name", function() use ($git, $branch) {
 					$git->gitClone();
+					$git->gitCheckOut($branch);
 				});
 			}
 		});
@@ -150,13 +151,13 @@ class UpdatePluginsDirectory implements Action
 	 */
 	protected function updatePlugins()
 	{
-		$urls = $this->plugins->getRepoUrls();
-		$this->task_logger->eventually("Pull plugins", function () use($urls) {
-			foreach ($urls as $url) {
+		$repos = $this->getRepoInfo();
+		$this->task_logger->eventually("Pull plugins", function () use ($repos) {
+			foreach ($repos as list($url, $branch)) {
 				$name = $this->getRepoNameFromUrl($url);
 				$git = $this->git_factory->getRepo($this->plugins->dir().'/'.$name, $url);
-				$this->task_logger->always("pull plugin $name", function() use($git) {
-					$git->gitPull(self::BRANCH);
+				$this->task_logger->always("pull plugin $name", function() use ($git, $branch) {
+					$git->gitPull($branch);
 				});
 			}
 		});
@@ -169,7 +170,7 @@ class UpdatePluginsDirectory implements Action
 	 */
 	protected function deleteUnlistedPlugins()
 	{
-		$urls = $this->plugins->getRepoUrls();
+		$urls = array_map(function($v) { return $v[0]; }, $this->getRepoInfo());
 		$installed_plugins = $this->filesystem->getSubdirectories($this->plugins->dir());
 		$marked_plugins = $this->getUnlistedPlugins($installed_plugins, $urls);
 		$reader = $this->getPluginInfoReader();
@@ -250,7 +251,6 @@ class UpdatePluginsDirectory implements Action
 		return array_diff($installed, $listed);
 	}
 
-
 	/**
 	 * Get an instance of PluginInfoReader for ILIAS 5.2
 	 *
@@ -262,5 +262,19 @@ class UpdatePluginsDirectory implements Action
 			$this->plugin_info_reader = $this->reader_factory->getPluginInfoReader("5.2", $this->server, $this->filesystem);
 		}
 		return $this->plugin_info_reader;
+	}
+
+
+	/**
+	 * Get urls and branches of plugin-repos.
+	 *
+	 * Each entry is an $url,$branch-tuple.
+	 *
+	 * @return array[]
+	 */
+	protected function getRepoInfo() {
+		return array_map(function($plugin) {
+			return [$plugin->git()->url(), $plugin->git()->branch()];
+		}, $this->plugins->plugins());
 	}
 }
